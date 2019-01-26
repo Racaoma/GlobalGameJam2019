@@ -18,6 +18,7 @@ public class Enemy_Mattress : Enemy
     {
         base.currentHP = maxHP_Mattress;
         currentState = enemyState.Active;
+        animatorRef.Play("Idle");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,6 +38,10 @@ public class Enemy_Mattress : Enemy
             collision = Physics2D.OverlapCircle(this.transform.position, detectionRange, playerLayerMask);
             if(collision != null)
             {
+                if(collision.transform.position.x < this.transform.position.x) this.transform.GetChild(0).localScale = new Vector3(-1f, 1f, 1f);
+                else this.transform.GetChild(0).localScale = new Vector3(1f, 1f, 1f);
+
+                animatorRef.SetTrigger("attack");
                 currentShotTimer = shotRatio;
                 BulletPool.Instance.spawnBullet(this.transform.position, (collision.transform.position - this.transform.position).normalized, 3f);
             }
