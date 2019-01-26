@@ -154,6 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c130dd8328b167142a41d0d7c08803fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnemyDie:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   maxHP_Mattress: 3
   shotRatio: 1
   detectionRange: 5
