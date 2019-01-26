@@ -9,11 +9,13 @@ public class FreeMovementState : PlayerState
     {
         Player.MovementController.enabled = true;
         Player.AnimationController.StartPlayingMovementAnimation();
+        Player.PlayerAttackController.enabled = true;
     }
 
     public override void OnExit()
     {
         Player.MovementController.enabled = false;
+        Player.PlayerAttackController.enabled = false;
         Player.AnimationController.StopPlayingMovementAnimation();
     }
 }
