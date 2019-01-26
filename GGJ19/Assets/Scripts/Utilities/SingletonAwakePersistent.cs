@@ -13,5 +13,4 @@ public class SingletonAwakePersistent<T> : MonoBehaviour where T : Component{
             DontDestroyOnLoad(this);
         }
     }
-
 }
