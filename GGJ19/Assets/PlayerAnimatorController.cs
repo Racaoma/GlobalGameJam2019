@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(PlayerMovementController))]
 public class PlayerAnimatorController : MonoBehaviour
@@ -17,16 +18,29 @@ public class PlayerAnimatorController : MonoBehaviour
     [SerializeField]
     private Animator _animator;
 
+    [SerializeField]
+    PlayerCharacterAnimationEvents _animationEvents;
+
+    public Action OnExecuteAttack;
+
     private PlayerMovementController _movementController;
     private int _isWalkingAnimationKey;
     private int _isJumpingAnimationKey;
     private int _isFallingAnimationKey;
     private int _attackAnimationKey;
     private Coroutine _movementAnimationCoroutine;
+
     private void Awake()
     {
         _movementController = GetComponent<PlayerMovementController>();
+        _animationEvents.OnExecuteAttack += OnExecuteAttack;
     }
+
+    private void OnDestroy()
+    {
+        _animationEvents.OnExecuteAttack -= OnExecuteAttack;
+    }
+
     private void Start()
     {
         _isWalkingAnimationKey = Animator.StringToHash("isWalking");
@@ -89,11 +103,12 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void StartAttackAnimation()
     {
+        
         _animator.SetTrigger(_attackAnimationKey);
     }
 
     public void StopAttackAnimation()
     {
-
+        
     }
 }

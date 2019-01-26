@@ -1,24 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(PlayerAnimatorController))]
 public class PlayerAttackController : MonoBehaviour
 {
     private PlayerAnimatorController _animationController;
     private Coroutine _attackCoroutine;
-
+    private AttackConfig _currentAttack;
     private AttackConfig _swordAttackConfig = new AttackConfig()
     {
         AnimatorWeapon = PlayerAnimatorController.Weapon.Sword,
-        IntervalInSeconds = 0.1f
+        IntervalInSeconds = 0.5f,
     };
     private AttackConfig _gunAttackConfig = new AttackConfig()
     {
         AnimatorWeapon = PlayerAnimatorController.Weapon.Gun,
-        IntervalInSeconds = 0.1f
+        IntervalInSeconds = 0.5f
     };
 
+    private void Awake()
+    {
+        _animationController = GetComponent<PlayerAnimatorController>();
+        _animationController.OnExecuteAttack += OnExecuteAttack;
+    }
+    private void OnDestroy()
+    {
+        _animationController.OnExecuteAttack -= OnExecuteAttack;
+    }
     private void Update()
     {
         if(!enabled)
@@ -59,10 +69,6 @@ public class PlayerAttackController : MonoBehaviour
         _animationController.StopAttackAnimation();
     }
 
-    private void Awake()
-    {
-        _animationController = GetComponent<PlayerAnimatorController>();
-    }
     private void StartAttack(AttackConfig attackConfig)
     {
         if(_attackCoroutine != null)
@@ -76,8 +82,33 @@ public class PlayerAttackController : MonoBehaviour
     {
         _animationController.StartAttackAnimation();
         _animationController.ChangeWeapon(attack.AnimatorWeapon);
+        
+        _currentAttack = attack;
         yield return new WaitForSeconds(attack.IntervalInSeconds);
         _animationController.StopAttackAnimation();
+    }
+
+    public void OnExecuteAttack()
+    {
+        if (_currentAttack == _swordAttackConfig)
+        {
+            OnExecuteSwordAttack();
+        }
+        if (_currentAttack == _gunAttackConfig)
+        {
+            OnExecuteGunAttack();
+        }
+        CancelAttacks();
+    }
+
+    public void OnExecuteSwordAttack()
+    {
+        Debug.Log("Execute sword attack");
+    }
+
+    public void OnExecuteGunAttack()
+    {
+        Debug.Log("Execute gun attack");
     }
 
     [System.Serializable]
@@ -85,5 +116,6 @@ public class PlayerAttackController : MonoBehaviour
     {
         public PlayerAnimatorController.Weapon AnimatorWeapon { get; set; }
         public float IntervalInSeconds { get; set; }
+        public Action OnExecuteAttack { get; set; }
     }
 }
