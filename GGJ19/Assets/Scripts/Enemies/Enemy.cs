@@ -17,13 +17,12 @@ public enum enemyState
     KnockedDown
 }
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     //Variables
     protected int maxHP;
     protected int currentHP;
     protected enemyState currentState;
-    protected Animator animatorRef;
     protected float stunTimer;
 
     //Layers
@@ -35,8 +34,12 @@ public class Enemy : MonoBehaviour
     //Events
     public UnityEvent OnEnemyDie;
 
-    //Particles
+    //References
     public GameObject feathersFX;
+    protected Animator animatorRef;
+    private SpriteRenderer spriteRendererRef;
+    [SerializeField]
+    protected Sprite mundaneFormSprite;
 
     //Methods
     private void Awake()
@@ -46,13 +49,14 @@ public class Enemy : MonoBehaviour
         playerLayerMask = LayerMask.GetMask("Player");
         groundLayerMask = LayerMask.GetMask("Ground");
         animatorRef = this.transform.GetComponentInChildren<Animator>();
+        spriteRendererRef = this.transform.GetComponentInChildren<SpriteRenderer>();
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
     } 
 
     public void takeDamage(int damageTaken)
     {
         currentHP -= damageTaken;
-        SpawnFX(feathersFX);
+        if(damageTaken == 2) SpawnFX(feathersFX);
 
         if (currentHP <= 0)
         {
@@ -71,12 +75,20 @@ public class Enemy : MonoBehaviour
         animatorRef.SetTrigger("knockDown");
         currentState = enemyState.KnockedDown;
         this.enabled = false;
+        becomeMundane();
     }
-    
+
     private void SpawnFX(GameObject effect)
     {
         if (effect == null) return;
         var fx = Instantiate(effect, transform.position, transform.rotation);
         Destroy(fx, 1);
+    }
+
+    //Abstract Methods
+    public void becomeMundane()
+    {
+        animatorRef.enabled = false;
+        spriteRendererRef.sprite = mundaneFormSprite;
     }
 }

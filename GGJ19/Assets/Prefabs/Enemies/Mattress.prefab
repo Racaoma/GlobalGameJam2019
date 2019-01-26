@@ -161,7 +161,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   feathersFX: {fileID: 3943363662497016629, guid: 0d2bb12c092466447b38a68bf4215e3a,
     type: 3}
-  maxHP_Mattress: 3
+  mundaneFormSprite: {fileID: 21300000, guid: 6df907306a1a31e45a56ddcb5f560511, type: 3}
+  maxHP_Mattress: 5
   shotRatio: 1
   detectionRange: 5
 --- !u!1001 &4485813853428285283
