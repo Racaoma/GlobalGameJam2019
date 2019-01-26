@@ -13,19 +13,11 @@ public class Enemy_Mattress : Enemy
     [SerializeField]
     private float detectionRange;
     private Collider2D collision;
-    private LayerMask playerLayerMask;
-    private int playerLayer;
-
-    //Methods
-    private void Start()
-    {
-        playerLayer = LayerMask.NameToLayer("Player");
-        playerLayerMask = LayerMask.GetMask("Player");
-    }
 
     private void OnEnable()
     {
         base.currentHP = maxHP_Mattress;
+        currentState = enemyState.Active;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

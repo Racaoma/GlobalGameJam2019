@@ -16,23 +16,18 @@ public class Enemy_Puff : Enemy
     private float movementSpeed;
     [SerializeField]
     private float detectionRange;
-    private int playerLayer;
-    private int groundLayer;
-    private LayerMask playerLayerMask;
     private CharacterController2D characterControllerRef;
 
     //Methods
     private void Start()
     {
-        playerLayer = LayerMask.NameToLayer("Player");
-        groundLayer = LayerMask.NameToLayer("Ground");
-        playerLayerMask = LayerMask.GetMask("Player");
         characterControllerRef = this.GetComponent<CharacterController2D>();
     }
 
     private void OnEnable()
     {
         base.currentHP = maxHP_Puff;
+        currentState = enemyState.Active;
         if (UnityEngine.Random.value >= 0.5f) movementDirection = Vector3.right;
         else movementDirection = Vector3.left;
     }

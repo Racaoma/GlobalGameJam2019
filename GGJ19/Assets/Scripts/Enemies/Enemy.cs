@@ -10,31 +10,59 @@ public enum enemyType
     Mattress
 }
 
+public enum enemyState
+{
+    Active,
+    Stunned,
+    KnockedDown
+}
+
 public class Enemy : MonoBehaviour
 {
-   public UnityEvent OnEnemyDie;
     //Variables
     protected int maxHP;
     protected int currentHP;
+    protected enemyState currentState;
+    protected Animator animatorRef;
+    protected float stunTimer;
+    public UnityEvent OnEnemyDie;
 
-    void Awake() {
+    //Layers
+    protected int playerLayer;
+    protected int groundLayer;
+    protected LayerMask playerLayerMask;
+    protected LayerMask groundLayerMask;
+
+    //Methods
+    void Awake()
+    {
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayer = LayerMask.NameToLayer("Ground");
+        playerLayerMask = LayerMask.GetMask("Player");
+        groundLayerMask = LayerMask.GetMask("Ground");
+        animatorRef = this.transform.GetComponentInChildren<Animator>();
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
     }
-    //Methods
+
     public void takeDamage(int damageTaken)
     {
         currentHP -= damageTaken;
         if(currentHP <= 0)
         {
             killEnemy();
-           
+        }
+        else
+        {
+            stunTimer = 1f;
+            currentState = enemyState.Stunned;
         }
     }
-
 
     public void killEnemy()
     {      
         OnEnemyDie.Invoke();
+        animatorRef.SetTrigger("knockDown");
+        currentState = enemyState.KnockedDown;
         this.enabled = false;
     }
 }

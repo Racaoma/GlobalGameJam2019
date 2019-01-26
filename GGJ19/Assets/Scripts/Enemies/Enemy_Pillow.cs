@@ -13,20 +13,19 @@ public class Enemy_Pillow : Enemy
     private CharacterController2D characterControllerRef;
     [SerializeField]
     private float movementSpeed;
-    private int playerLayer;
-    private int groundLayer;
 
     //Methods
     private void Start()
     {
         characterControllerRef = this.GetComponent<CharacterController2D>();
-        playerLayer = LayerMask.NameToLayer("Player");
-        groundLayer = LayerMask.NameToLayer("Ground");
+        currentState = enemyState.Active;
+        animatorRef.Play("Idle");
     }
 
     private void OnEnable()
     {
         base.currentHP = maxHP_Pillow;
+        this.transform.GetChild(0).localScale = Vector3.one;
         if (UnityEngine.Random.value >= 0.5f) movementDirection = Vector3.right;
         else movementDirection = Vector3.left;
     }
@@ -44,8 +43,30 @@ public class Enemy_Pillow : Enemy
         }
     }
 
+    private void move()
+    {
+        if (movementDirection.x >= 0f) this.transform.GetChild(0).localScale = new Vector3(-1f, 1f, 1f);
+        else this.transform.GetChild(0).localScale = Vector3.one;
+
+        characterControllerRef.move(movementDirection * movementSpeed);
+        animatorRef.SetBool("isWalking", true);
+    }
+
     private void Update()
     {
-        characterControllerRef.move(movementDirection * movementSpeed);
+        if (currentState == enemyState.Stunned)
+        {
+            if (stunTimer <= 0f)
+            {
+                move();
+                currentState = enemyState.Active;
+            }
+            else
+            {
+                stunTimer -= Time.deltaTime;
+                animatorRef.SetBool("isWalking", false);
+            }
+        }
+        else move();
     }
 }
