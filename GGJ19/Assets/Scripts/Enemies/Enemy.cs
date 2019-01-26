@@ -25,15 +25,29 @@ public class Enemy : MonoBehaviour
     protected enemyState currentState;
     protected Animator animatorRef;
     protected float stunTimer;
+
+    //Layers
+    protected int playerLayer;
+    protected int groundLayer;
+    protected LayerMask playerLayerMask;
+    protected LayerMask groundLayerMask;
+
+    //Events
     public UnityEvent OnEnemyDie;
 
     //Particles
     public GameObject hitFX;
     public GameObject deathFX;
 
+    //Methods
     private void Start()
     {
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayer = LayerMask.NameToLayer("Ground");
+        playerLayerMask = LayerMask.GetMask("Player");
+        groundLayerMask = LayerMask.GetMask("Ground");
+        animatorRef = this.transform.GetComponentInChildren<Animator>();
     }
 
     public void takeDamage(int damageTaken)
@@ -46,6 +60,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            stunTimer = 1f;
+            currentState = enemyState.Stunned;
             SpawnFX(hitFX);
         }
     }
@@ -54,6 +70,8 @@ public class Enemy : MonoBehaviour
     {      
         OnEnemyDie.Invoke();
         SpawnFX(deathFX);
+        animatorRef.SetTrigger("knockDown");
+        currentState = enemyState.KnockedDown;
         this.enabled = false;
     }
     
