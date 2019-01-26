@@ -57,7 +57,7 @@ MonoBehaviour:
     m_Bits: 256
   oneWayPlatformMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   slopeLimit: 30
   jumpingThreshold: 0.07
   slopeSpeedMultiplier:
@@ -108,7 +108,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0000006556511, y: -0.00000047683716}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -119,7 +119,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 2.2435246, y: 2.2435236}
+  m_Size: {x: 2.27, y: 2.23}
   m_EdgeRadius: 0
 --- !u!50 &6181991799111949149
 Rigidbody2D:
@@ -141,7 +141,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6181991799111949144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,16 +154,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b640f48cd58ab4bb26b8b71a25f2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputVelocity: {x: 0, y: 0}
   _maxMovementVelocity: 20
   _movementAcceleration: 60
   _oppositeDeaccelerationRatio: 2.5
   _maxJumpForce: 20
   _minJumpForce: 8
   _canJumpVelocityTreshold: 30
-  _gravityMaxSpeed: 10
-  _gravityAcceleration: -20
+  _gravityAcceleration: -30
   _pressDownAccelerationRatio: 3
+  _airAccelerationRatio: 0.7
 --- !u!1 &6181991799212881527
 GameObject:
   m_ObjectHideFlags: 0
