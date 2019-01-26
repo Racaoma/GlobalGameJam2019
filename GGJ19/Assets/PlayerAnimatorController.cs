@@ -21,6 +21,7 @@ public class PlayerAnimatorController : MonoBehaviour
     private int _isWalkingAnimationKey;
     private int _isJumpingAnimationKey;
     private int _isFallingAnimationKey;
+    private int _attackAnimationKey;
     private Coroutine _movementAnimationCoroutine;
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class PlayerAnimatorController : MonoBehaviour
         _isWalkingAnimationKey = Animator.StringToHash("isWalking");
         _isJumpingAnimationKey = Animator.StringToHash("isJumping");
         _isFallingAnimationKey = Animator.StringToHash("isFalling");
+        _attackAnimationKey = Animator.StringToHash("attack");
     }
 
     void LateUpdate()
@@ -83,5 +85,15 @@ public class PlayerAnimatorController : MonoBehaviour
         {
             _animator.SetLayerWeight(i + 1, weaponLayers[i] == currentWeapon ? 1 : 0);
         }
+    }
+
+    public void StartAttackAnimation()
+    {
+        _animator.SetTrigger(_attackAnimationKey);
+    }
+
+    public void StopAttackAnimation()
+    {
+
     }
 }
