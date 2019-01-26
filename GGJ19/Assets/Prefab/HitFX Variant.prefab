@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 5236289737934526572, guid: bcd928a15454adf4bab22e7c88af372c,
         type: 3}
       propertyPath: m_Name
-      value: HitFX
+      value: HitFX Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5236289737934526571, guid: bcd928a15454adf4bab22e7c88af372c,
         type: 3}
@@ -69,33 +69,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5236289737934526570, guid: bcd928a15454adf4bab22e7c88af372c,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236289737934526570, guid: bcd928a15454adf4bab22e7c88af372c,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.9338811
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236289737934526570, guid: bcd928a15454adf4bab22e7c88af372c,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.3820755
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236289737934526570, guid: bcd928a15454adf4bab22e7c88af372c,
-        type: 3}
       propertyPath: lengthInSec
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5236289737934526570, guid: bcd928a15454adf4bab22e7c88af372c,
         type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 30
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5236289737934526570, guid: bcd928a15454adf4bab22e7c88af372c,
         type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.2
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236289737934526570, guid: bcd928a15454adf4bab22e7c88af372c,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.03548336
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236289737934526570, guid: bcd928a15454adf4bab22e7c88af372c,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcd928a15454adf4bab22e7c88af372c, type: 3}

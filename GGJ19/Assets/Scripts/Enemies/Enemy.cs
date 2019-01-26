@@ -12,14 +12,27 @@ public enum enemyType
 
 public class Enemy : MonoBehaviour
 {
-   public UnityEvent OnEnemyDie;
+    public UnityEvent OnEnemyDie;
+    
     //Variables
     protected int maxHP;
     protected int currentHP;
 
-    void Awake() {
+    //Particles
+    public GameObject hitFX;
+    public GameObject deathFX;
+
+
+    void Awake()
+    {
+        
+    }
+
+    private void Start()
+    {
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
     }
+
     //Methods
     public void takeDamage(int damageTaken)
     {
@@ -27,8 +40,11 @@ public class Enemy : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            killEnemy();
-           
+            killEnemy();  
+        }
+        else
+        {
+            SpawnFX(hitFX);
         }
     }
 
@@ -36,6 +52,19 @@ public class Enemy : MonoBehaviour
     public void killEnemy()
     {      
         OnEnemyDie.Invoke();
+
+        SpawnFX(deathFX);
+
         this.enabled = false;
+    }
+
+    
+    private void SpawnFX(GameObject effect)
+    {
+        if (effect == null)
+            return;
+
+        var fx = Instantiate(effect, transform.position, transform.rotation);
+        Destroy(fx, 1);
     }
 }
