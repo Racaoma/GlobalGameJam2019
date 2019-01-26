@@ -36,7 +36,7 @@ public class PlayerMovementController : MonoBehaviour
     private CharacterController2D _characterController;
     private Vector2 _velocity;
     private float _gravityVelocity;
-    private Vector2 _movementInput = new Vector2();
+    private PlayerInput _input = new PlayerInput();
     private bool _canJump = false;
     private bool _isJumping = false;
 
@@ -47,13 +47,12 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
-        _movementInput.x = Input.GetAxis("Horizontal");
-        _movementInput.y = Input.GetAxis("Vertical");
+        _input.Update();
 
         var acceleration = _movementAcceleration;
-        if(_movementInput.x != 0 && _velocity.x != 0)
+        if(_input.Direction.x != 0 && _velocity.x != 0)
         {
-            if (Mathf.Sign(_movementInput.x) != Mathf.Sign(_velocity.x))
+            if (Mathf.Sign(_input.Direction.x) != Mathf.Sign(_velocity.x))
             {
                 acceleration *= _oppositeDeaccelerationRatio;
             }
@@ -63,6 +62,10 @@ public class PlayerMovementController : MonoBehaviour
         {
             _canJump = true;
             _velocity.y = 0;
+            if(_input.IsDescending)
+            {
+                _characterController.ignoreOneWayPlatformsThisFrame = true;
+            }
         }
         else
         {
@@ -80,7 +83,7 @@ public class PlayerMovementController : MonoBehaviour
             gravityAcceleration *= _pressDownAccelerationRatio;
         }
 
-        _velocity.x = Mathf.MoveTowards(_velocity.x, _movementInput.x * _maxMovementVelocity, acceleration * Time.deltaTime);
+        _velocity.x = Mathf.MoveTowards(_velocity.x, _input.Direction.x * _maxMovementVelocity, acceleration * Time.deltaTime);
         _velocity.y += gravityAcceleration * Time.deltaTime;
         
         if (Input.GetButton("Jump") || Input.GetAxisRaw("Vertical") > 0.5f)
@@ -111,5 +114,18 @@ public class PlayerMovementController : MonoBehaviour
     {
         _isJumping = false;
         _velocity.y = Mathf.Min(_velocity.y, _minJumpForce);
+    }
+
+    private class PlayerInput
+    {
+        public Vector2 Direction { get; set; }
+        public bool IsJumping { get; set; }
+        public bool IsDescending { get; set; }
+        public void Update()
+        {
+            Direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            IsJumping = Input.GetAxisRaw("Vertical") > 0.5f || Input.GetButton("Jump");
+            IsDescending = Input.GetAxisRaw("Vertical") < -0.5f;
+        }
     }
 }

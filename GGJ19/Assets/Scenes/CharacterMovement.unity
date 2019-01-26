@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 246784196}
   - component: {fileID: 246784195}
   - component: {fileID: 246784194}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: floor (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 302779785}
   - component: {fileID: 302779784}
   - component: {fileID: 302779783}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: floor (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 333488090}
   - component: {fileID: 333488089}
   - component: {fileID: 333488088}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: floor (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 478940469}
   - component: {fileID: 478940468}
   - component: {fileID: 478940467}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: floor (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +814,7 @@ GameObject:
   - component: {fileID: 1281326257}
   - component: {fileID: 1281326256}
   - component: {fileID: 1281326255}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: floor (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,7 +934,7 @@ GameObject:
   - component: {fileID: 1490910062}
   - component: {fileID: 1490910061}
   - component: {fileID: 1490910060}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1145,7 +1145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788540471}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1490910059}
@@ -1170,7 +1170,7 @@ GameObject:
   - component: {fileID: 1875300806}
   - component: {fileID: 1875300805}
   - component: {fileID: 1875300804}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: floor (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1303,7 +1303,7 @@ PrefabInstance:
     - target: {fileID: 6181991799111949145, guid: 16855b8240eebdc4b86aa5b981011fc2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6181991799111949145, guid: 16855b8240eebdc4b86aa5b981011fc2,
         type: 3}
@@ -1344,36 +1344,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6181991799111949147, guid: 16855b8240eebdc4b86aa5b981011fc2,
-        type: 3}
-      propertyPath: triggerMask.m_Bits
-      value: 1280
-      objectReference: {fileID: 0}
-    - target: {fileID: 6181991799111949147, guid: 16855b8240eebdc4b86aa5b981011fc2,
-        type: 3}
-      propertyPath: platformMask.m_Bits
-      value: 1280
-      objectReference: {fileID: 0}
-    - target: {fileID: 6181991799111949147, guid: 16855b8240eebdc4b86aa5b981011fc2,
-        type: 3}
-      propertyPath: oneWayPlatformMask.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
-    - target: {fileID: 6181991799111949149, guid: 16855b8240eebdc4b86aa5b981011fc2,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6181991799111949144, guid: 16855b8240eebdc4b86aa5b981011fc2,
-        type: 3}
-      propertyPath: _gravityAcceleration
-      value: -30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6181991799111949144, guid: 16855b8240eebdc4b86aa5b981011fc2,
-        type: 3}
-      propertyPath: _airAccelerationRatio
-      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16855b8240eebdc4b86aa5b981011fc2, type: 3}

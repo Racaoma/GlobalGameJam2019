@@ -48,13 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreOneWayPlatformsThisFrame: 0
-  _skinWidth: 0.111
+  _skinWidth: 0.002
   platformMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   triggerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -129,7 +129,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6181991799111949148}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
