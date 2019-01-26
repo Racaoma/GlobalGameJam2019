@@ -36,8 +36,7 @@ public class Enemy : MonoBehaviour
     public UnityEvent OnEnemyDie;
 
     //Particles
-    public GameObject hitFX;
-    public GameObject deathFX;
+    public GameObject feathersFX;
 
     //Methods
     private void Awake()
@@ -53,6 +52,7 @@ public class Enemy : MonoBehaviour
     public void takeDamage(int damageTaken)
     {
         currentHP -= damageTaken;
+        SpawnFX(feathersFX);
 
         if (currentHP <= 0)
         {
@@ -62,14 +62,12 @@ public class Enemy : MonoBehaviour
         {
             stunTimer = 1f;
             currentState = enemyState.Stunned;
-            SpawnFX(hitFX);
         }
     }
 
     public void killEnemy()
     {      
         OnEnemyDie.Invoke();
-        SpawnFX(deathFX);
         animatorRef.SetTrigger("knockDown");
         currentState = enemyState.KnockedDown;
         this.enabled = false;

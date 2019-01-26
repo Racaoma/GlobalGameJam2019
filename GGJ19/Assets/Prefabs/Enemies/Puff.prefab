@@ -159,8 +159,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  hitFX: {fileID: 0}
-  deathFX: {fileID: 0}
+  feathersFX: {fileID: 3943363662497016629, guid: 0d2bb12c092466447b38a68bf4215e3a,
+    type: 3}
   maxHP_Puff: 2
   movementSpeed: 0.1
   detectionRange: 5

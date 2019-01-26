@@ -159,6 +159,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  feathersFX: {fileID: 3943363662497016629, guid: 0d2bb12c092466447b38a68bf4215e3a,
+    type: 3}
   maxHP_Pillow: 1
   movementSpeed: 0.1
 --- !u!1001 &4061279619791181044
