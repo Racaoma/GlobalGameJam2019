@@ -5,17 +5,21 @@ using UnityEngine;
 public class Enemy_Mattress : Enemy
 {
     //Variables
-    private int maxHP_Mattress = 3;
-    private float shotRatio = 2f;
+    [SerializeField]
+    private int maxHP_Mattress;
+    [SerializeField]
+    private float shotRatio;
     private float currentShotTimer;
+    [SerializeField]
     private float detectionRange;
-    private float detectionAngleThreshold;
     private Collider2D collision;
     private LayerMask playerLayerMask;
+    private int playerLayer;
 
     //Methods
     private void Start()
     {
+        playerLayer = LayerMask.NameToLayer("Player");
         playerLayerMask = LayerMask.GetMask("Player");
     }
 
@@ -26,9 +30,10 @@ public class Enemy_Mattress : Enemy
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.layer == playerLayer)
         {
-            //Player takes damage
+            LudicController.Instance.ludicMeter--;
+            //Player stun
         }
     }
 
@@ -40,11 +45,8 @@ public class Enemy_Mattress : Enemy
             collision = Physics2D.OverlapCircle(this.transform.position, detectionRange, playerLayerMask);
             if(collision != null)
             {
-                if (Vector3.Angle(collision.transform.position, this.transform.position) <= detectionAngleThreshold)
-                {
-                    currentShotTimer = shotRatio;
-                    BulletPool.Instance.spawnBullet(this.transform.position, collision.transform.position, 3f);
-                }
+                currentShotTimer = shotRatio;
+                BulletPool.Instance.spawnBullet(this.transform.position, (collision.transform.position - this.transform.position).normalized, 3f);
             }
         }
     }
