@@ -5,6 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovementController))]
 public class PlayerAnimatorController : MonoBehaviour
 {
+    public enum Weapon { Gun, Sword }
+    Weapon currentWeapon = Weapon.Gun;
+    private Weapon[] weaponLayers = {
+        Weapon.Gun,
+        Weapon.Sword,
+        Weapon.Gun,
+        Weapon.Sword
+    };
+
     [SerializeField]
     private Animator _animator;
 
@@ -42,7 +51,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void StartPlayingMovementAnimation()
     {
-        if(_movementAnimationCoroutine != null)
+        if (_movementAnimationCoroutine != null)
         {
             StopCoroutine(_movementAnimationCoroutine);
         }
@@ -50,7 +59,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void StopPlayingMovementAnimation()
     {
-        if(_movementAnimationCoroutine != null)
+        if (_movementAnimationCoroutine != null)
         {
             StopCoroutine(_movementAnimationCoroutine);
         }
@@ -58,10 +67,21 @@ public class PlayerAnimatorController : MonoBehaviour
 
     IEnumerator UpdateMovementAnimationCR()
     {
-        while(true)
+        while (true)
         {
             UpdateMovementAnimation();
             yield return null;
+        }
+    }
+
+    public void ChangeWeapon(Weapon newWeapon)
+    {
+        currentWeapon = newWeapon;
+
+        // change animator layers
+        for (int i = 0; i < weaponLayers.Length; i++)
+        {
+            _animator.SetLayerWeight(i + 1, weaponLayers[i] == currentWeapon ? 1 : 0);
         }
     }
 }
