@@ -4,6 +4,23 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Text;
+using UnityEditor;
+
+
+[CustomEditor(typeof(LevelFlow))]
+public class LevelFlowEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        LevelFlow myScript = (LevelFlow)target;
+        if (GUILayout.Button("Save Object"))
+        {
+            LevelFlow.Instance.Save();
+        }
+    }
+}
 
 public class LevelFlow : MonoBehaviour
 {
@@ -37,16 +54,22 @@ public class LevelFlow : MonoBehaviour
     {
         Instance = this;
         SetPath();
-        Save();
+       // Save();
+        Read();
     }
 
     void SetPath() {
 
         path = Application.streamingAssetsPath + "/Level.json";
+       
+    }
+
+     void Read() {
         jsonString = File.ReadAllText(path);
         Level = new LevelParameters();
         Level = JsonUtility.FromJson<LevelParameters>(jsonString);
     }
+
 
     public void Save()
     {
