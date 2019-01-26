@@ -16,8 +16,8 @@ TagManager:
   - Ground
   - Player
   - One-Way-Platforms
-  - 
-  - 
+  - Trigger
+  - Wall
   - 
   - 
   - 
@@ -46,6 +46,7 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 3163350517
+    locked: 0
   - name: Character
     uniqueID: 3527011729
     locked: 0

@@ -4,65 +4,66 @@ using UnityEngine;
 
 public class HitArea : MonoBehaviour
 {
-    public string hittableTag;
-
     public int damage = 1;
+    [SerializeField]
+    private Collider2D _ignoreCollider;
+    [SerializeField]
+    private bool _oneFrameOnly;
+    private Collider2D _collider;
+    private List<Collider2D> visitedColliders = new List<Collider2D>();
 
-    public List<GameObject> hittableObjects = new List<GameObject>();
-
-
-
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        _collider = GetComponent<Collider2D>();
+        if(_collider != null && _ignoreCollider != null)
         {
-            Debug.Log("Attack");
-            HitObjects();
+            Physics2D.IgnoreCollision(_collider, _ignoreCollider);
         }
     }
 
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void LateUpdate()
     {
-        Debug.Log("TriggerEnter2D");
-
-        if (collision.tag == hittableTag)
+        if(enabled && gameObject.activeInHierarchy)
         {
-            hittableObjects.Add(collision.gameObject);
+            CheckCollisions();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void OnEnable()
     {
-        Debug.Log("TriggerExit2D");
+        visitedColliders.Clear();
+        CheckCollisions();
 
-        if (collision.tag == hittableTag)
+        if (_oneFrameOnly)
         {
-            hittableObjects.Remove(collision.gameObject);
+            gameObject.SetActive(false);
         }
     }
 
-    public void HitObjects()
+    public void CheckCollisions()
     {
-        Debug.Log("HitObjects");
-
-        List<Enemy> enemies = new List<Enemy>();
-
-        for (int i=0; i < hittableObjects.Count; i++)
+        Collider2D[] results = new Collider2D[10];
+        int count = _collider.OverlapCollider(new ContactFilter2D(), results);
+        for (int i = 0; i < count; i++)
         {
-            var enemy = hittableObjects[i].GetComponent<Enemy>();
+            if (visitedColliders.Contains(results[i]))
+            {
+                return;
+            }
 
+            visitedColliders.Add(results[i]);
+            var result = results[i];
+            var enemy = result.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemies.Add(enemy);
+                enemy.takeDamage(damage);
+            }
+
+            var player = result.GetComponent<PlayerStateController>();
+            if (player != null)
+            {
+                //player take damage;
             }
         }
-
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            enemies[i].takeDamage(damage);
-        }
     }
-
 }

@@ -6,9 +6,13 @@ using System;
 [RequireComponent(typeof(PlayerAnimatorController))]
 public class PlayerAttackController : MonoBehaviour
 {
+    [SerializeField]
+    private HitArea _attackCollider;
+
     private PlayerAnimatorController _animationController;
     private Coroutine _attackCoroutine;
     private AttackConfig _currentAttack;
+    
     private AttackConfig _swordAttackConfig = new AttackConfig()
     {
         AnimatorWeapon = PlayerAnimatorController.Weapon.Sword,
@@ -103,7 +107,15 @@ public class PlayerAttackController : MonoBehaviour
 
     public void OnExecuteSwordAttack()
     {
+        StartCoroutine(ExecuteSwordAttackCR());
         Debug.Log("Execute sword attack");
+    }
+
+    private IEnumerator ExecuteSwordAttackCR()
+    {
+        _attackCollider.gameObject.active = true;
+        yield return new WaitForSeconds(1);
+        _attackCollider.gameObject.active = false;
     }
 
     public void OnExecuteGunAttack()
