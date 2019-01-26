@@ -9,6 +9,8 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField]
     private HitArea _attackCollider;
 
+    [SerializeField]
+    private GunShotSpawner _gunShotSpawner;
     private PlayerAnimatorController _animationController;
     private Coroutine _attackCoroutine;
     private AttackConfig _currentAttack;
@@ -120,6 +122,7 @@ public class PlayerAttackController : MonoBehaviour
 
     public void OnExecuteGunAttack()
     {
+        _gunShotSpawner.Shot(transform.right * Mathf.Sign(transform.transform.localScale.x));
         Debug.Log("Execute gun attack");
     }
 

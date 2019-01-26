@@ -11,6 +11,7 @@ public class HitArea : MonoBehaviour
     private bool _oneFrameOnly;
     private Collider2D _collider;
     private List<Collider2D> visitedColliders = new List<Collider2D>();
+    public bool hitEnemies = false;
 
     private void Awake()
     {
@@ -53,16 +54,21 @@ public class HitArea : MonoBehaviour
 
             visitedColliders.Add(results[i]);
             var result = results[i];
-            var enemy = result.GetComponent<Enemy>();
-            if (enemy != null)
+            if(hitEnemies)
             {
-                enemy.takeDamage(damage);
+                var enemy = result.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.takeDamage(damage);
+                }
             }
-
-            var player = result.GetComponent<PlayerStateController>();
-            if (player != null)
+            else
             {
-                //player take damage;
+                var player = result.GetComponent<PlayerStateController>();
+                if (player != null)
+                {
+                    //player take damage;
+                }
             }
         }
     }
