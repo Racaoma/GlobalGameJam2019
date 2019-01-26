@@ -41,7 +41,8 @@ public class Enemy_Puff : Enemy
     {
         if (collision.gameObject.layer == playerLayer)
         {
-            //Player takes damage
+            LudicController.Instance.ludicMeter--;
+            //Player stun
         }
         else if (collision.gameObject.layer == groundLayer)
         {

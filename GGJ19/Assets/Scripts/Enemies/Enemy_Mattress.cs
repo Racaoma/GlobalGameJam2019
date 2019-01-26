@@ -32,7 +32,8 @@ public class Enemy_Mattress : Enemy
     {
         if (collision.gameObject.layer == playerLayer)
         {
-            //Player takes damage
+            LudicController.Instance.ludicMeter--;
+            //Player stun
         }
     }
 

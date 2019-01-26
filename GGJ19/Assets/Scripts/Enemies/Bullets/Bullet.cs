@@ -37,7 +37,9 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.layer == playerLayer)
         {
-            //Player takes damage
+            LudicController.Instance.ludicMeter--;
+            //Player stun
+            disableBullet();
         }
         else if(collision.gameObject.layer == groundLayer)
         {
