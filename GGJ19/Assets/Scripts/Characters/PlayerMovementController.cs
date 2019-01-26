@@ -46,6 +46,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController2D>();
         CurrentMovementState = new MovementState();
+
     }
 
     void Update()

@@ -112,6 +112,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &212091719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6181991799212881527, guid: 16855b8240eebdc4b86aa5b981011fc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6181991799176239390}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &212091720
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212091719}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &246784192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,6 +1146,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1582423438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6181991799111949148, guid: 16855b8240eebdc4b86aa5b981011fc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6181991799176239390}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1582423444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582423438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de29ee50885fbe949a8e4e9a04000f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1582423445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582423438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8e00eb8f23c454d9d7f69276040eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 212091720}
 --- !u!1 &1788540471
 GameObject:
   m_ObjectHideFlags: 0
