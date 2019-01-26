@@ -58,10 +58,14 @@ public class LevelFlow : MonoBehaviour
 
     public List<Transform> Positions = new List<Transform>();
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Instance = this;
         SetPath();
        // Save();
         Read();
