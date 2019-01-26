@@ -6,6 +6,8 @@ public class HitArea : MonoBehaviour
 {
     public string hittableTag;
 
+    public int damage = 1;
+
     public List<GameObject> hittableObjects = new List<GameObject>();
 
 
@@ -45,11 +47,11 @@ public class HitArea : MonoBehaviour
     {
         Debug.Log("HitObjects");
 
-        List<CharacterHits> enemies = new List<CharacterHits>();
+        List<Enemy> enemies = new List<Enemy>();
 
         for (int i=0; i < hittableObjects.Count; i++)
         {
-            var enemy = hittableObjects[i].GetComponent<CharacterHits>();
+            var enemy = hittableObjects[i].GetComponent<Enemy>();
 
             if (enemy != null)
             {
@@ -59,7 +61,7 @@ public class HitArea : MonoBehaviour
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].TakeHit();
+            enemies[i].takeDamage(damage);
         }
     }
 

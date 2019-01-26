@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour
     public void takeDamage(int damageTaken)
     {
         currentHP -= damageTaken;
-        if(currentHP <= 0)
+
+        if (currentHP <= 0)
         {
             killEnemy();
         }
