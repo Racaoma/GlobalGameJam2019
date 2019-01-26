@@ -31,23 +31,24 @@ public class LevelFlow : MonoBehaviour
     public class LevelParameters
     {
         public int MaxEnemiesOnScreen;
-        public int InstantiatedEnemies;
+        public int EnemiesOnScreen;
         public int WaveSize;
+        public int WaveInstantiatedEnemies;
         public float TimerToInstantiate;
 
-        public LevelParameters(int _maxEnemiesInstantiated, int _enemiesInstantiated, int _waveEnemies, float _enemyTimer) {
-            MaxEnemiesOnScreen = _maxEnemiesInstantiated;
-            InstantiatedEnemies = _enemiesInstantiated;
-            WaveSize = _waveEnemies;
-            TimerToInstantiate = _enemyTimer;
-        }
+      
         public LevelParameters() { }
 
-        public void InstantiateEnemy() { }
+        public void InstantiateEnemiesBehaviour() {
+            EnemiesOnScreen++;
+            WaveInstantiatedEnemies++;
+        }
 
     }
 
     private string _path;
+    [SerializeField]
+    private string fileName;
     private string _jsonString;
     public LevelParameters Level;
 
@@ -68,7 +69,7 @@ public class LevelFlow : MonoBehaviour
 
     void SetPath() {
 
-        _path = Application.streamingAssetsPath + "/Level.json";
+        _path = Application.streamingAssetsPath +"/"+ fileName;
        
     }
 
@@ -88,14 +89,18 @@ public class LevelFlow : MonoBehaviour
         // //Debug.Log(charc);
     }
 
+    public void EnemyDeath() {
+        Debug.Log("The enemy died");
+        Level.EnemiesOnScreen--;
+    }
 
-    public void InstantiateEnemy() {
-        if (Level.InstantiatedEnemies <= Level.MaxEnemiesOnScreen)
+
+    protected void InstantiateEnemy() {
+        if (Level.EnemiesOnScreen < Level.MaxEnemiesOnScreen)
         {
             if (_timer >= Level.TimerToInstantiate)
             {
                 int rand = UnityEngine.Random.Range(0, 10);
-                Debug.Log("rand " + rand);
 
                 for (int i = 0; i < Enemies.Count; i++)
                 {
@@ -105,13 +110,13 @@ public class LevelFlow : MonoBehaviour
 
                         Instantiate(Enemies[i].Enemy, Positions[pos].transform.position, Positions[pos].transform.rotation);
                         i = Enemies.Count;
+                        Level.InstantiateEnemiesBehaviour();
                     }
                 }
 
                 _timer = 0;
             }
         }
-
     }
     // Update is called once per frame
     void Update()
