@@ -124,8 +124,8 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         CurrentMovementState.IsRunning = Mathf.Abs(_input.Direction.x) > 0;
-        CurrentMovementState.IsJumping = _velocity.y > 0;
-        CurrentMovementState.IsFalling = _velocity.y < 0;
+        CurrentMovementState.IsJumping = _velocity.y > 0 && !_characterController.isGrounded;
+        CurrentMovementState.IsFalling = _velocity.y <= 0 && (!_characterController.isGrounded);
     }
 
     public void StartJump()
