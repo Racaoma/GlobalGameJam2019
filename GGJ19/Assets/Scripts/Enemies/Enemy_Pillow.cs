@@ -7,14 +7,21 @@ using Prime31;
 public class Enemy_Pillow : Enemy
 {
     //Variables
-    private int maxHP_Pillow = 1;
+    [SerializeField]
+    private int maxHP_Pillow;
     private Vector3 movementDirection;
     private CharacterController2D characterControllerRef;
+    [SerializeField]
+    private float movementSpeed;
+    private int playerLayer;
+    private int groundLayer;
 
     //Methods
     private void Start()
     {
         characterControllerRef = this.GetComponent<CharacterController2D>();
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayer = LayerMask.NameToLayer("Ground");
     }
 
     private void OnEnable()
@@ -26,11 +33,12 @@ public class Enemy_Pillow : Enemy
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if(collision.gameObject.layer == playerLayer)
         {
-            //Player takes damage
+            LudicController.Instance.ludicMeter--;
+            //Player stun
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        else if (collision.gameObject.layer == groundLayer)
         {
             movementDirection *= -1;
         }
@@ -38,6 +46,6 @@ public class Enemy_Pillow : Enemy
 
     private void Update()
     {
-        characterControllerRef.move(movementDirection);
+        characterControllerRef.move(movementDirection * movementSpeed);
     }
 }
