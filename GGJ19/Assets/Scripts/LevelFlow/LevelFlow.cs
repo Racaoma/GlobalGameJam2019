@@ -89,14 +89,18 @@ public class LevelFlow : MonoBehaviour
         // //Debug.Log(charc);
     }
 
+    public void EnemyDeath() {
+        Debug.Log("The enemy died");
+        Level.EnemiesOnScreen--;
+    }
 
-    public void InstantiateEnemy() {
+
+    protected void InstantiateEnemy() {
         if (Level.EnemiesOnScreen < Level.MaxEnemiesOnScreen)
         {
             if (_timer >= Level.TimerToInstantiate)
             {
                 int rand = UnityEngine.Random.Range(0, 10);
-                Debug.Log("rand " + rand);
 
                 for (int i = 0; i < Enemies.Count; i++)
                 {
@@ -113,7 +117,6 @@ public class LevelFlow : MonoBehaviour
                 _timer = 0;
             }
         }
-
     }
     // Update is called once per frame
     void Update()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum enemyType
 {
@@ -11,10 +12,14 @@ public enum enemyType
 
 public class Enemy : MonoBehaviour
 {
+   public UnityEvent OnEnemyDie;
     //Variables
     protected int maxHP;
     protected int currentHP;
 
+    void Awake() {
+        OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
+    }
     //Methods
     public void takeDamage(int damageTaken)
     {
@@ -22,11 +27,14 @@ public class Enemy : MonoBehaviour
         if(currentHP <= 0)
         {
             killEnemy();
+           
         }
     }
 
+
     public void killEnemy()
-    {
+    {      
+        OnEnemyDie.Invoke();
         this.enabled = false;
     }
 }
