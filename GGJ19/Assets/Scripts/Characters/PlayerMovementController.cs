@@ -6,6 +6,7 @@ using Prime31;
 [RequireComponent(typeof(CharacterController2D))]
 public class PlayerMovementController : MonoBehaviour
 {
+    public MovementState CurrentMovementState { get; set; }
     [SerializeField]
     private float _maxMovementVelocity = 40;
 
@@ -40,13 +41,19 @@ public class PlayerMovementController : MonoBehaviour
     private bool _canJump = false;
     private bool _isJumping = false;
 
+
     private void Awake()
     {
         _characterController = GetComponent<CharacterController2D>();
+        CurrentMovementState = new MovementState();
     }
 
     void Update()
     {
+        if(!enabled)
+        {
+            return;
+        }
         _input.Update();
 
         var acceleration = _movementAcceleration;
@@ -101,6 +108,23 @@ public class PlayerMovementController : MonoBehaviour
         Vector2 deltaMovement = _velocity * Time.deltaTime;
         _characterController.move(deltaMovement);
         _velocity = _characterController.velocity;
+        if (_input.Direction.x > 0)
+        {
+            var scale = _characterController.transform.localScale;
+            scale.x = Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+
+        if (_input.Direction.x < 0)
+        {
+            var scale = _characterController.transform.localScale;
+            scale.x = -Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+
+        CurrentMovementState.IsRunning = Mathf.Abs(_input.Direction.x) > 0;
+        CurrentMovementState.IsJumping = _velocity.y > 0;
+        CurrentMovementState.IsFalling = _velocity.y < 0;
     }
 
     public void StartJump()
@@ -127,5 +151,13 @@ public class PlayerMovementController : MonoBehaviour
             IsJumping = Input.GetAxisRaw("Vertical") > 0.5f || Input.GetButton("Jump");
             IsDescending = Input.GetAxisRaw("Vertical") < -0.5f;
         }
+    }
+
+    [System.Serializable]
+    public class MovementState
+    {
+        public bool IsJumping { get; set; }
+        public bool IsFalling { get; set; }
+        public bool IsRunning { get; set; }
     }
 }
