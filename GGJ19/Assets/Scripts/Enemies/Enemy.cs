@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum enemyType
+{
+    Pillow,
+    Puff,
+    Mattress
+}
+
 public class Enemy : MonoBehaviour
 {
     //Variables

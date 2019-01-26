@@ -2,21 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Colchao : Enemy
+public class Enemy_Mattress : Enemy
 {
     //Variables
-    private int maxHP_Colchao = 3;
+    private int maxHP_Mattress = 3;
     private float shotRatio = 2f;
     private float currentShotTimer;
     private float detectionRange;
     private float detectionAngleThreshold;
     private Collider2D collision;
-    private LayerMask playerLayerMask = LayerMask.GetMask("Player");
+    private LayerMask playerLayerMask;
 
     //Methods
+    private void Start()
+    {
+        playerLayerMask = LayerMask.GetMask("Player");
+    }
+
     private void OnEnable()
     {
-        base.currentHP = maxHP_Colchao;
+        base.currentHP = maxHP_Mattress;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            //Player takes damage
+        }
     }
 
     private void Update()

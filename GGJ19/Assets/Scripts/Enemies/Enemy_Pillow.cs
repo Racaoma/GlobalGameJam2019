@@ -4,26 +4,40 @@ using UnityEngine;
 using Prime31;
 
 [RequireComponent(typeof(CharacterController2D))]
-public class Almofada : Enemy
+public class Enemy_Pillow : Enemy
 {
     //Variables
-    private int maxHP_Almofada = 1;
+    private int maxHP_Pillow = 1;
     private Vector3 movementDirection;
     private CharacterController2D characterControllerRef;
 
     //Methods
+    private void Start()
+    {
+        characterControllerRef = this.GetComponent<CharacterController2D>();
+    }
+
     private void OnEnable()
     {
-        base.currentHP = maxHP_Almofada;
-        characterControllerRef = this.GetComponent<CharacterController2D>();
+        base.currentHP = maxHP_Pillow;
         if (UnityEngine.Random.value >= 0.5f) movementDirection = Vector3.right;
         else movementDirection = Vector3.left;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            //Player takes damage
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            movementDirection *= -1;
+        }
     }
 
     private void Update()
     {
         characterControllerRef.move(movementDirection);
     }
-
-    //TODO: Change Direction when hitting a wall
 }
