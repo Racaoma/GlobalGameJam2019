@@ -34,10 +34,13 @@ public abstract class Enemy : MonoBehaviour
     //Events
     public UnityEvent OnEnemyDie;
 
-    //References
+    //Particle Effects
     public GameObject feathersFX;
+    public GameObject transformFX;
+
+    //References
     protected Animator animatorRef;
-    private SpriteRenderer spriteRendererRef;
+    protected SpriteRenderer spriteRendererRef;
     [SerializeField]
     protected Sprite mundaneFormSprite;
 
@@ -75,7 +78,6 @@ public abstract class Enemy : MonoBehaviour
         animatorRef.SetTrigger("knockDown");
         currentState = enemyState.KnockedDown;
         this.enabled = false;
-        becomeMundane();
     }
 
     private void SpawnFX(GameObject effect)
@@ -88,7 +90,9 @@ public abstract class Enemy : MonoBehaviour
     //Abstract Methods
     public void becomeMundane()
     {
+        SpawnFX(transformFX);
         animatorRef.enabled = false;
+        spriteRendererRef.sortingOrder = -1;
         spriteRendererRef.sprite = mundaneFormSprite;
     }
 }
