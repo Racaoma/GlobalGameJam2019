@@ -41,6 +41,7 @@ public abstract class Enemy : MonoBehaviour
     //References
     protected Animator animatorRef;
     protected SpriteRenderer spriteRendererRef;
+    protected MaterialBlink materialBlinkRef;
     [SerializeField]
     protected Sprite mundaneFormSprite;
 
@@ -53,13 +54,15 @@ public abstract class Enemy : MonoBehaviour
         groundLayerMask = LayerMask.GetMask("Ground");
         animatorRef = this.transform.GetComponentInChildren<Animator>();
         spriteRendererRef = this.transform.GetComponentInChildren<SpriteRenderer>();
+        materialBlinkRef = this.transform.GetComponentInChildren<MaterialBlink>();
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
     } 
 
     public void takeDamage(int damageTaken)
     {
         currentHP -= damageTaken;
-        if(damageTaken == 2) SpawnFX(feathersFX);
+        materialBlinkRef.StartBlink(0.25f, 1f);
+        if (damageTaken == 2) SpawnFX(feathersFX);
 
         if (currentHP <= 0)
         {
