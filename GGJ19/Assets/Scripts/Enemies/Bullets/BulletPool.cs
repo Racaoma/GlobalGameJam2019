@@ -36,6 +36,7 @@ public class BulletPool : Singleton<BulletPool>
         else obj = Instantiate(bulletPrefab);
 
         //Set Bullet Info
+        obj.SetActive(true);
         obj.GetComponent<Bullet>().setInfo(center, direction, timeToDie);
     }
 }
