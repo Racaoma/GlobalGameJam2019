@@ -19,7 +19,6 @@ public enum enemyState
 
 public class Enemy : MonoBehaviour
 {
-   public UnityEvent OnEnemyDie;
     //Variables
     protected int maxHP;
     protected int currentHP;
@@ -31,6 +30,7 @@ public class Enemy : MonoBehaviour
     //Particles
     public GameObject hitFX;
     public GameObject deathFX;
+
     private void Start()
     {
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
@@ -43,7 +43,6 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0)
         {
             killEnemy();
-           
         }
         else
         {
@@ -57,13 +56,10 @@ public class Enemy : MonoBehaviour
         SpawnFX(deathFX);
         this.enabled = false;
     }
-
     
     private void SpawnFX(GameObject effect)
     {
-        if (effect == null)
-            return;
-
+        if (effect == null) return;
         var fx = Instantiate(effect, transform.position, transform.rotation);
         Destroy(fx, 1);
     }
