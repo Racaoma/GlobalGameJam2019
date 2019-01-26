@@ -8,6 +8,10 @@ public class Colchao : Enemy
     private int maxHP_Colchao = 3;
     private float shotRatio = 2f;
     private float currentShotTimer;
+    private float detectionRange;
+    private float detectionAngleThreshold;
+    private Collider2D collision;
+    private LayerMask playerLayerMask = LayerMask.GetMask("Player");
 
     //Methods
     private void OnEnable()
@@ -17,10 +21,18 @@ public class Colchao : Enemy
 
     private void Update()
     {
-        currentShotTimer -= Time.deltaTime;
-        if (currentShotTimer <= 0f)
+        if(currentShotTimer > 0f) currentShotTimer -= Time.deltaTime;
+        else if (currentShotTimer <= 0f)
         {
-            currentShotTimer = shotRatio;
+            collision = Physics2D.OverlapCircle(this.transform.position, detectionRange, playerLayerMask);
+            if(collision != null)
+            {
+                if (Vector3.Angle(collision.transform.position, this.transform.position) <= detectionAngleThreshold)
+                {
+                    currentShotTimer = shotRatio;
+                    BulletPool.Instance.spawnBullet(this.transform.position, collision.transform.position, 3f);
+                }
+            }
         }
     }
 }
