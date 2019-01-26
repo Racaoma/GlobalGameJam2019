@@ -43,14 +43,22 @@ public class LevelFlow : MonoBehaviour
         }
         public LevelParameters() { }
 
+        public void InstantiateEnemy() { }
+
     }
 
-   [SerializeField]
-   private string path;
-    private string jsonString;
-    public LevelParameters Level; 
-        // Start is called before the first frame update
-        void Start()
+    private string _path;
+    private string _jsonString;
+    public LevelParameters Level;
+
+    private float _timer;
+
+    public List<InstantiateBehaviour> Enemies = new List<InstantiateBehaviour>();
+
+    public List<Transform> Positions = new List<Transform>();
+
+    // Start is called before the first frame update
+    void Start()
     {
         Instance = this;
         SetPath();
@@ -60,14 +68,14 @@ public class LevelFlow : MonoBehaviour
 
     void SetPath() {
 
-        path = Application.streamingAssetsPath + "/Level.json";
+        _path = Application.streamingAssetsPath + "/Level.json";
        
     }
 
      void Read() {
-        jsonString = File.ReadAllText(path);
+        _jsonString = File.ReadAllText(_path);
         Level = new LevelParameters();
-        Level = JsonUtility.FromJson<LevelParameters>(jsonString);
+        Level = JsonUtility.FromJson<LevelParameters>(_jsonString);
     }
 
 
@@ -75,13 +83,40 @@ public class LevelFlow : MonoBehaviour
     {
         string charc = JsonUtility.ToJson(Level);
         Debug.Log(charc);
-        System.IO.File.WriteAllText(path, charc);
+        System.IO.File.WriteAllText(_path, charc);
 
         // //Debug.Log(charc);
+    }
+
+
+    public void InstantiateEnemy() {
+        if (Level.InstantiatedEnemies <= Level.MaxEnemiesOnScreen)
+        {
+            if (_timer >= Level.TimerToInstantiate)
+            {
+                int rand = UnityEngine.Random.Range(0, 10);
+                Debug.Log("rand " + rand);
+
+                for (int i = 0; i < Enemies.Count; i++)
+                {
+                    if (rand >= Enemies[i].Min && rand <=Enemies[i].Max)
+                    {
+                        int pos = UnityEngine.Random.Range(0, 2);
+
+                        Instantiate(Enemies[i].Enemy, Positions[pos].transform.position, Positions[pos].transform.rotation);
+                        i = Enemies.Count;
+                    }
+                }
+
+                _timer = 0;
+            }
+        }
+
     }
     // Update is called once per frame
     void Update()
     {
-        
+        _timer += Time.deltaTime;
+        InstantiateEnemy();       
     }
 }
