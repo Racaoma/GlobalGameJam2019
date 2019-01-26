@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using UnityEditor;
 
-
+/*
 [CustomEditor(typeof(LevelFlow))]
 public class LevelFlowEditor : Editor
 {
@@ -20,7 +20,7 @@ public class LevelFlowEditor : Editor
             LevelFlow.Instance.Save();
         }
     }
-}
+}*/
 
 public class LevelFlow : MonoBehaviour
 {
