@@ -30,6 +30,7 @@ public class Enemy_Puff : Enemy
         currentState = enemyState.Active;
         if (UnityEngine.Random.value >= 0.5f) movementDirection = Vector3.right;
         else movementDirection = Vector3.left;
+        animatorRef.Play("Idle");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -45,19 +46,37 @@ public class Enemy_Puff : Enemy
         }
     }
 
+    private void move(Vector3 movementTarget)
+    {
+        if (movementDirection.x >= 0f) this.transform.GetChild(0).localScale = new Vector3(-1f, 1f, 1f);
+        else this.transform.GetChild(0).localScale = Vector3.one;
+
+        characterControllerRef.move(movementTarget * movementSpeed);
+        animatorRef.SetBool("isWalking", true);
+    }
+
     private void Update()
     {
-        collision = Physics2D.OverlapCircle(this.transform.position, detectionRange, playerLayerMask);
-        if(collision != null)
+        if (currentState == enemyState.Stunned && stunTimer >= 0f)
         {
-            Vector3 chasingDirection = (collision.transform.position - this.transform.position);
-            chasingDirection.y = 0;
-            chasingDirection.Normalize();
-            characterControllerRef.move(chasingDirection * movementSpeed);
+            stunTimer -= Time.deltaTime;
+            animatorRef.SetBool("isWalking", false);
         }
         else
         {
-            characterControllerRef.move(movementDirection * movementSpeed);
+            currentState = enemyState.Active;
+            collision = Physics2D.OverlapCircle(this.transform.position, detectionRange, playerLayerMask);
+            if (collision != null)
+            {
+                Vector3 chasingDirection = (collision.transform.position - this.transform.position);
+                chasingDirection.y = 0;
+                chasingDirection.Normalize();
+                move(chasingDirection);
+            }
+            else
+            {
+                move(movementDirection);
+            }
         }
     }
 }

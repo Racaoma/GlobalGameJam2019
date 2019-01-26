@@ -40,15 +40,15 @@ public class Enemy : MonoBehaviour
     public GameObject deathFX;
 
     //Methods
-    private void Start()
+    private void Awake()
     {
-        OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
         playerLayer = LayerMask.NameToLayer("Player");
         groundLayer = LayerMask.NameToLayer("Ground");
         playerLayerMask = LayerMask.GetMask("Player");
         groundLayerMask = LayerMask.GetMask("Ground");
         animatorRef = this.transform.GetComponentInChildren<Animator>();
-    }
+        OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
+    } 
 
     public void takeDamage(int damageTaken)
     {

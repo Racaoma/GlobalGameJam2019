@@ -18,8 +18,6 @@ public class Enemy_Pillow : Enemy
     private void Start()
     {
         characterControllerRef = this.GetComponent<CharacterController2D>();
-        currentState = enemyState.Active;
-        animatorRef.Play("Idle");
     }
 
     private void OnEnable()
@@ -28,6 +26,8 @@ public class Enemy_Pillow : Enemy
         this.transform.GetChild(0).localScale = Vector3.one;
         if (UnityEngine.Random.value >= 0.5f) movementDirection = Vector3.right;
         else movementDirection = Vector3.left;
+        currentState = enemyState.Active;
+        animatorRef.Play("Idle");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -54,19 +54,15 @@ public class Enemy_Pillow : Enemy
 
     private void Update()
     {
-        if (currentState == enemyState.Stunned)
+        if (currentState == enemyState.Stunned && stunTimer >= 0f)
         {
-            if (stunTimer <= 0f)
-            {
-                move();
-                currentState = enemyState.Active;
-            }
-            else
-            {
-                stunTimer -= Time.deltaTime;
-                animatorRef.SetBool("isWalking", false);
-            }
+            stunTimer -= Time.deltaTime;
+            animatorRef.SetBool("isWalking", false);
         }
-        else move();
+        else
+        {
+            currentState = enemyState.Active;
+            move();
+        }
     }
 }
