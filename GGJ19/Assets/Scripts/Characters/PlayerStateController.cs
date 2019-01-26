@@ -18,6 +18,7 @@ public class PlayerStateController : MonoBehaviour
     {
         MovementController = GetComponent<PlayerMovementController>();
         AnimationController = GetComponent<PlayerAnimatorController>();
+        PlayerAttackController = GetComponent<PlayerAttackController>();
     }
     private void Start()
     {
