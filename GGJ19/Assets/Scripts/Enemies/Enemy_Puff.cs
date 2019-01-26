@@ -32,6 +32,8 @@ public class Enemy_Puff : Enemy
         else movementDirection = Vector3.left;
         animatorRef.enabled = true;
         spriteRendererRef.sortingOrder = 0;
+        boxCollider2DRef.enabled = true;
+        rigidBody2DRef.isKinematic = false;
         animatorRef.Play("Idle");
     }
 

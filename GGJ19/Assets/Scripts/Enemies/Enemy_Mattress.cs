@@ -19,6 +19,8 @@ public class Enemy_Mattress : Enemy
         base.currentHP = maxHP_Mattress;
         currentState = enemyState.Active;
         animatorRef.enabled = true;
+        boxCollider2DRef.enabled = true;
+        rigidBody2DRef.isKinematic = false;
         spriteRendererRef.sortingOrder = 0;
         animatorRef.Play("Idle");
     }

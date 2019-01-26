@@ -39,11 +39,13 @@ public abstract class Enemy : MonoBehaviour
     public GameObject transformFX;
 
     //References
+    [SerializeField]
+    protected Sprite mundaneFormSprite;
     protected Animator animatorRef;
     protected SpriteRenderer spriteRendererRef;
     protected MaterialBlink materialBlinkRef;
-    [SerializeField]
-    protected Sprite mundaneFormSprite;
+    protected BoxCollider2D boxCollider2DRef;
+    protected Rigidbody2D rigidBody2DRef;
 
     //Methods
     private void Awake()
@@ -55,6 +57,8 @@ public abstract class Enemy : MonoBehaviour
         animatorRef = this.transform.GetComponentInChildren<Animator>();
         spriteRendererRef = this.transform.GetComponentInChildren<SpriteRenderer>();
         materialBlinkRef = this.transform.GetComponentInChildren<MaterialBlink>();
+        boxCollider2DRef = this.transform.GetComponent<BoxCollider2D>();
+        rigidBody2DRef = this.transform.GetComponent<Rigidbody2D>();
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
     } 
 
@@ -95,6 +99,8 @@ public abstract class Enemy : MonoBehaviour
     {
         SpawnFX(transformFX);
         animatorRef.enabled = false;
+        boxCollider2DRef.enabled = false;
+        rigidBody2DRef.isKinematic = true;
         spriteRendererRef.sortingOrder = -1;
         spriteRendererRef.sprite = mundaneFormSprite;
     }
