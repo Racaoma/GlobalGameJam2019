@@ -64,7 +64,6 @@ public class HUDController : Singleton<HUDController>
     }
 
     public void ChangeLudicMeter() {
-        Debug.Log("Ludic " + LudicController.Instance.ludicMeterPercent);
         HouseColor.fillAmount = LudicController.Instance.ludicMeterPercent;
       
         ColorLudic.a = LudicController.Instance.ludicMeterPercent;
@@ -75,7 +74,6 @@ public class HUDController : Singleton<HUDController>
 
     public void ChangeWaveStatus() {
         PillowSlider.value = LevelFlow.Instance.Level.WaveCompletedPercent;
-        Debug.Log("Slider " + LevelFlow.Instance.Level.WaveCompletedPercent);
     }
 
     // Update is called once per frame

@@ -33,6 +33,7 @@ public class TutorialFlow : Singleton<TutorialFlow>
     //Methods
     public void startTutorial()
     {
+        GameEvents.GameState.Tutorial.SafeInvoke();
         buttonsInfo.SetActive(true);
         buttonsInfo.transform.GetChild(0).gameObject.SetActive(true);
         currentPhase = tutorialPhase.Movement;

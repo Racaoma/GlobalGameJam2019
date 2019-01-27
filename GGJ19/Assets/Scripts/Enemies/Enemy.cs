@@ -78,15 +78,18 @@ public abstract class Enemy : MonoBehaviour
 
         if (damageTaken == 2)
         {
+            //Not WOrking! Sword & Nerf same damage
             SpawnFX(feathersFX);
         }
         else if(damageTaken == 1)
         {
+            GameEvents.EnemyAction.NerfHit.SafeInvoke();
             SpawnFX(feathersFX);
         }
 
         if (currentHP <= 0)
         {
+            GameEvents.EnemyAction.SwordHit.SafeInvoke();
             killEnemy();
             SpawnFX(feathersFX);
         }
