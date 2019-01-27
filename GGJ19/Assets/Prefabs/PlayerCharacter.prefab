@@ -600,9 +600,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KnockbackDeaceleration: 60
-  KnockbackForce: 30
+  KnockbackForce: 15
   KnockbackDuration: 0.5
-  StunDuration: 0.5
+  StunDuration: 0.3
+  invulneraabilityTime: 0.5
 --- !u!114 &1582423445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,6 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 5297511116211541397}
+  _blink: {fileID: 5767455998045211113}
   _animationEvents: {fileID: 2943150527020760461}
 --- !u!114 &44036081
 MonoBehaviour:
@@ -630,7 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackCollider: {fileID: 5210826285868805863}
-  _startingBullets: 300
+  _startingBullets: 5
   _gunShotSpawner: {fileID: 1812585950}
   _giveBulletsInterval: 5
   canAttack: 1
@@ -912,16 +914,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 2957606378333923213, guid: f324bbad1714ec44aa7cd52df9fb77e2,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.4956771
-      objectReference: {fileID: 0}
     - target: {fileID: 2993781829621333627, guid: f324bbad1714ec44aa7cd52df9fb77e2,
         type: 3}
       propertyPath: rend
       value: 
       objectReference: {fileID: 2314399103135502311}
+    - target: {fileID: 2957606378333923213, guid: f324bbad1714ec44aa7cd52df9fb77e2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.4956771
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f324bbad1714ec44aa7cd52df9fb77e2, type: 3}
 --- !u!1 &3436638600523228492 stripped
@@ -942,6 +944,18 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 8756706428828743570}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5767455998045211113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2993781829621333627, guid: f324bbad1714ec44aa7cd52df9fb77e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8756706428828743570}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436638600523228492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d24336a1ee7a3442a83009fff66fa61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2314399103135502311 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6456041606832765045, guid: f324bbad1714ec44aa7cd52df9fb77e2,
