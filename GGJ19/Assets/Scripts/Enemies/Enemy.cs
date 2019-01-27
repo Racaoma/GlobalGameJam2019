@@ -92,6 +92,7 @@ public abstract class Enemy : MonoBehaviour
             GameEvents.EnemyAction.SwordHit.SafeInvoke();
             killEnemy();
             SpawnFX(feathersFX);
+            LevelFlow.Instance.EnemyDeath();
         }
         else
         {

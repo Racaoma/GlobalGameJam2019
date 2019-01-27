@@ -72,6 +72,7 @@ public class LevelFlow : Singleton<LevelFlow>
     private float _timer;
     public gameState currentGameState = gameState.Tutorial;
     private gameState nextGameState;
+    public GameObject boss;
 
     //Lists Enemies & Positions
     public List<InstantiateBehaviour> Enemies = new List<InstantiateBehaviour>();
@@ -105,7 +106,7 @@ public class LevelFlow : Singleton<LevelFlow>
 
     public void EnemyDeath()
     {
-        Level.EnemiesOnScreen--;
+        Mathf.Max(Level.EnemiesOnScreen--, 0f);
     }
 
     protected void InstantiateEnemy()
@@ -192,7 +193,6 @@ public class LevelFlow : Singleton<LevelFlow>
             Fortress.Instance.ActivateFortress(10);
         }
         GameEvents.GameState.StartLevel.SafeInvoke();
-
     }
 
     private void winWave()
@@ -206,6 +206,12 @@ public class LevelFlow : Singleton<LevelFlow>
         else if (currentGameState == gameState.Wave3) setNextGameState(gameState.Boss);
     }
 
+    private void activateBoss()
+    {
+        boss.SetActive(true);
+        _timer = 0f;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -214,11 +220,10 @@ public class LevelFlow : Singleton<LevelFlow>
             _timer -= Time.deltaTime;
             if (_timer <= 0f) startWave();
         }
-        else if (currentGameState == gameState.Wave1 || currentGameState == gameState.Wave2 || currentGameState == gameState.Wave3)
+        else if (currentGameState == gameState.Wave1)
         {
             if (LudicController.Instance.getLudicMeter() <= 0) loseGame();
-            else if (Level.WaveInstantiatedEnemies == Level.WaveSize && Level.EnemiesOnScreen == 0) winWave();
-            else if (_timer >= (Level.TimeToComplete * 60f)) startWave();
+            else if (_timer >= (Level.TimeToComplete)) activateBoss();
             else
             {
                 _timer += Time.deltaTime;
