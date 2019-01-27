@@ -45,6 +45,15 @@ public class LevelFlow : Singleton<LevelFlow>
         public float TimerToInstantiate;
         public float TimeToComplete;
 
+        public float WaveCompletedPercent
+        {
+            get
+            {
+                return (float)WaveInstantiatedEnemies / (float)WaveSize;
+            }
+        }
+
+
         public LevelParameters() { }
 
         public void InstantiateEnemiesBehaviour()

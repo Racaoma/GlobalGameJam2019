@@ -73,10 +73,19 @@ public class HUDController : Singleton<HUDController>
         Tail.color = ColorLudic;
     }
 
+    public void ChangeWaveStatus() {
+        PillowSlider.value = LevelFlow.Instance.Level.WaveCompletedPercent;
+        Debug.Log("Slider " + LevelFlow.Instance.Level.WaveCompletedPercent);
+    }
+
     // Update is called once per frame
     void Update()
     {
         ChangeLudicMeter();
-
+        if(LevelFlow.Instance.currentGameState!= gameState.Tutorial)
+        {
+            ChangeWaveStatus();
+        }
+       
     }
 }
