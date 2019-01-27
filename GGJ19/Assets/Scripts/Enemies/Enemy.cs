@@ -34,12 +34,18 @@ public abstract class Enemy : MonoBehaviour
     //Events
     public UnityEvent OnEnemyDie;
 
-    //References
+    //Particle Effects
     public GameObject feathersFX;
-    protected Animator animatorRef;
-    private SpriteRenderer spriteRendererRef;
+    public GameObject transformFX;
+
+    //References
     [SerializeField]
     protected Sprite mundaneFormSprite;
+    protected Animator animatorRef;
+    protected SpriteRenderer spriteRendererRef;
+    protected MaterialBlink materialBlinkRef;
+    protected BoxCollider2D boxCollider2DRef;
+    protected Rigidbody2D rigidBody2DRef;
 
     //Methods
     private void Awake()
@@ -50,13 +56,21 @@ public abstract class Enemy : MonoBehaviour
         groundLayerMask = LayerMask.GetMask("Ground");
         animatorRef = this.transform.GetComponentInChildren<Animator>();
         spriteRendererRef = this.transform.GetComponentInChildren<SpriteRenderer>();
+        materialBlinkRef = this.transform.GetComponentInChildren<MaterialBlink>();
+        boxCollider2DRef = this.transform.GetComponent<BoxCollider2D>();
+        rigidBody2DRef = this.transform.GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
-    } 
+    }
 
     public void takeDamage(int damageTaken)
     {
         currentHP -= damageTaken;
-        if(damageTaken == 2) SpawnFX(feathersFX);
+        materialBlinkRef.StartBlink(0.25f, 1f);
+        if (damageTaken == 2) SpawnFX(feathersFX);
 
         if (currentHP <= 0)
         {
@@ -76,7 +90,7 @@ public abstract class Enemy : MonoBehaviour
         animatorRef.SetTrigger("knockDown");
         currentState = enemyState.KnockedDown;
         this.enabled = false;
-        becomeMundane();
+        EnemyPool.Instance.defeatEnemy(this.gameObject);
     }
 
     private void SpawnFX(GameObject effect)
@@ -89,7 +103,11 @@ public abstract class Enemy : MonoBehaviour
     //Abstract Methods
     public void becomeMundane()
     {
+        SpawnFX(transformFX);
         animatorRef.enabled = false;
+        boxCollider2DRef.enabled = false;
+        rigidBody2DRef.isKinematic = true;
+        spriteRendererRef.sortingOrder = -1;
         spriteRendererRef.sprite = mundaneFormSprite;
         var collider = GetComponent<Collider2D>();
         collider.enabled = false;

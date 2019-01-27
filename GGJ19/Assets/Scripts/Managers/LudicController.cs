@@ -10,6 +10,7 @@ public class LudicController : Singleton<LudicController>
     private float ludicMeter_continous;
     public int maxLudicMeter;
     public float changeSpeed = 2f;
+
     void Update()
     {
         if (Mathf.Abs(ludicMeter_continous - (float)ludicMeter) > 0.05f)
@@ -18,6 +19,7 @@ public class LudicController : Singleton<LudicController>
             UpdateLudicMeter(ludicMeter_continous/(float)maxLudicMeter);
         }
     }
+
     public void IncreaseLudicMeter()
     {
         ludicMeter = Mathf.Max(ludicMeter + 1, maxLudicMeter);

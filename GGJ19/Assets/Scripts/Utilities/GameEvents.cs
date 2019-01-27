@@ -5,26 +5,27 @@ public static class GameEvents
 {
     public static class GameState
     {
-        public static Action OnStartGame;
+        public static Action StartGame;
+        public static Action StartBoss;
         public static Action WaveWon;
     }
 
-    public static class PlayerActions
+    public static class PlayerAction
     {
         public static Action SwordAttack;
         public static Action NerfShoot;
-        public static Action BodyFall;
         public static Action TookDamage;
+        public static Action Jump;
     }
 
-    public static class Enemies
+    public static class EnemyAction
     {
         public static Action SwordHit;
         public static Action NerfHit;
         public static Action LazerShoot;
     }
 
-    public static class UI
+    public static class Menu
     {
         public static Action buttonSelect;
     }
