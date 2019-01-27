@@ -60,6 +60,11 @@ public class PlayerAnimatorController : MonoBehaviour
         UpdateMovementAnimation();
     }
 
+    private void OnAttack()
+    {
+        OnExecuteAttack.SafeInvoke();
+    }
+
     void UpdateMovementAnimation()
     {
         if (_movementController.enabled)
