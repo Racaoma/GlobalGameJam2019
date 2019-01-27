@@ -7,7 +7,9 @@ public class EnemyPool : Singleton<EnemyPool>
     //Variables
     [SerializeField]
     private GameObject puffPrefab;
+    [SerializeField]
     private GameObject pillowPrefab;
+    [SerializeField]
     private GameObject mattressPrefab;
 
     [SerializeField]
