@@ -13,6 +13,8 @@ public class DefeatedBoss : BossState
         boss.leftFistCollider.enabled = false;
         boss.rightFistCollider.enabled = false;
         boss.headCollider.enabled = false;
+
+        boss.KillBoss();
     }
 
     public override void FixedTick()

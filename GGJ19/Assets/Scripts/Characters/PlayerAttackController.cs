@@ -4,10 +4,8 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(PlayerAnimatorController))]
-public class PlayerAttackController : Singleton<PlayerAttackController>
+public class PlayerAttackController : MonoBehaviour
 {
-  
- 
     [SerializeField]
     private HitArea _attackCollider;
     [SerializeField]
@@ -55,15 +53,17 @@ public class PlayerAttackController : Singleton<PlayerAttackController>
         IntervalInSeconds = 0.5f
     };
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         _animationController = GetComponent<PlayerAnimatorController>();
-        _animationController.OnExecuteAttack += OnExecuteAttack;
+        
         Bullets = _startingBullets;
         _shotDirection = new Vector2(1.0f, .1f).normalized;
     }
-
+    private void Start()
+    {
+        _animationController.OnExecuteAttack += OnExecuteAttack;
+    }
     private void OnDestroy()
     {
         _animationController.OnExecuteAttack -= OnExecuteAttack;
@@ -107,6 +107,7 @@ public class PlayerAttackController : Singleton<PlayerAttackController>
 
     private void StartSwordAttack()
     {
+        Debug.Log("StartSwordAttack");
         GameEvents.PlayerAction.SwordAttack.SafeInvoke();
         StartAttack(_swordAttackConfig);
     }
@@ -127,7 +128,8 @@ public class PlayerAttackController : Singleton<PlayerAttackController>
 
     private void StartAttack(AttackConfig attackConfig)
     {
-        if(_attackCoroutine != null)
+        Debug.Log("StartAttack");
+        if (_attackCoroutine != null)
         {
             StopCoroutine(_attackCoroutine);
         }
@@ -136,6 +138,7 @@ public class PlayerAttackController : Singleton<PlayerAttackController>
 
     public IEnumerator AttackCR(AttackConfig attack)
     {
+        Debug.Log("AttackCR");
         _animationController.StartAttackAnimation();
         _animationController.ChangeWeapon(attack.AnimatorWeapon);
         
@@ -146,6 +149,7 @@ public class PlayerAttackController : Singleton<PlayerAttackController>
 
     public void OnExecuteAttack()
     {
+        Debug.Log("OnExecuteAttack");
         if (_currentAttack == _swordAttackConfig)
         {
             OnExecuteSwordAttack();
@@ -164,9 +168,10 @@ public class PlayerAttackController : Singleton<PlayerAttackController>
 
     private IEnumerator ExecuteSwordAttackCR()
     {
-        _attackCollider.gameObject.active = true;
+        Debug.Log("ExecuteSwordAttackCR");
+        _attackCollider.gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
-        _attackCollider.gameObject.active = false;
+        _attackCollider.gameObject.SetActive(false);
     }
 
     public void OnExecuteGunAttack()

@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4b54715f0664d114599bbe3dd8fc9132
+guid: 8ef59f62e26606943b71a8dbdc3ca4be
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HUDContainer_0
+    21300000: hud fundo_0
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -85,13 +85,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HUDContainer_0
+      name: hud fundo_0
       rect:
         serializedVersion: 2
-        x: 83
-        y: 155
-        width: 413
-        height: 146
+        x: 5
+        y: 171
+        width: 494
+        height: 230
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -99,7 +99,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e4928cc80147544f96d1e406b99382a
+      spriteID: 12949be01e4df814aa295969a33b2935
       vertices: []
       indices: 
       edges: []
@@ -107,7 +107,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1a26efd46faf328438f4997583ab1bd4
+    spriteID: 391f98f5179b05c4383626cb9f3bedfc
     vertices: []
     indices: 
     edges: []
