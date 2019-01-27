@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuScreen : MonoBehaviour
 {
@@ -9,10 +10,22 @@ public class MenuScreen : MonoBehaviour
     public Animator CreditsScreen;
     public const string TriggerIn = "In";
     public const string TriggerOut = "Out";
+    private bool wasClicked=false;
+    public Button PlayButton;
     // Start is called before the first frame update
 
+    private void Awake() {
+        wasClicked=false;
+    }
+
     public void StartGame() {
-        ScenesFader.Instance.ChangeScene(SceneName);
+        if (!wasClicked)
+        {
+            wasClicked = true;
+            PlayButton.interactable = !wasClicked;
+            ScenesFader.Instance.ChangeScene(SceneName);
+            
+        }
     }
 
     public void CreditScreenIn() {
