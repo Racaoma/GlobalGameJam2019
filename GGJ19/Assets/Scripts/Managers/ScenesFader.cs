@@ -18,7 +18,10 @@ public class ScenesFader : SingletonAwakePersistent<ScenesFader>
 
     public void ChangeScene(string newScene)
     {
-        StartCoroutine(ChangeRoutine(newScene));
+        if (!transitioning)
+        {
+            StartCoroutine(ChangeRoutine(newScene));
+        }
     }
 
     private IEnumerator ChangeRoutine(string newScene)
