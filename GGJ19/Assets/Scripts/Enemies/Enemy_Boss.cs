@@ -8,7 +8,7 @@ using Prime31;
 public class Enemy_Boss : Enemy
 {
     //Variables
-    private int maxHP_Boss = 20;
+    private int maxHP_Boss = 10;
     private Collider2D collision;
     private LayerMask playerLayerMask;
 

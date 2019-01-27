@@ -12,6 +12,9 @@ public class BossStatemachine : MonoBehaviour
 
     public Enemy_Boss enemyBoss;
 
+    public ParticleSystem DeathFX;
+    
+
 
     public IdleBoss idle;
     public AttackingBoss attacking;
@@ -34,6 +37,8 @@ public class BossStatemachine : MonoBehaviour
 
 
         SetState(idle);
+
+        enemyBoss.OnEnemyDie.AddListener(KillBoss);
     }
 
     private void Update()
@@ -46,7 +51,7 @@ public class BossStatemachine : MonoBehaviour
         currentState.FixedTick();
     }
 
-
+    
     public void IdleState(int delay = 0)
     {
         SetState(idle, delay);
@@ -72,6 +77,14 @@ public class BossStatemachine : MonoBehaviour
         {
             SetState(explode, delay);
         }
+    }
+
+    public void KillBoss()
+    {
+        SetState(idle);
+
+        enemyBoss.gameObject.SetActive(false);
+        DeathFX.Play();
     }
 
 
