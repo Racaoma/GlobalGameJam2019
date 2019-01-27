@@ -10,7 +10,6 @@ public class GunShotVFX : MonoBehaviour
     }
     public void Shoot(Vector2 direction)
     {
-        Debug.Log("test");
         ps.transform.forward = direction;
         ps.Play();
     }
