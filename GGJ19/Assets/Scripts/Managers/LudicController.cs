@@ -10,6 +10,11 @@ public class LudicController : Singleton<LudicController>
     private float ludicMeter_continous;
     public int maxLudicMeter;
     public float changeSpeed = 2f;
+    public float ludicMeterPercent {
+        get{
+            return (float)ludicMeter/(float)maxLudicMeter;
+        }
+    }
 
     void Update()
     {
