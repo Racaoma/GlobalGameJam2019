@@ -2209,29 +2209,9 @@ PrefabInstance:
       objectReference: {fileID: 6181991799176239391}
     - target: {fileID: 128905565646205556, guid: 3291ec6ae5cf5d0479084a5dbab5a7c3,
         type: 3}
-      propertyPath: positionSpawnEnemy1.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 128905565646205556, guid: 3291ec6ae5cf5d0479084a5dbab5a7c3,
-        type: 3}
-      propertyPath: positionSpawnEnemy2.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 128905565646205556, guid: 3291ec6ae5cf5d0479084a5dbab5a7c3,
-        type: 3}
       propertyPath: buttonsInfo
       value: 
       objectReference: {fileID: 837159351604152266}
-    - target: {fileID: 128905565646205556, guid: 3291ec6ae5cf5d0479084a5dbab5a7c3,
-        type: 3}
-      propertyPath: positionSpawnEnemy1.x
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 128905565646205556, guid: 3291ec6ae5cf5d0479084a5dbab5a7c3,
-        type: 3}
-      propertyPath: positionSpawnEnemy2.x
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3291ec6ae5cf5d0479084a5dbab5a7c3, type: 3}
 --- !u!1 &837159351604152266 stripped

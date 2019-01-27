@@ -53,12 +53,12 @@ public class Enemy_Puff : Enemy
         }
     }
 
-    private void move(Vector3 movementTarget)
+    private void move(float targetMovementSpeed)
     {
         if (movementDirection.x >= 0f) this.transform.GetChild(0).localScale = new Vector3(-1f, 1f, 1f);
         else this.transform.GetChild(0).localScale = Vector3.one;
 
-        characterControllerRef.move(movementTarget * movementSpeed);
+        characterControllerRef.move(movementDirection * targetMovementSpeed);
         animatorRef.SetBool("isWalking", true);
     }
 
@@ -73,17 +73,8 @@ public class Enemy_Puff : Enemy
         {
             currentState = enemyState.Active;
             collision = Physics2D.OverlapCircle(this.transform.position, detectionRange, playerLayerMask);
-            if (collision != null)
-            {
-                Vector3 chasingDirection = (collision.transform.position - this.transform.position);
-                chasingDirection.y = 0;
-                chasingDirection.Normalize();
-                move(chasingDirection);
-            }
-            else
-            {
-                move(movementDirection);
-            }
+            if (collision != null) move(movementSpeed * 4);
+            else move(movementSpeed);
         }
     }
 }
