@@ -90,15 +90,20 @@ public class BossStatemachine : MonoBehaviour
     {
         StopAllCoroutines();
 
+        SetState(defeated);
+
         enemyBoss.gameObject.SetActive(false);
         DeathFX.Play();
     }
 
 
-    public void SetAudio(AudioClip audio)
+    public void SetAudio(AudioClip audio, bool loop = false)
     {
-        _source.Stop();
+        //return;
+
+        _source.Play();
         _source.clip = audio;
+        _source.loop = loop;
         _source.Play();
     }
 

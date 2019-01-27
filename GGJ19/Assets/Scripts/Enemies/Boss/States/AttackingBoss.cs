@@ -15,8 +15,8 @@ public class AttackingBoss : BossState
         boss.animator.SetTrigger("leftAttack");
         boss.animator.SetTrigger("rightAttack");
 
-        boss.IdleState(Random.Range(2, 6));
         boss.SetAudio(boss.sound_attacking);
+        boss.IdleState(Random.Range(2, 6));
     }
 
     public override void FixedTick()
