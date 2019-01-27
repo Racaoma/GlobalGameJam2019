@@ -56,6 +56,7 @@ public class EnemyPool : Singleton<EnemyPool>
     {
         foreach(GameObject obj in defeatedEnemies)
         {
+            obj.SetActive(false);
             if (obj.GetComponent<Enemy>() is Enemy_Pillow) pillowObjects.Enqueue(obj);
             else if (obj.GetComponent<Enemy>() is Enemy_Puff) puffObjects.Enqueue(obj);
             else if (obj.GetComponent<Enemy>() is Enemy_Mattress) mattressObjects.Enqueue(obj);

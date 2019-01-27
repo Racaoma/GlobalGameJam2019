@@ -1656,6 +1656,7 @@ MonoBehaviour:
   - {fileID: 972193227853413233}
   - {fileID: 7304364789567978669}
   - {fileID: 6597950087531973003}
+  rotto: {x: -1, y: 0, z: 0}
 --- !u!58 &7715511327916310337
 CircleCollider2D:
   m_ObjectHideFlags: 0

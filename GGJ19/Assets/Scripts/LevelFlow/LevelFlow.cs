@@ -45,6 +45,15 @@ public class LevelFlow : Singleton<LevelFlow>
         public float TimerToInstantiate;
         public float TimeToComplete;
 
+        public float WaveCompletedPercent
+        {
+            get
+            {
+                return (float)WaveInstantiatedEnemies / (float)WaveSize;
+            }
+        }
+
+
         public LevelParameters() { }
 
         public void InstantiateEnemiesBehaviour()
@@ -71,12 +80,12 @@ public class LevelFlow : Singleton<LevelFlow>
     // Start is called before the first frame update
     private void Start()
     {
-        if(currentGameState == gameState.Tutorial) TutorialFlow.Instance.startTutorial();
+        if (currentGameState == gameState.Tutorial) TutorialFlow.Instance.startTutorial();
     }
 
     private void SetPath()
     {
-        _path = Application.streamingAssetsPath +"/"+ fileName;
+        _path = Application.streamingAssetsPath + "/" + fileName;
     }
 
     private void Read()
@@ -101,7 +110,7 @@ public class LevelFlow : Singleton<LevelFlow>
 
     protected void InstantiateEnemy()
     {
-        if(Level.WaveInstantiatedEnemies < Level.WaveSize)
+        if (Level.WaveInstantiatedEnemies < Level.WaveSize)
         {
             if (Level.EnemiesOnScreen < Level.MaxEnemiesOnScreen)
             {
@@ -149,11 +158,14 @@ public class LevelFlow : Singleton<LevelFlow>
         currentGameState = gameState.Interwave;
         setNextGameState(gameState.Wave1);
         _timer = 4f;
+        LudicController.Instance.setMaxLudic();
 
-        while(EnemyPool.Instance.activeEnemies.Count > 0)
+        while (EnemyPool.Instance.activeEnemies.Count > 0)
         {
             EnemyPool.Instance.activeEnemies.First.Value.GetComponent<Enemy>().killEnemy();
         }
+        LudicController.Instance.setMinLudic();
+        GameEvents.GameState.WaveLose.SafeInvoke();
     }
 
     public void startWave()
@@ -161,8 +173,26 @@ public class LevelFlow : Singleton<LevelFlow>
         _timer = 0f;
         EnemyPool.Instance.cleanUpEnemies();
         currentGameState = nextGameState;
-        if(currentGameState == gameState.Wave1) GameEvents.GameState.StartGame.SafeInvoke();
+        if (currentGameState == gameState.Wave1)
+        {
+            LudicController.Instance.setMaxLudic();
+            GameEvents.GameState.StartGame.SafeInvoke();
+            Fortress.Instance.ActivateFortress(0);
+        }
+        else if (currentGameState == gameState.Wave2)
+        {
+            Fortress.Instance.ActivateFortress(1);
+        }
+        else if (currentGameState == gameState.Wave3)
+        {
+            Fortress.Instance.ActivateFortress(2);
+        }
+        else
+        {
+            Fortress.Instance.ActivateFortress(10);
+        }
         GameEvents.GameState.StartLevel.SafeInvoke();
+
     }
 
     private void winWave()
@@ -171,9 +201,9 @@ public class LevelFlow : Singleton<LevelFlow>
         currentGameState = gameState.Interwave;
         _timer = 4f;
 
-        if(currentGameState == gameState.Wave1) setNextGameState(gameState.Wave2);
+        if (currentGameState == gameState.Wave1) setNextGameState(gameState.Wave2);
         else if (currentGameState == gameState.Wave2) setNextGameState(gameState.Wave3);
-        else if(currentGameState == gameState.Wave3) setNextGameState(gameState.Boss);
+        else if (currentGameState == gameState.Wave3) setNextGameState(gameState.Boss);
     }
 
     // Update is called once per frame
@@ -184,9 +214,9 @@ public class LevelFlow : Singleton<LevelFlow>
             _timer -= Time.deltaTime;
             if (_timer <= 0f) startWave();
         }
-        else if(currentGameState == gameState.Wave1 || currentGameState == gameState.Wave2 || currentGameState == gameState.Wave3)
+        else if (currentGameState == gameState.Wave1 || currentGameState == gameState.Wave2 || currentGameState == gameState.Wave3)
         {
-            if (LudicController.Instance.ludicMeter <= 0) loseGame();
+            if (LudicController.Instance.getLudicMeter() <= 0) loseGame();
             else if (Level.WaveInstantiatedEnemies == Level.WaveSize && Level.EnemiesOnScreen == 0) winWave();
             else if (_timer >= (Level.TimeToComplete * 60f)) startWave();
             else

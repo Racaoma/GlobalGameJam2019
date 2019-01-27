@@ -20,6 +20,8 @@ public class PlayerStateController : MonoBehaviour
     public float KnockbackForce = 30;
     public float KnockbackDuration = 0.5f;
     public float StunDuration = 0.5f;
+    public float invulneraabilityTime;
+    public bool isVulnerable {get; private set;}
 
     public FreeMovementState FreeMovementState = new FreeMovementState();
     public StunState StunState = new StunState();
@@ -30,6 +32,7 @@ public class PlayerStateController : MonoBehaviour
         AnimationController = GetComponent<PlayerAnimatorController>();
         PlayerAttackController = GetComponent<PlayerAttackController>();
         CharacterController = GetComponent<Prime31.CharacterController2D>();
+        isVulnerable = true;
     }
 
     private void Start()
@@ -41,15 +44,32 @@ public class PlayerStateController : MonoBehaviour
 
     public bool TakeHit(Vector3 hitterPosition)
     {
-        StunKnockbackDirection = (transform.position-hitterPosition).normalized;
-        if (StateMachine.CurrentState == FreeMovementState)
+        StunKnockbackDirection = (transform.position - hitterPosition).normalized;
+
+        if (isVulnerable)
         {
-            LudicController.Instance.ludicMeter--;
-            StateMachine.SetState(StunState);
-            return true;
+            if (StateMachine.CurrentState == FreeMovementState)
+            {
+                LudicController.Instance.DecreaseLudicMeter();
+                StateMachine.SetState(StunState);
+                isVulnerable = false;
+                StartCoroutine(getVulnerable(StunDuration + invulneraabilityTime));
+                return true;
+            }
         }
 
         return false;
-        
+
+    }
+
+    public IEnumerator getVulnerable(float duration)
+    {
+        float timer = 0f;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        isVulnerable = true;
     }
 }

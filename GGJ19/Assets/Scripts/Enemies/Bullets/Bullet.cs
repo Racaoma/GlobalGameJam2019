@@ -9,15 +9,6 @@ public class Bullet : MonoBehaviour
     private float currentTimer;
     [SerializeField]
     private float movementSpeed;
-    private int playerLayer;
-    private int groundLayer;
-    
-    //Methods
-    private void Start()
-    {
-        playerLayer = LayerMask.NameToLayer("Player");
-        groundLayer = LayerMask.NameToLayer("Ground");
-    }
 
     private void disableBullet()
     {
@@ -36,29 +27,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision);
         var player = collision.GetComponent<PlayerStateController>();
-        if(player != null)
+        if (player != null)
         {
-            if(player.TakeHit(transform.position))
+            if (player.TakeHit(transform.position))
             {
                 disableBullet();
             }
-        }
-
-        if (collision.gameObject.layer == groundLayer)
-        {
-            disableBullet();
-        }
-
-        if (collision.gameObject.layer == playerLayer)
-        {
-            
-            //Player stun
-            
-        }
-        else if(collision.gameObject.layer == groundLayer)
-        {
-            //disableBullet();
         }
     }
 
@@ -72,6 +48,7 @@ public class Bullet : MonoBehaviour
         else
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + direction, movementSpeed * Time.deltaTime);
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0f);
         }
         
     }

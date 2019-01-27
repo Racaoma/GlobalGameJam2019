@@ -14,6 +14,11 @@ public class StunState : PlayerState
 
     public IEnumerator TimeoutRoutine()
     {
+        // fica invulneravel
+        
+        // pisca
+        Player.AnimationController._blink.StartBlink(0.05f,Player.KnockbackDuration + Player.invulneraabilityTime);
+
         float timeout = Player.KnockbackDuration;
         while (timeout > 0)
         {
@@ -26,6 +31,7 @@ public class StunState : PlayerState
         yield return new WaitForSeconds(Player.StunDuration);
 
         Player.StateMachine.SetState(Player.FreeMovementState);
+
     }
 
     public override void OnExit()

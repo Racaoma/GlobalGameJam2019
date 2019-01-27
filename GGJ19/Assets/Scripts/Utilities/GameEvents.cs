@@ -8,6 +8,7 @@ public static class GameEvents
         public static Action StartGame;
         public static Action StartBoss;
         public static Action WaveWon;
+        public static Action WaveLose;
         public static Action StartLevel;
     }
 
