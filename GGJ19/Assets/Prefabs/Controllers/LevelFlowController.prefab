@@ -272,6 +272,26 @@ PrefabInstance:
       propertyPath: playerCharacter
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1635409771, guid: 0122d4f767fda854f9c38bca40ac7823, type: 3}
+      propertyPath: buttonsInfo
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635409771, guid: 0122d4f767fda854f9c38bca40ac7823, type: 3}
+      propertyPath: positionSpawnEnemy1.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635409771, guid: 0122d4f767fda854f9c38bca40ac7823, type: 3}
+      propertyPath: positionSpawnEnemy1.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635409771, guid: 0122d4f767fda854f9c38bca40ac7823, type: 3}
+      propertyPath: positionSpawnEnemy2.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635409771, guid: 0122d4f767fda854f9c38bca40ac7823, type: 3}
+      propertyPath: positionSpawnEnemy2.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0122d4f767fda854f9c38bca40ac7823, type: 3}
 --- !u!4 &7138890653319693983 stripped
