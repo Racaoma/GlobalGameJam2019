@@ -24,7 +24,6 @@ public class MenuScreen : MonoBehaviour
             wasClicked = true;
             PlayButton.interactable = !wasClicked;
             ScenesFader.Instance.ChangeScene(SceneName);
-            
         }
     }
 

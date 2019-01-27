@@ -20,18 +20,18 @@ public class EnemyPool : Singleton<EnemyPool>
     private Queue<GameObject> mattressObjects;
     public LinkedList<GameObject> activeEnemies;
     public LinkedList<GameObject> defeatedEnemies;
-
-    private void Awake()
+    
+    private void Start()
     {
+        base.Awake();
         puffObjects = new Queue<GameObject>();
         pillowObjects = new Queue<GameObject>();
         mattressObjects = new Queue<GameObject>();
         activeEnemies = new LinkedList<GameObject>();
         defeatedEnemies = new LinkedList<GameObject>();
-    }
 
-    private void Start()
-    {
+        Debug.Log("PreFOR");
+
         for (int i = 0; i < initialPoolSize; i++)
         {
             GameObject obj = Instantiate(puffPrefab);
@@ -45,7 +45,11 @@ public class EnemyPool : Singleton<EnemyPool>
             obj = Instantiate(mattressPrefab);
             obj.SetActive(false);
             mattressObjects.Enqueue(obj);
+
+            Debug.Log("FOR");
         }
+
+        Debug.Log("Complete");
     }
 
     public void defeatEnemy(GameObject enemy)

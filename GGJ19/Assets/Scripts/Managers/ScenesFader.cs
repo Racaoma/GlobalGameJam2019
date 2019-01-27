@@ -31,15 +31,8 @@ public class ScenesFader : SingletonAwakePersistent<ScenesFader>
 
         yield return StartCoroutine(FadeIn(1f));
 
-        async = SceneManager.LoadSceneAsync(newScene, LoadSceneMode.Additive);
+        async = SceneManager.LoadSceneAsync(newScene, LoadSceneMode.Single);
 
-        while (!async.isDone)
-        {
-            yield return null;
-        }
-
-        async = SceneManager.UnloadSceneAsync(currentScene);
-        
         while (!async.isDone)
         {
             yield return null;
