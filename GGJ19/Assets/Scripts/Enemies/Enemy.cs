@@ -89,6 +89,7 @@ public abstract class Enemy : MonoBehaviour
         animatorRef.SetTrigger("knockDown");
         currentState = enemyState.KnockedDown;
         this.enabled = false;
+        EnemyPool.Instance.defeatEnemy(this.gameObject);
     }
 
     private void SpawnFX(GameObject effect)
