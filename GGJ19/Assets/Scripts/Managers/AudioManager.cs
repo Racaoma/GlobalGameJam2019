@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : Singleton<AudioManager>
+public class AudioManager : SingletonAwakePersistent<AudioManager>
 {
     //AudioSource
-    [SerializeField]
     private AudioSource bgmAudioSource;
 
     [Header("BGM")]
@@ -43,7 +42,7 @@ public class AudioManager : Singleton<AudioManager>
     public void playSFX_SwordHit() { playSFX(SFX_SwordHit); }
     public void playSFX_NerfHit() { playSFX(SFX_NerfHit); }
     public void playSFX_LazerShoot() { playSFX(SFX_LazerShoot); }
-    public void playSFX_ButtonSelect() { playSFX(SFX_ButtonSelect); }
+    public void playSFXButtonSelect() { AudioSource.PlayClipAtPoint(SFX_ButtonSelect, Camera.main.transform.position); }
 
     //Start
     private void Start()
@@ -62,7 +61,6 @@ public class AudioManager : Singleton<AudioManager>
         GameEvents.EnemyAction.SwordHit += playSFX_SwordHit;
         GameEvents.EnemyAction.NerfHit += playSFX_NerfHit;
         GameEvents.EnemyAction.LazerShoot += playSFX_LazerShoot;
-        GameEvents.Menu.buttonSelect += playSFX_ButtonSelect;
     }
 
     private void OnDestroy()
@@ -77,7 +75,6 @@ public class AudioManager : Singleton<AudioManager>
         GameEvents.EnemyAction.SwordHit -= playSFX_SwordHit;
         GameEvents.EnemyAction.NerfHit -= playSFX_NerfHit;
         GameEvents.EnemyAction.LazerShoot -= playSFX_LazerShoot;
-        GameEvents.Menu.buttonSelect -= playSFX_ButtonSelect;
     }
 
     private void playIntroBGM(AudioClip bgm)
@@ -103,7 +100,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if(sfx != null)
         {
-            AudioSource.PlayClipAtPoint(sfx, Vector3.zero);
+            AudioSource.PlayClipAtPoint(sfx, Camera.main.transform.position);
         }
     }
 

@@ -7,6 +7,11 @@ public class NerfGunBullet : HitArea
     public bool CanBeCatched { get; set; }
     private GameObject pivot;
 
+    private void Start()
+    {
+        base.damage = 1;
+    }
+
     public override void OnHitTarget(GameObject target)
     {
         if(CanBeCatched)

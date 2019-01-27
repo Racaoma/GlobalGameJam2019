@@ -70,7 +70,15 @@ public abstract class Enemy : MonoBehaviour
     {
         currentHP -= damageTaken;
         materialBlinkRef.StartBlink(0.25f, 1f);
-        if (damageTaken == 2) SpawnFX(feathersFX);
+
+        if (damageTaken == 2)
+        {
+            SpawnFX(feathersFX);
+        }
+        else if(damageTaken == 1)
+        {
+
+        }
 
         if (currentHP <= 0)
         {

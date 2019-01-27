@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HitArea : MonoBehaviour
 {
-    public int damage = 1;
+    public int damage = 2;
 
     [SerializeField]
     private Collider2D _ignoreCollider;
