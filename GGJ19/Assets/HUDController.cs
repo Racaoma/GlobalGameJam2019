@@ -15,11 +15,15 @@ public class HUDController : Singleton<HUDController>
 
     public Color ColorBulletOff;
     public Color ColorBulletOn;
+    public Color ColorLudic;
 
     public Image HouseColor;
     public Image Tower;
     public Image Tail;
     public Image Spaceship;
+
+
+    public Slider PillowSlider;
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -62,20 +66,17 @@ public class HUDController : Singleton<HUDController>
     public void ChangeLudicMeter() {
         Debug.Log("Ludic " + LudicController.Instance.ludicMeterPercent);
         HouseColor.fillAmount = LudicController.Instance.ludicMeterPercent;
-        var tempColor = Tower.color;
-        tempColor.a = LudicController.Instance.ludicMeterPercent;
-        Tower.color = tempColor;
-        Spaceship.color = tempColor;
-        Tail.color = tempColor;
-
+      
+        ColorLudic.a = LudicController.Instance.ludicMeterPercent;
+        Tower.color = ColorLudic;
+        Spaceship.color = ColorLudic;
+        Tail.color = ColorLudic;
     }
 
     // Update is called once per frame
     void Update()
     {
-     
-
-
+        ChangeLudicMeter();
 
     }
 }
