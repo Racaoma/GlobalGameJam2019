@@ -61,7 +61,7 @@ public class LevelFlow : Singleton<LevelFlow>
     private string _jsonString;
     public LevelParameters Level;
     private float _timer;
-    public gameState currentGameState;
+    public gameState currentGameState = gameState.Tutorial;
     private gameState nextGameState;
 
     //Lists Enemies & Positions
@@ -71,8 +71,7 @@ public class LevelFlow : Singleton<LevelFlow>
     // Start is called before the first frame update
     private void Start()
     {
-       // currentGameState = gameState.Tutorial;
-       // TutorialFlow.Instance.startTutorial();
+        if(currentGameState == gameState.Tutorial) TutorialFlow.Instance.startTutorial();
     }
 
     private void SetPath()
@@ -131,7 +130,6 @@ public class LevelFlow : Singleton<LevelFlow>
         if (nextGameState == gameState.Wave1)
         {
             fileName = "Level1.json";
-            GameEvents.GameState.StartGame();
         }
         else if (nextGameState == gameState.Wave2)
         {
@@ -163,6 +161,7 @@ public class LevelFlow : Singleton<LevelFlow>
         _timer = 0f;
         EnemyPool.Instance.cleanUpEnemies();
         currentGameState = nextGameState;
+        if(currentGameState == gameState.Wave1) GameEvents.GameState.StartGame.SafeInvoke();
     }
 
     private void winWave()
@@ -187,7 +186,7 @@ public class LevelFlow : Singleton<LevelFlow>
         else
         {
             if (LudicController.Instance.ludicMeter <= 0) loseGame();
-            else if (Level.WaveInstantiatedEnemies == Level.WaveSize && Level.EnemiesOnScreen == 0) winWave();
+            //else if (Level.WaveInstantiatedEnemies == Level.WaveSize && Level.EnemiesOnScreen == 0) winWave();
             else if (_timer >= (Level.TimeToComplete * 60f)) startWave();
             else
             {
