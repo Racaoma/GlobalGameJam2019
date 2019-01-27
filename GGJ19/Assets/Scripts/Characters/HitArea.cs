@@ -74,7 +74,6 @@ public class HitArea : MonoBehaviour
                 return;
             }
 
-
             visitedColliders.Add(results[i]);
             var result = results[i];
             if(hitEnemies)
