@@ -77,12 +77,13 @@ public abstract class Enemy : MonoBehaviour
         }
         else if(damageTaken == 1)
         {
-
+            SpawnFX(feathersFX);
         }
 
         if (currentHP <= 0)
         {
             killEnemy();
+            SpawnFX(feathersFX);
         }
         else
         {
