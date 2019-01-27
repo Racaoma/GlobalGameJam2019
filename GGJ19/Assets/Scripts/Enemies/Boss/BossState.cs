@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BossState : MonoBehaviour
+public abstract class BossState
 {
     protected BossStatemachine boss;
 
