@@ -2269,6 +2269,12 @@ PrefabInstance:
       propertyPath: ColorBulletOff.a
       value: 0.42745098
       objectReference: {fileID: 0}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: bulletsParent
+      value: 
+      objectReference: {fileID: 156832128533714432, guid: fe835eef59f7e8f428caa7e360a4b83d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10a117737bcdb7f4cb6e0f5af118c1ab, type: 3}
 --- !u!1001 &6181991799176239390
