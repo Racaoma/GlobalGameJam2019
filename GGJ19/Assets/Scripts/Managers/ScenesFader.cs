@@ -60,6 +60,7 @@ public class ScenesFader : SingletonAwakePersistent<ScenesFader>
         }
         canvasGroup.alpha = 1f;
     }
+
     private IEnumerator FadeOut(float duration)
     {
         timer = 0f;

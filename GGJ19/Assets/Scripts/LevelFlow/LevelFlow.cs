@@ -131,6 +131,7 @@ public class LevelFlow : Singleton<LevelFlow>
         if (nextGameState == gameState.Wave1)
         {
             fileName = "Level1.json";
+            GameEvents.GameState.StartGame();
         }
         else if (nextGameState == gameState.Wave2)
         {

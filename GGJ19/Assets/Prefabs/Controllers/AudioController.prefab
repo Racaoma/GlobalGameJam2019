@@ -42,11 +42,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 30bb3393479ab174b9cdad4e723092d2, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -140,20 +140,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea68f18bd1e5e6548be30f2478c39434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmAudioSource: {fileID: 0}
-  BGM_Menu: {fileID: 0}
-  BGM_IntroInGame: {fileID: 0}
+  BGM_Menu: {fileID: 8300000, guid: 30bb3393479ab174b9cdad4e723092d2, type: 3}
+  BGM_IntroInGame: {fileID: 8300000, guid: 3d07da1cf9a68544a9d09a4afe7adcec, type: 3}
   BGM_InGame: {fileID: 8300000, guid: c65ab60f89366ed489e5c0163103e68c, type: 3}
-  BGM_IntroBoss: {fileID: 0}
-  BGM_Boss: {fileID: 0}
-  SFX_SwordAttack: {fileID: 0}
-  SFX_SwordHit: {fileID: 0}
-  SFX_NerfShoot: {fileID: 0}
-  SFX_NerfHit: {fileID: 0}
-  SFX_BodyFall: {fileID: 0}
-  SFX_ChildDamaged: {fileID: 0}
-  SFX_ChildJump: {fileID: 0}
-  SFX_LazerShoot: {fileID: 0}
-  SFX_VictoryFanfare: {fileID: 0}
-  SFX_MenuSelect: {fileID: 0}
+  BGM_IntroBoss: {fileID: 8300000, guid: 670ba01ad63f0ff4bb040819c3b3ad49, type: 3}
+  BGM_Boss: {fileID: 8300000, guid: 960bdcd55aeec3046888268a56d34d76, type: 3}
+  SFX_SwordAttack: {fileID: 8300000, guid: 3670d242e0155a64ca5ef8cee3d613d6, type: 3}
+  SFX_SwordHit: {fileID: 8300000, guid: 15b5ad2ca5d48e742b1d67614d823342, type: 3}
+  SFX_NerfShoot: {fileID: 8300000, guid: 4b2f0573d5fbbbf4285ab4bfc42df8f1, type: 3}
+  SFX_NerfHit: {fileID: 8300000, guid: cbd2a9ab8d4ae7f409efae694f55e00a, type: 3}
+  SFX_ChildDamaged: {fileID: 8300000, guid: 889b415d380df724185257146b55a449, type: 3}
+  SFX_ChildJump: {fileID: 8300000, guid: e29cedb2b59e8e64796b17d9ddc42891, type: 3}
+  SFX_LazerShoot: {fileID: 8300000, guid: 4c3f32a8f92598f4eb871c58deb50c67, type: 3}
+  SFX_VictoryFanfare: {fileID: 8300000, guid: 374959a8364e0f943ab503d8caf46c74, type: 3}
+  SFX_ButtonSelect: {fileID: 8300000, guid: 22c0ac6d1b2f2b84a836626f48264bf8, type: 3}
   audioFadeOutFactor: 0.6

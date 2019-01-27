@@ -99,6 +99,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void StartSwordAttack()
     {
+        GameEvents.PlayerAction.SwordAttack.SafeInvoke();
         StartAttack(_swordAttackConfig);
     }
     private void StartGunAttack()
@@ -164,6 +165,7 @@ public class PlayerAttackController : MonoBehaviour
     {
         if(Bullets > 0)
         {
+            GameEvents.PlayerAction.NerfShoot.SafeInvoke();
             _shotDirection.x = Mathf.Abs(_shotDirection.x) * Mathf.Sign(transform.transform.localScale.x);
             _gunShotSpawner.Shot(_shotDirection);
             Bullets--;
