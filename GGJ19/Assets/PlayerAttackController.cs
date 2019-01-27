@@ -8,13 +8,21 @@ public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField]
     private HitArea _attackCollider;
-
+    [SerializeField]
+    private int _startingBullets = 2;
     [SerializeField]
     private GunShotSpawner _gunShotSpawner;
     private PlayerAnimatorController _animationController;
     private Coroutine _attackCoroutine;
     private AttackConfig _currentAttack;
+
+    public int Bullets { get; private set; }
     
+    public void AddBullet()
+    {
+        Bullets++;
+    }
+
     private AttackConfig _swordAttackConfig = new AttackConfig()
     {
         AnimatorWeapon = PlayerAnimatorController.Weapon.Sword,
@@ -30,6 +38,7 @@ public class PlayerAttackController : MonoBehaviour
     {
         _animationController = GetComponent<PlayerAnimatorController>();
         _animationController.OnExecuteAttack += OnExecuteAttack;
+        Bullets = _startingBullets;
     }
     private void OnDestroy()
     {
@@ -122,8 +131,18 @@ public class PlayerAttackController : MonoBehaviour
 
     public void OnExecuteGunAttack()
     {
-        _gunShotSpawner.Shot(transform.right * Mathf.Sign(transform.transform.localScale.x));
-        Debug.Log("Execute gun attack");
+        if(Bullets > 0)
+        {
+            _gunShotSpawner.Shot(transform.right * Mathf.Sign(transform.transform.localScale.x));
+            Bullets--;
+            Debug.Log("Execute gun attack");
+        }
+        else
+        {
+            Debug.Log("Out of ammo");
+        }
+        
+        
     }
 
     [System.Serializable]
@@ -132,5 +151,18 @@ public class PlayerAttackController : MonoBehaviour
         public PlayerAnimatorController.Weapon AnimatorWeapon { get; set; }
         public float IntervalInSeconds { get; set; }
         public Action OnExecuteAttack { get; set; }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        var bullet = other.GetComponent<NerfGunBullet>();
+        if(bullet != null)
+        {
+            if(bullet.CanBeCatched)
+            {
+                Destroy(bullet.gameObject);
+                Bullets++;
+            }
+        }
     }
 }

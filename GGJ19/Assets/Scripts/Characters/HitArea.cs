@@ -9,7 +9,7 @@ public class HitArea : MonoBehaviour
     private Collider2D _ignoreCollider;
     [SerializeField]
     private bool _oneFrameOnly;
-    private Collider2D _collider;
+    protected Collider2D _collider;
     private List<Collider2D> visitedColliders = new List<Collider2D>();
     public bool hitEnemies = false;
 
@@ -41,6 +41,11 @@ public class HitArea : MonoBehaviour
         }
     }
 
+    public virtual void OnHitTarget(GameObject target)
+    {
+        
+    }
+
     public void CheckCollisions()
     {
         Collider2D[] results = new Collider2D[10];
@@ -52,6 +57,7 @@ public class HitArea : MonoBehaviour
                 return;
             }
 
+
             visitedColliders.Add(results[i]);
             var result = results[i];
             if(hitEnemies)
@@ -60,6 +66,7 @@ public class HitArea : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.takeDamage(damage);
+                    OnHitTarget(result.gameObject);
                 }
             }
             else
@@ -69,6 +76,11 @@ public class HitArea : MonoBehaviour
                 {
                     //player take damage;
                 }
+            }
+
+            if(result.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
+            {
+                OnHitTarget(result.gameObject);
             }
         }
     }

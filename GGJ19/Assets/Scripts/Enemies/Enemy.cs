@@ -70,7 +70,8 @@ public abstract class Enemy : MonoBehaviour
     }
 
     public void killEnemy()
-    {      
+    {
+        
         OnEnemyDie.Invoke();
         animatorRef.SetTrigger("knockDown");
         currentState = enemyState.KnockedDown;
@@ -90,5 +91,8 @@ public abstract class Enemy : MonoBehaviour
     {
         animatorRef.enabled = false;
         spriteRendererRef.sprite = mundaneFormSprite;
+        var collider = GetComponent<Collider2D>();
+        collider.enabled = false;
+        GetComponent<Rigidbody2D>().isKinematic = true;
     }
 }

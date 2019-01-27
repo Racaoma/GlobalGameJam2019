@@ -144,7 +144,7 @@ MonoBehaviour:
     m_Bits: 257
   triggerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackCollider: {fileID: 5210826285868805863}
+  _startingBullets: 2
   _gunShotSpawner: {fileID: 1812585950}
 --- !u!1001 &8047736736083232475
 PrefabInstance:
