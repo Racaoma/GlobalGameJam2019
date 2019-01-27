@@ -14,12 +14,13 @@ public class TutorialFlow : Singleton<TutorialFlow>
 {
     //Player
     public GameObject playerCharacter;
+    private PlayerAttackController attackController;
 
     //Enemies
     public GameObject enemy1Prefab;
     public GameObject enemy2Prefab;
-    public GameObject enemy1Ref;
-    public GameObject enemy2Ref;
+    public Enemy enemy1Ref;
+    public Enemy enemy2Ref;
     public Transform positionSpawnEnemy1;
     public Transform positionSpawnEnemy2;
 
@@ -32,21 +33,30 @@ public class TutorialFlow : Singleton<TutorialFlow>
     {
         currentPhase = tutorialPhase.Movement;
         tutorialStarted = true;
+        attackController = playerCharacter.GetComponent<PlayerAttackController>();
+        attackController.canAttack = false;
+        attackController.canShoot = false;
     }
 
     private void startSwordTraining()
     {
-        enemy1Ref = Instantiate(enemy1Prefab, positionSpawnEnemy1);
+        GameObject obj = Instantiate(enemy1Prefab, positionSpawnEnemy1);
+        enemy1Ref = obj.GetComponent<Enemy>();
+        attackController.canAttack = true;
     }
 
     private void startNerfTraining()
     {
-        enemy2Ref = Instantiate(enemy2Prefab, positionSpawnEnemy2);
+        GameObject obj = Instantiate(enemy2Prefab, positionSpawnEnemy2);
+        enemy2Ref = obj.GetComponent<Enemy>();
+        attackController.canAttack = false;
+        attackController.canShoot = true;
     }
 
     private void startAmmoTraining()
     {
-
+        attackController.giveBulletsEnabled = false;
+        attackController.canShoot = false;
     }
 
     private void Update()
@@ -63,16 +73,21 @@ public class TutorialFlow : Singleton<TutorialFlow>
             }
             else if (currentPhase == tutorialPhase.Sword)
             {
-                //TODO
+                if (enemy1Ref.currentState == enemyState.KnockedDown) startNerfTraining();
             }
             else if (currentPhase == tutorialPhase.Nerf)
             {
-                //TODO
+                if (enemy2Ref.currentState == enemyState.KnockedDown) startAmmoTraining();
             }
             else if (currentPhase == tutorialPhase.Ammo)
             {
-                Destroy(enemy1Ref);
-                Destroy(enemy2Ref);
+                if(attackController.Bullets == attackController.getMaxBullets())
+                {
+                    Destroy(enemy1Ref);
+                    Destroy(enemy2Ref);
+                    LevelFlow.Instance.currentGameState = gameState.Interwave;
+                    LevelFlow.Instance.setNextGameState(gameState.Wave1);
+                }
             }
         }
     }

@@ -30,7 +30,6 @@ public enum gameState
     Wave2,
     Wave3,
     Boss,
-    Defeat,
     Victory
 }
 
@@ -62,8 +61,8 @@ public class LevelFlow : Singleton<LevelFlow>
     private string _jsonString;
     public LevelParameters Level;
     private float _timer;
-    private gameState currentGameState;
-    private gameState lastWave;
+    public gameState currentGameState;
+    private gameState nextGameState;
 
     //Lists Enemies & Positions
     public List<InstantiateBehaviour> Enemies = new List<InstantiateBehaviour>();
@@ -128,13 +127,31 @@ public class LevelFlow : Singleton<LevelFlow>
         }
     }
 
-    private void loseGame()
+    public void setNextGameState(gameState nextState)
     {
-        currentGameState = gameState.Defeat;
-        _timer = 10f;
-        fileName = "Level1.json";
+        nextGameState = nextState;
+        if (nextGameState == gameState.Wave1)
+        {
+            fileName = "Level1.json";
+        }
+        else if (nextGameState == gameState.Wave2)
+        {
+            fileName = "Level2.json";
+        }
+        else if (nextGameState == gameState.Wave3)
+        {
+            fileName = "Level3.json";
+        }
+
         SetPath();
         Read();
+    }
+
+    private void loseGame()
+    {
+        currentGameState = gameState.Interwave;
+        setNextGameState(gameState.Wave1);
+        _timer = 4f;
 
         foreach (GameObject obj in EnemyPool.Instance.activeEnemies)
         {
@@ -146,32 +163,24 @@ public class LevelFlow : Singleton<LevelFlow>
     {
         _timer = 0f;
         EnemyPool.Instance.cleanUpEnemies();
-
-        if(lastWave == gameState.Wave1)
-        {
-            fileName = "Level2.json";
-            SetPath();
-            Read();
-        }
-        else if (lastWave == gameState.Wave2)
-        {
-            fileName = "Level3.json";
-            SetPath();
-            Read();
-        }
+        currentGameState = nextGameState;
     }
 
     private void winWave()
     {
         GameEvents.GameState.WaveWon.SafeInvoke();
-        lastWave = currentGameState;
-        _timer = 10f;
+        currentGameState = gameState.Interwave;
+        _timer = 4f;
+
+        if(currentGameState == gameState.Wave1) setNextGameState(gameState.Wave2);
+        else if (currentGameState == gameState.Wave2) setNextGameState(gameState.Wave3);
+        else if(currentGameState == gameState.Wave3) setNextGameState(gameState.Boss);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentGameState == gameState.Interwave || currentGameState == gameState.Defeat)
+        if (currentGameState == gameState.Interwave)
         {
             _timer -= Time.deltaTime;
             if (_timer <= 0f) startWave();

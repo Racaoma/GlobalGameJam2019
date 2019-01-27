@@ -20,7 +20,17 @@ public class PlayerAttackController : MonoBehaviour
     private float _giveBulletsTimeout = 3;
     private Vector2 _shotDirection;
 
+    //Attack Control Variables
+    public bool canAttack = true;
+    public bool canShoot = true;
+    public bool giveBulletsEnabled = true;
+
     public int Bullets { get; private set; }
+
+    public int getMaxBullets()
+    {
+        return _startingBullets;
+    }
     
     public void AddBullet()
     {
@@ -56,17 +66,17 @@ public class PlayerAttackController : MonoBehaviour
         {
             return;
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && canAttack)
         {
             StartSwordAttack();
         }
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && canShoot)
         {
             StartGunAttack();
         }
 
         _giveBulletsTimeout -= Time.deltaTime;
-        if(_giveBulletsTimeout <= 0)
+        if(_giveBulletsTimeout <= 0 && giveBulletsEnabled)
         {
             _giveBulletsTimeout = _giveBulletsInterval;
             AddBullet();

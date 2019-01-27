@@ -22,7 +22,7 @@ public abstract class Enemy : MonoBehaviour
     //Variables
     protected int maxHP;
     protected int currentHP;
-    protected enemyState currentState;
+    public enemyState currentState;
     protected float stunTimer;
 
     //Layers
