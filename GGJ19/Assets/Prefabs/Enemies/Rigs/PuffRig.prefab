@@ -224,8 +224,8 @@ MonoBehaviour:
   - {fileID: 8202032987079179918}
   - {fileID: 2308243011599207371}
   m_Bounds:
-    m_Center: {x: 1.5238764, y: 0.6924411, z: 0}
-    m_Extent: {x: 2.536302, y: 2.723998, z: 0}
+    m_Center: {x: 1.447295, y: 0.59359753, z: 0}
+    m_Extent: {x: 2.4565234, y: 2.7159178, z: 0}
 --- !u!95 &1694619966497038287
 Animator:
   serializedVersion: 3
