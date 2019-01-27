@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5730697587481817761}
   - component: {fileID: 5190225471179990313}
   - component: {fileID: 3972116858881182033}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Puff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,6 +179,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuffRig
       objectReference: {fileID: 0}
+    - target: {fileID: 6270859966628954253, guid: 516ff590e3f041044a8430abc1717998,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 517025478595678679, guid: 516ff590e3f041044a8430abc1717998,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -233,6 +238,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038440557256473410, guid: 516ff590e3f041044a8430abc1717998,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289044034680893759, guid: 516ff590e3f041044a8430abc1717998,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107625720423029011, guid: 516ff590e3f041044a8430abc1717998,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6187364802745178474, guid: 516ff590e3f041044a8430abc1717998,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6177598179480989262, guid: 516ff590e3f041044a8430abc1717998,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813977660686587095, guid: 516ff590e3f041044a8430abc1717998,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 516ff590e3f041044a8430abc1717998, type: 3}

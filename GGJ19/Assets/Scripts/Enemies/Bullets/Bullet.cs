@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour
         this.transform.position = position;
         currentTimer = timeToDie;
         this.direction = direction;
+        this.transform.right = direction;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
