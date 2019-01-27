@@ -18,7 +18,7 @@ public class ExplodingBoss : BossState
         boss.leftFistCollider.enabled = false;
         boss.rightFistCollider.enabled = false;
 
-        boss.IdleState(Random.Range(3, 6));
+        boss.IdleState(Random.Range(4, 9));
     }
 
     public override void FixedTick()

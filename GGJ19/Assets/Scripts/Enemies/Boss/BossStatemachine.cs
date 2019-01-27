@@ -10,12 +10,15 @@ public class BossStatemachine : MonoBehaviour
 
     public Animator animator;
 
+    public Enemy_Boss enemyBoss;
+
 
     public IdleBoss idle;
     public AttackingBoss attacking;
     public DefendingBoss defending;
     public HittingFloorBoss hittingFloor;
     public ExplodingBoss explode;
+    public DefeatedBoss defeated;
 
     private BossState currentState;
 
@@ -27,6 +30,7 @@ public class BossStatemachine : MonoBehaviour
         defending = new DefendingBoss(this);
         hittingFloor = new HittingFloorBoss(this);
         explode = new ExplodingBoss(this);
+        defeated = new DefeatedBoss(this);
 
 
         SetState(idle);

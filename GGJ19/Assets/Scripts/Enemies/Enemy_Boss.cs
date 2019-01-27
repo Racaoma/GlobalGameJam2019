@@ -7,8 +7,6 @@ using Prime31;
 [RequireComponent(typeof(CharacterController2D))]
 public class Enemy_Boss : Enemy
 {
-    public bool isGuarding = false;
-
     //Variables
     private int maxHP_Boss = 20;
     private Collider2D collision;
