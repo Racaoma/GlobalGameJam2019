@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(PlayerAnimatorController))]
-public class PlayerAttackController : MonoBehaviour
+public class PlayerAttackController : Singleton<PlayerAttackController>
 {
     [SerializeField]
     private HitArea _attackCollider;
@@ -53,8 +53,9 @@ public class PlayerAttackController : MonoBehaviour
         IntervalInSeconds = 0.5f
     };
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _animationController = GetComponent<PlayerAnimatorController>();
         
         Bullets = _startingBullets;

@@ -28,18 +28,17 @@ public class HUDController : Singleton<HUDController>
 
         void Start()
     {
-        /*
+        
         for (int i = 0; i < PlayerAttackController.Instance.StartingBullets; i++) {
             Vector2 pos = new Vector2(BulletsPos.transform.position.x + (bulletsSpacing * i), BulletsPos.transform.position.y);
             GameObject bullet = Instantiate(BulletsToInstantiate, pos, BulletsToInstantiate.transform.rotation);
             bullet.transform.parent = bulletsParent.transform;
             Bullets.Add(bullet);
-        }
-        */
+        }        
     }
 
     public void CheckBulletsAmount() {
-        /*
+        
         if (PlayerAttackController.Instance.Bullets < PlayerAttackController.Instance.StartingBullets)
         {
             for (int i = PlayerAttackController.Instance.Bullets; i < (PlayerAttackController.Instance.StartingBullets); i++)
@@ -57,7 +56,7 @@ public class HUDController : Singleton<HUDController>
             }
             
         }
-        */
+        
     }
 
     public void ChangeLudicMeter() {
