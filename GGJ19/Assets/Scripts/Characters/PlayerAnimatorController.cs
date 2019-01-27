@@ -18,6 +18,10 @@ public class PlayerAnimatorController : MonoBehaviour
     [SerializeField]
     private Animator _animator;
 
+
+    public MaterialBlink _blink;
+
+
     [SerializeField]
     PlayerCharacterAnimationEvents _animationEvents;
 
