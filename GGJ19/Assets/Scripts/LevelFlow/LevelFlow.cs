@@ -150,9 +150,9 @@ public class LevelFlow : Singleton<LevelFlow>
         setNextGameState(gameState.Wave1);
         _timer = 4f;
 
-        foreach (GameObject obj in EnemyPool.Instance.activeEnemies)
+        while(EnemyPool.Instance.activeEnemies.Count > 0)
         {
-            obj.GetComponent<Enemy>().killEnemy();
+            EnemyPool.Instance.activeEnemies.First.Value.GetComponent<Enemy>().killEnemy();
         }
     }
 
