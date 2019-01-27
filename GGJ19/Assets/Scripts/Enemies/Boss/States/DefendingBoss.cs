@@ -10,7 +10,12 @@ public class DefendingBoss : BossState
 
     public override void OnStateEnter()
     {
+        Debug.Log("Boss Defending");
+
         boss.headCollider.enabled = false;
+        boss.animator.SetBool("covering", true);
+
+        boss.IdleState(Random.Range(2, 5));
     }
 
     public override void FixedTick()
@@ -20,11 +25,12 @@ public class DefendingBoss : BossState
 
     public override void Tick()
     {
-
+        
     }
 
     public override void OnStateExit()
     {
         boss.headCollider.enabled = true;
+        boss.animator.SetBool("covering", false);
     }
 }
