@@ -166,7 +166,7 @@ MonoBehaviour:
     type: 3}
   transformFX: {fileID: 4204805670879952459}
   mundaneFormSprite: {fileID: 21300000, guid: 6df907306a1a31e45a56ddcb5f560511, type: 3}
-  maxHP_Mattress: 5
+  maxHP_Mattress: 3
   shotRatio: 1
   detectionRange: 8
 --- !u!1001 &4485813853428285283
