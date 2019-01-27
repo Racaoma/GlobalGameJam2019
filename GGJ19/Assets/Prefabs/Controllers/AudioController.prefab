@@ -140,11 +140,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea68f18bd1e5e6548be30f2478c39434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BGM_Menu: {fileID: 8300000, guid: 30bb3393479ab174b9cdad4e723092d2, type: 3}
+  BGM_Menu: {fileID: 8300000, guid: e6ec41ae0289fc841aab57510fcc6ab5, type: 3}
   BGM_IntroInGame: {fileID: 8300000, guid: 3d07da1cf9a68544a9d09a4afe7adcec, type: 3}
   BGM_InGame: {fileID: 8300000, guid: c65ab60f89366ed489e5c0163103e68c, type: 3}
-  BGM_IntroBoss: {fileID: 8300000, guid: 670ba01ad63f0ff4bb040819c3b3ad49, type: 3}
-  BGM_Boss: {fileID: 8300000, guid: 960bdcd55aeec3046888268a56d34d76, type: 3}
+  BGM_IntroBoss: {fileID: 8300000, guid: 9d88bd09f442d5c40b062883ab62e10b, type: 3}
+  BGM_Boss: {fileID: 8300000, guid: 58cdfb4614568b24fb877d6326682150, type: 3}
+  BGM_Defeat: {fileID: 8300000, guid: 109b1fe4e85b6ba4fa506738ee1b12c9, type: 3}
+  BGM_Victory: {fileID: 8300000, guid: 7c8a23e725e2a944f9c4ee584c264a87, type: 3}
+  BGM_Tutorial: {fileID: 8300000, guid: 2eb38239b3a897d4aaf23a24d9b7fa49, type: 3}
   SFX_SwordAttack: {fileID: 8300000, guid: 3670d242e0155a64ca5ef8cee3d613d6, type: 3}
   SFX_SwordHit: {fileID: 8300000, guid: 15b5ad2ca5d48e742b1d67614d823342, type: 3}
   SFX_NerfShoot: {fileID: 8300000, guid: 4b2f0573d5fbbbf4285ab4bfc42df8f1, type: 3}
