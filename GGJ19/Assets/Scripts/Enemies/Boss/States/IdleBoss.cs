@@ -10,7 +10,7 @@ public class IdleBoss : BossState
 
     public override void OnStateEnter()
     {
-        boss.headCollider.enabled = true;
+        Debug.Log("Boss Idle");
     }
 
     public override void FixedTick()

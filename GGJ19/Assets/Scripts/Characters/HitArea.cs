@@ -5,14 +5,20 @@ using UnityEngine;
 public class HitArea : MonoBehaviour
 {
     public int damage = 1;
+
     [SerializeField]
     private Collider2D _ignoreCollider;
     [SerializeField]
     private bool _oneFrameOnly;
-    private Collider2D _collider;
+
+    [SerializeField]
+    private LayerMask _collisionLayerMask;
+
+    protected Collider2D _collider;
     private List<Collider2D> visitedColliders = new List<Collider2D>();
     public bool hitEnemies = false;
-
+    protected Rigidbody2D _rigidBody;
+    
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
@@ -20,6 +26,8 @@ public class HitArea : MonoBehaviour
         {
             Physics2D.IgnoreCollision(_collider, _ignoreCollider);
         }
+
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     public void LateUpdate()
@@ -41,6 +49,11 @@ public class HitArea : MonoBehaviour
         }
     }
 
+    public virtual void OnHitTarget(GameObject target)
+    {
+        
+    }
+
     public void CheckCollisions()
     {
         Collider2D[] results = new Collider2D[10];
@@ -52,6 +65,7 @@ public class HitArea : MonoBehaviour
                 return;
             }
 
+
             visitedColliders.Add(results[i]);
             var result = results[i];
             if(hitEnemies)
@@ -60,6 +74,7 @@ public class HitArea : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.takeDamage(damage);
+                    OnHitTarget(result.gameObject);
                 }
             }
             else
@@ -69,6 +84,11 @@ public class HitArea : MonoBehaviour
                 {
                     //player take damage;
                 }
+            }
+
+            if (_collisionLayerMask.value == (_collisionLayerMask.value | (1 << result.gameObject.layer)))
+            {
+                OnHitTarget(result.gameObject);
             }
         }
     }

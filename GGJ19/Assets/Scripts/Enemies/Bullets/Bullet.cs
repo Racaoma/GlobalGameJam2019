@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     private float movementSpeed;
     private int playerLayer;
     private int groundLayer;
-
+    
     //Methods
     private void Start()
     {
@@ -58,5 +58,6 @@ public class Bullet : MonoBehaviour
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + direction, movementSpeed * Time.deltaTime);
         }
+        
     }
 }

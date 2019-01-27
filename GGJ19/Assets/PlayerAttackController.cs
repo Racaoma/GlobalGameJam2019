@@ -8,13 +8,25 @@ public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField]
     private HitArea _attackCollider;
-
+    [SerializeField]
+    private int _startingBullets = 10;
     [SerializeField]
     private GunShotSpawner _gunShotSpawner;
     private PlayerAnimatorController _animationController;
     private Coroutine _attackCoroutine;
     private AttackConfig _currentAttack;
+    [SerializeField]
+    private float _giveBulletsInterval = 5;
+    private float _giveBulletsTimeout = 3;
+    private Vector2 _shotDirection;
+
+    public int Bullets { get; private set; }
     
+    public void AddBullet()
+    {
+        Bullets = Mathf.Min(Bullets+1, _startingBullets);
+    }
+
     private AttackConfig _swordAttackConfig = new AttackConfig()
     {
         AnimatorWeapon = PlayerAnimatorController.Weapon.Sword,
@@ -30,7 +42,10 @@ public class PlayerAttackController : MonoBehaviour
     {
         _animationController = GetComponent<PlayerAnimatorController>();
         _animationController.OnExecuteAttack += OnExecuteAttack;
+        Bullets = _startingBullets;
+        _shotDirection = new Vector2(1.0f, .1f).normalized;
     }
+
     private void OnDestroy()
     {
         _animationController.OnExecuteAttack -= OnExecuteAttack;
@@ -48,6 +63,22 @@ public class PlayerAttackController : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
             StartGunAttack();
+        }
+
+        _giveBulletsTimeout -= Time.deltaTime;
+        if(_giveBulletsTimeout <= 0)
+        {
+            _giveBulletsTimeout = _giveBulletsInterval;
+            AddBullet();
+        }
+    }
+
+    private IEnumerator GiveAmmoCR()
+    {
+        for(;;)
+        {
+            yield return new WaitForSeconds(3);
+            AddBullet();
         }
     }
 
@@ -122,8 +153,17 @@ public class PlayerAttackController : MonoBehaviour
 
     public void OnExecuteGunAttack()
     {
-        _gunShotSpawner.Shot(transform.right * Mathf.Sign(transform.transform.localScale.x));
-        Debug.Log("Execute gun attack");
+        if(Bullets > 0)
+        {
+            _shotDirection.x = Mathf.Abs(_shotDirection.x) * Mathf.Sign(transform.transform.localScale.x);
+            _gunShotSpawner.Shot(_shotDirection);
+            Bullets--;
+            Debug.Log("Execute gun attack");
+        }
+        else
+        {
+            Debug.Log("Out of ammo");
+        }
     }
 
     [System.Serializable]
@@ -132,5 +172,18 @@ public class PlayerAttackController : MonoBehaviour
         public PlayerAnimatorController.Weapon AnimatorWeapon { get; set; }
         public float IntervalInSeconds { get; set; }
         public Action OnExecuteAttack { get; set; }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        var bullet = other.GetComponent<NerfGunBullet>();
+        if(bullet != null)
+        {
+            if(bullet.CanBeCatched)
+            {
+                Destroy(bullet.gameObject);
+                Bullets++;
+            }
+        }
     }
 }
