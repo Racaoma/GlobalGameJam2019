@@ -30,6 +30,14 @@ public class CameraShake : MonoBehaviour
     void OnEnable()
     {
         initialPosition = transform.localPosition;
+
+        // register events
+        GameEvents.PlayerAction.TookDamage += PlayerTookDamage;
+    }
+
+    void OnDisable()
+    {
+        GameEvents.PlayerAction.TookDamage -= PlayerTookDamage;
     }
 
     void Update()
@@ -51,9 +59,11 @@ public class CameraShake : MonoBehaviour
     {
         shakeDuration_option = d;
         shakeIntensity_option = i;
+        ActivateShake();
     }
 
-    public void ActivateShake(){
+    public void ActivateShake()
+    {
         switch (shakeDuration_option)
         {
             case ShakeDuration.small:
@@ -83,6 +93,11 @@ public class CameraShake : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void PlayerTookDamage()
+    {
+        TriggerShake(ShakeDuration.small, ShakeIntensity.weak);
     }
 
 }

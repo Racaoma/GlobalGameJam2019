@@ -124,11 +124,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterRig
       objectReference: {fileID: 0}
-    - target: {fileID: 6212564517086450398, guid: f324bbad1714ec44aa7cd52df9fb77e2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 269695616852698467, guid: f324bbad1714ec44aa7cd52df9fb77e2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -353,6 +348,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BossRig
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902589083744289086, guid: 77ae6e3ccf0d78a468611c664385e59f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7900800388514824230, guid: 77ae6e3ccf0d78a468611c664385e59f,
         type: 3}
