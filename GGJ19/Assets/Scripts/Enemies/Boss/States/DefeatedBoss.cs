@@ -15,6 +15,7 @@ public class DefeatedBoss : BossState
         boss.headCollider.enabled = false;
 
         boss.KillBoss();
+        boss.SetAudio(boss.sound_defeated);
     }
 
     public override void FixedTick()
