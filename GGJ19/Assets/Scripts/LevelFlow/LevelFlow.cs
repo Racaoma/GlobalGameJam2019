@@ -22,10 +22,19 @@ public class LevelFlowEditor : Editor
     }
 }*/
 
-public class LevelFlow : MonoBehaviour
+public enum gameState
 {
-    public static LevelFlow Instance;
+    Tutorial,
+    Level1,
+    Level2,
+    Level3,
+    Boss,
+    Defeat,
+    Victory
+}
 
+public class LevelFlow : Singleton<LevelFlow>
+{
     [Serializable]
     public class LevelParameters
     {
@@ -44,22 +53,18 @@ public class LevelFlow : MonoBehaviour
         }
     }
 
+    //Variables
     private string _path;
     [SerializeField]
     private string fileName;
     private string _jsonString;
     public LevelParameters Level;
-
     private float _timer;
+    private gameState currentGameState;
 
+    //Lists Enemies & Positions
     public List<InstantiateBehaviour> Enemies = new List<InstantiateBehaviour>();
-
     public List<Transform> Positions = new List<Transform>();
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     // Start is called before the first frame update
     private void Start()
@@ -67,13 +72,12 @@ public class LevelFlow : MonoBehaviour
         SetPath();
         //Save();
         Read();
+        currentGameState = gameState.Level1;
     }
 
     private void SetPath()
     {
-
         _path = Application.streamingAssetsPath +"/"+ fileName;
-       
     }
 
     private void Read()
@@ -88,36 +92,35 @@ public class LevelFlow : MonoBehaviour
         string charc = JsonUtility.ToJson(Level);
         Debug.Log(charc);
         System.IO.File.WriteAllText(_path, charc);
-        // //Debug.Log(charc);
+        //Debug.Log(charc);
     }
 
     public void EnemyDeath()
     {
-        Debug.Log("The enemy died");
         Level.EnemiesOnScreen--;
     }
 
     protected void InstantiateEnemy()
     {
-        if (Level.EnemiesOnScreen < Level.MaxEnemiesOnScreen)
+        if(Level.WaveInstantiatedEnemies < Level.WaveSize)
         {
-            if (_timer >= Level.TimerToInstantiate)
+            if (Level.EnemiesOnScreen < Level.MaxEnemiesOnScreen)
             {
-                int rand = UnityEngine.Random.Range(0, 10);
-
-                for (int i = 0; i < Enemies.Count; i++)
+                if (_timer >= Level.TimerToInstantiate)
                 {
-                    if (rand >= Enemies[i].Min && rand <= Enemies[i].Max)
+                    int rand = UnityEngine.Random.Range(0, 10);
+                    for (int i = 0; i < Enemies.Count; i++)
                     {
-                        int pos = UnityEngine.Random.Range(0, 2);
-
-                        EnemyPool.Instance.spawnEnemy(Positions[pos].transform.position, Enemies[i].Enemy);
-                        i = Enemies.Count;
-                        Level.InstantiateEnemiesBehaviour();
+                        if (rand >= Enemies[i].Min && rand <= Enemies[i].Max)
+                        {
+                            EnemyPool.Instance.spawnEnemy(Positions[UnityEngine.Random.Range(0, 2)].transform.position, Enemies[i].Enemy);
+                            i = Enemies.Count;
+                            Level.InstantiateEnemiesBehaviour();
+                        }
                     }
-                }
 
-                _timer = 0;
+                    _timer = 0;
+                }
             }
         }
     }
@@ -126,6 +129,6 @@ public class LevelFlow : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        InstantiateEnemy();       
+        InstantiateEnemy();
     }
 }
