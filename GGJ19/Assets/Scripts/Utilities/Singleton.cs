@@ -14,6 +14,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
         if (Instance != null)
         {
             DestroyImmediate(gameObject);
+            return;
         }
         else
         {

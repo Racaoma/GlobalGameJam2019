@@ -1,15 +1,21 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
 [RequireComponent(typeof(PlayerAnimatorController))]
-public class PlayerAttackController : MonoBehaviour
+public class PlayerAttackController : Singleton<PlayerAttackController>
 {
+  
+ 
     [SerializeField]
     private HitArea _attackCollider;
     [SerializeField]
     private int _startingBullets = 10;
+
+    public int StartingBullets{
+        get { return _startingBullets; }
+        }
     [SerializeField]
     private GunShotSpawner _gunShotSpawner;
     private PlayerAnimatorController _animationController;
@@ -19,6 +25,7 @@ public class PlayerAttackController : MonoBehaviour
     private float _giveBulletsInterval = 5;
     private float _giveBulletsTimeout = 3;
     private Vector2 _shotDirection;
+
 
     //Attack Control Variables
     public bool canAttack = true;
@@ -48,8 +55,9 @@ public class PlayerAttackController : MonoBehaviour
         IntervalInSeconds = 0.5f
     };
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _animationController = GetComponent<PlayerAnimatorController>();
         _animationController.OnExecuteAttack += OnExecuteAttack;
         Bullets = _startingBullets;
@@ -169,6 +177,7 @@ public class PlayerAttackController : MonoBehaviour
             _shotDirection.x = Mathf.Abs(_shotDirection.x) * Mathf.Sign(transform.transform.localScale.x);
             _gunShotSpawner.Shot(_shotDirection);
             Bullets--;
+            HUDController.Instance.CheckBulletsAmount();
         }
         else
         {
@@ -192,7 +201,10 @@ public class PlayerAttackController : MonoBehaviour
             if(bullet.CanBeCatched)
             {
                 Destroy(bullet.gameObject);
-                Bullets++;
+                if (Bullets < StartingBullets) {
+                    Bullets++;
+                }
+                HUDController.Instance.CheckBulletsAmount();
             }
         }
     }
