@@ -14,15 +14,17 @@ public class TutorialFlow : Singleton<TutorialFlow>
 {
     //Player
     public GameObject playerCharacter;
+    public GameObject buttonsInfo;
     private PlayerAttackController attackController;
+    private SpriteRenderer spriteRendererRef;
 
     //Enemies
     public GameObject enemy1Prefab;
     public GameObject enemy2Prefab;
-    public Enemy enemy1Ref;
-    public Enemy enemy2Ref;
-    public Transform positionSpawnEnemy1;
-    public Transform positionSpawnEnemy2;
+    private Enemy enemy1Ref;
+    private Enemy enemy2Ref;
+    public Vector3 positionSpawnEnemy1;
+    public Vector3 positionSpawnEnemy2;
 
     //Controls
     private bool tutorialStarted = false;
@@ -31,6 +33,8 @@ public class TutorialFlow : Singleton<TutorialFlow>
     //Methods
     public void startTutorial()
     {
+        buttonsInfo.SetActive(true);
+        buttonsInfo.transform.GetChild(0).gameObject.SetActive(true);
         currentPhase = tutorialPhase.Movement;
         tutorialStarted = true;
         attackController = playerCharacter.GetComponent<PlayerAttackController>();
@@ -40,14 +44,23 @@ public class TutorialFlow : Singleton<TutorialFlow>
 
     private void startSwordTraining()
     {
-        GameObject obj = Instantiate(enemy1Prefab, positionSpawnEnemy1);
+        buttonsInfo.transform.GetChild(0).gameObject.SetActive(false);
+        buttonsInfo.transform.GetChild(1).gameObject.SetActive(true);
+        spriteRendererRef = buttonsInfo.transform.GetChild(1).GetComponent<SpriteRenderer>();
+        Debug.Log(spriteRendererRef);
+        currentPhase = tutorialPhase.Sword;
+        GameObject obj = Instantiate(enemy1Prefab, positionSpawnEnemy1, Quaternion.identity);
         enemy1Ref = obj.GetComponent<Enemy>();
         attackController.canAttack = true;
     }
 
     private void startNerfTraining()
     {
-        GameObject obj = Instantiate(enemy2Prefab, positionSpawnEnemy2);
+        buttonsInfo.transform.GetChild(1).gameObject.SetActive(false);
+        buttonsInfo.transform.GetChild(2).gameObject.SetActive(true);
+        spriteRendererRef = buttonsInfo.transform.GetChild(2).GetComponent<SpriteRenderer>();
+        currentPhase = tutorialPhase.Nerf;
+        GameObject obj = Instantiate(enemy2Prefab, positionSpawnEnemy2, Quaternion.identity);
         enemy2Ref = obj.GetComponent<Enemy>();
         attackController.canAttack = false;
         attackController.canShoot = true;
@@ -55,8 +68,24 @@ public class TutorialFlow : Singleton<TutorialFlow>
 
     private void startAmmoTraining()
     {
+        buttonsInfo.SetActive(false);
+        buttonsInfo.transform.GetChild(2).gameObject.SetActive(false);
+        currentPhase = tutorialPhase.Ammo;
         attackController.giveBulletsEnabled = false;
         attackController.canShoot = false;
+    }
+
+    private void endTutorial()
+    {
+        buttonsInfo.SetActive(false);
+        if (enemy1Ref != null) enemy1Ref.killEnemy();
+        if (enemy2Ref != null) enemy2Ref.killEnemy();
+        LevelFlow.Instance.currentGameState = gameState.Interwave;
+        LevelFlow.Instance.setNextGameState(gameState.Wave1);
+        tutorialStarted = false;
+        attackController.giveBulletsEnabled = true;
+        attackController.canShoot = true;
+        attackController.canAttack = true;
     }
 
     private void Update()
@@ -65,28 +94,29 @@ public class TutorialFlow : Singleton<TutorialFlow>
         {
             if(currentPhase == tutorialPhase.Movement)
             {
-                if (Input.GetAxisRaw("Vertical") != 0 && Input.GetAxisRaw("Horizontal") != 0)
+                if (Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)
                 {
                     startSwordTraining();
-                    currentPhase = tutorialPhase.Sword;
                 }
+                else if (Input.GetButtonDown("Fire2")) endTutorial();
             }
             else if (currentPhase == tutorialPhase.Sword)
             {
+                if (playerCharacter.transform.localScale.x < 0f) spriteRendererRef.flipX = true;
+                else spriteRendererRef.flipX = false;
                 if (enemy1Ref.currentState == enemyState.KnockedDown) startNerfTraining();
             }
             else if (currentPhase == tutorialPhase.Nerf)
             {
+                if (playerCharacter.transform.localScale.x < 0f) spriteRendererRef.flipX = true;
+                else spriteRendererRef.flipX = false;
                 if (enemy2Ref.currentState == enemyState.KnockedDown) startAmmoTraining();
             }
             else if (currentPhase == tutorialPhase.Ammo)
             {
                 if(attackController.Bullets == attackController.getMaxBullets())
                 {
-                    Destroy(enemy1Ref);
-                    Destroy(enemy2Ref);
-                    LevelFlow.Instance.currentGameState = gameState.Interwave;
-                    LevelFlow.Instance.setNextGameState(gameState.Wave1);
+                    endTutorial();
                 }
             }
         }
