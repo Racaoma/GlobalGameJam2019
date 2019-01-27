@@ -14,7 +14,7 @@ public class HittingFloorBoss : BossState
 
         boss.animator.SetBool("hittingFloor", true);
 
-        boss.IdleState(Random.Range(1, 5));
+        boss.IdleState(Random.Range(2, 6));
     }
 
     public override void FixedTick()

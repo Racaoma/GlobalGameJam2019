@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefendingBoss : BossState
+public class DefeatedBoss : BossState
 {
-    public DefendingBoss(BossStatemachine boss) : base(boss)
+    public DefeatedBoss(BossStatemachine boss) : base(boss)
     {
     }
 
     public override void OnStateEnter()
     {
-        Debug.Log("Boss Defending");
-
+        boss.leftFistCollider.enabled = false;
+        boss.rightFistCollider.enabled = false;
         boss.headCollider.enabled = false;
-        boss.animator.SetBool("covering", true);
-
-        boss.IdleState(Random.Range(2, 6));
     }
 
     public override void FixedTick()
@@ -25,12 +22,11 @@ public class DefendingBoss : BossState
 
     public override void Tick()
     {
-        
+
     }
 
     public override void OnStateExit()
     {
-        boss.headCollider.enabled = true;
-        boss.animator.SetBool("covering", false);
+         
     }
 }

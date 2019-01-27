@@ -15,10 +15,9 @@ public class IdleBoss : BossState
         boss.leftFistCollider.enabled = false;
         boss.rightFistCollider.enabled = false;
 
-        boss.RandomState(Random.Range(2, 5));
+        boss.RandomState(Random.Range(4, 9));
     }
     
-
     public override void FixedTick()
     {
 
