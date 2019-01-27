@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3739c8d40fe8543a875bf45f5f4bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 3938001208858502751, guid: aa3f5681aeb56264d9102c7f0b44b7d7, type: 3}
+  Enemy: 2
   Min: 8
   Max: 10
 --- !u!4 &101037705
@@ -909,7 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3739c8d40fe8543a875bf45f5f4bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 3938001208858502751, guid: 850165322b426a148a3308f70c8e875d, type: 3}
+  Enemy: 0
   Min: 0
   Max: 4
 --- !u!4 &504985048
@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3739c8d40fe8543a875bf45f5f4bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 3938001208858502751, guid: 8a7a495ad6acab54588addfad6276ecf, type: 3}
+  Enemy: 1
   Min: 5
   Max: 7
 --- !u!4 &1019019526
