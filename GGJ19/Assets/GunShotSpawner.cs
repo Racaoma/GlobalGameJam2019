@@ -12,6 +12,9 @@ public class GunShotSpawner : MonoBehaviour
 
     [SerializeField]
     private float speed = 10;
+    
+    [SerializeField]
+    private GunShotVFX gunShotVFX;
 
     public void Shot(Vector2 direction)
     {
@@ -20,5 +23,6 @@ public class GunShotSpawner : MonoBehaviour
         var rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * speed;
         bullet.transform.right = direction;
+        gunShotVFX.Shoot(direction);
     }
 }
