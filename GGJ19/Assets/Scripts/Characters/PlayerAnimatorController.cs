@@ -34,7 +34,7 @@ public class PlayerAnimatorController : MonoBehaviour
     private void Awake()
     {
         _movementController = GetComponent<PlayerMovementController>();
-        _animationEvents.OnExecuteAttack += OnExecuteAttack;
+        _animationEvents.OnExecuteAttack += OnAttack;
     }
 
     private void OnDestroy()
@@ -54,6 +54,11 @@ public class PlayerAnimatorController : MonoBehaviour
     void LateUpdate()
     {
         UpdateMovementAnimation();
+    }
+
+    private void OnAttack()
+    {
+        OnExecuteAttack.SafeInvoke();
     }
 
     void UpdateMovementAnimation()
