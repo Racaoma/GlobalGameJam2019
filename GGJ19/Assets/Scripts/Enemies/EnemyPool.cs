@@ -30,8 +30,6 @@ public class EnemyPool : Singleton<EnemyPool>
         activeEnemies = new LinkedList<GameObject>();
         defeatedEnemies = new LinkedList<GameObject>();
 
-        Debug.Log("PreFOR");
-
         for (int i = 0; i < initialPoolSize; i++)
         {
             GameObject obj = Instantiate(puffPrefab);
@@ -45,11 +43,7 @@ public class EnemyPool : Singleton<EnemyPool>
             obj = Instantiate(mattressPrefab);
             obj.SetActive(false);
             mattressObjects.Enqueue(obj);
-
-            Debug.Log("FOR");
         }
-
-        Debug.Log("Complete");
     }
 
     public void defeatEnemy(GameObject enemy)

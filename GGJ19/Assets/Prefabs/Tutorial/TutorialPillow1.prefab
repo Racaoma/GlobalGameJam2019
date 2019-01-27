@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3468652394333509342}
   - component: {fileID: 5730697587481817761}
   - component: {fileID: 9149997703172977796}
-  m_Layer: 0
+  - component: {fileID: 3892952854340252050}
+  m_Layer: 13
   m_Name: TutorialPillow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,6 +104,66 @@ MonoBehaviour:
     type: 3}
   transformFX: {fileID: 0}
   mundaneFormSprite: {fileID: 21300000, guid: 96cb09d88cac7634c8d90db06f1c73d7, type: 3}
+--- !u!114 &3892952854340252050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938001208858502751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f9fca2d52a2d4ab684b3f42e0ce8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreOneWayPlatformsThisFrame: 0
+  _skinWidth: 0.02
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 256
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  oneWayPlatformMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  slopeLimit: 30
+  jumpingThreshold: 0.07
+  slopeSpeedMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -90
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 90
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  totalHorizontalRays: 8
+  totalVerticalRays: 4
 --- !u!1001 &4061279619791181044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,6 +175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PillowRig
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030057471655271819, guid: 4f6b85dd05e574f4597691575c342ffa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4030057471655271823, guid: 4f6b85dd05e574f4597691575c342ffa,
         type: 3}
@@ -169,6 +235,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030057471771626549, guid: 4f6b85dd05e574f4597691575c342ffa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030057473299509642, guid: 4f6b85dd05e574f4597691575c342ffa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030057471915917382, guid: 4f6b85dd05e574f4597691575c342ffa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030057472315458251, guid: 4f6b85dd05e574f4597691575c342ffa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030057472823473809, guid: 4f6b85dd05e574f4597691575c342ffa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f6b85dd05e574f4597691575c342ffa, type: 3}
