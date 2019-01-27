@@ -234,6 +234,31 @@ PrefabInstance:
       propertyPath: bulletsParent
       value: 
       objectReference: {fileID: 275582557}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: PillowSlider
+      value: 
+      objectReference: {fileID: 181990412}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorLudic.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorLudic.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorLudic.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorLudic.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1923307542781171476, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -277,7 +302,7 @@ PrefabInstance:
     - target: {fileID: 1923307543631867824, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 582
+      value: 214
       objectReference: {fileID: 0}
     - target: {fileID: 1923307543631867824, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
@@ -302,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 1923307543631867824, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -598.00006
+      value: -230
       objectReference: {fileID: 0}
     - target: {fileID: 1923307543206877445, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
@@ -454,6 +479,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0.708
       objectReference: {fileID: 0}
+    - target: {fileID: 8850520594514845586, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.7607843
+      objectReference: {fileID: 0}
     - target: {fileID: 5862012223698739962, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -472,7 +502,7 @@ PrefabInstance:
     - target: {fileID: 5862012223698739962, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140.98
+      value: -125
       objectReference: {fileID: 0}
     - target: {fileID: 4041790497962478090, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
@@ -517,7 +547,7 @@ PrefabInstance:
     - target: {fileID: 6026721232378328207, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6871903935600718846, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
         type: 3}
@@ -598,6 +628,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10a117737bcdb7f4cb6e0f5af118c1ab, type: 3}
+--- !u!114 &181990412 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6026721232378328207, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 181990411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &182835948
 GameObject:
   m_ObjectHideFlags: 0

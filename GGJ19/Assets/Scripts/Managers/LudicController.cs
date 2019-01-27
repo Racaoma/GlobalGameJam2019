@@ -36,6 +36,10 @@ public class LudicController : Singleton<LudicController>
         ludicMeter = maxLudicMeter;
     }
 
+    public void setMinLudic(){
+        ludicMeter = 0f;
+    }
+
     public float getRatio(float current, float max)
     {
         return current / max;
