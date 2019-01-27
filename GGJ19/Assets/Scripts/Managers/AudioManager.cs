@@ -36,6 +36,10 @@ public class AudioManager : MonoBehaviour
     //Start
     private void Start()
     {
+        //Get Audio Source
+        bgmAudioSource = this.GetComponent<AudioSource>();
+
+        //Setup Events
         GameEvents.SFX.StartBGM += playIntroBGM;
         GameEvents.SFX.WaveWon += playSFX;
         GameEvents.SFX.SwordAttack += playSFX;

@@ -59,8 +59,12 @@ public abstract class Enemy : MonoBehaviour
         materialBlinkRef = this.transform.GetComponentInChildren<MaterialBlink>();
         boxCollider2DRef = this.transform.GetComponent<BoxCollider2D>();
         rigidBody2DRef = this.transform.GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
-    } 
+    }
 
     public void takeDamage(int damageTaken)
     {
