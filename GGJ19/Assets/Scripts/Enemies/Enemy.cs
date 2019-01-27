@@ -46,6 +46,7 @@ public abstract class Enemy : MonoBehaviour
     protected MaterialBlink materialBlinkRef;
     protected BoxCollider2D boxCollider2DRef;
     protected Rigidbody2D rigidBody2DRef;
+    private ParticleSystem ps;
 
     //Methods
     private void Awake()
@@ -59,6 +60,10 @@ public abstract class Enemy : MonoBehaviour
         materialBlinkRef = this.transform.GetComponentInChildren<MaterialBlink>();
         boxCollider2DRef = this.transform.GetComponent<BoxCollider2D>();
         rigidBody2DRef = this.transform.GetComponent<Rigidbody2D>();
+
+        if(transformFX != null){
+            ps = transformFX.GetComponent<ParticleSystem>();
+        }
     }
 
     private void Start()
@@ -120,5 +125,10 @@ public abstract class Enemy : MonoBehaviour
         var collider = GetComponent<Collider2D>();
         collider.enabled = false;
         GetComponent<Rigidbody2D>().isKinematic = true;
+
+        if(ps != null){
+            ps.Play();
+        }
+        
     }
 }

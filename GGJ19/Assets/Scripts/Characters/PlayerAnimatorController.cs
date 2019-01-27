@@ -31,6 +31,7 @@ public class PlayerAnimatorController : MonoBehaviour
     private int _onKnockbackAnimationKey;
     private Coroutine _movementAnimationCoroutine;
 
+  
     private void Awake()
     {
         _movementController = GetComponent<PlayerMovementController>();
