@@ -162,6 +162,7 @@ public class LevelFlow : Singleton<LevelFlow>
         EnemyPool.Instance.cleanUpEnemies();
         currentGameState = nextGameState;
         if(currentGameState == gameState.Wave1) GameEvents.GameState.StartGame.SafeInvoke();
+        GameEvents.GameState.StartLevel.SafeInvoke();
     }
 
     private void winWave()
