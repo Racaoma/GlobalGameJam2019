@@ -47,7 +47,6 @@ public class TutorialFlow : Singleton<TutorialFlow>
         buttonsInfo.transform.GetChild(0).gameObject.SetActive(false);
         buttonsInfo.transform.GetChild(1).gameObject.SetActive(true);
         spriteRendererRef = buttonsInfo.transform.GetChild(1).GetComponent<SpriteRenderer>();
-        Debug.Log(spriteRendererRef);
         currentPhase = tutorialPhase.Sword;
         GameObject obj = Instantiate(enemy1Prefab, positionSpawnEnemy1, Quaternion.identity);
         enemy1Ref = obj.GetComponent<Enemy>();

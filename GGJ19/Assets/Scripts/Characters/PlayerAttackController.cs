@@ -151,7 +151,6 @@ public class PlayerAttackController : MonoBehaviour
     public void OnExecuteSwordAttack()
     {
         StartCoroutine(ExecuteSwordAttackCR());
-        Debug.Log("Execute sword attack");
     }
 
     private IEnumerator ExecuteSwordAttackCR()
@@ -168,7 +167,6 @@ public class PlayerAttackController : MonoBehaviour
             _shotDirection.x = Mathf.Abs(_shotDirection.x) * Mathf.Sign(transform.transform.localScale.x);
             _gunShotSpawner.Shot(_shotDirection);
             Bullets--;
-            Debug.Log("Execute gun attack");
         }
         else
         {
