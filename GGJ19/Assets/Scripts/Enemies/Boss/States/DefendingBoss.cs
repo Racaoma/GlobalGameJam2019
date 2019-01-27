@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeffendingBoss : BossState
+public class DefendingBoss : BossState
 {
-    public DeffendingBoss(BossStatemachine boss) : base(boss)
+    public DefendingBoss(BossStatemachine boss) : base(boss)
     {
     }
 
