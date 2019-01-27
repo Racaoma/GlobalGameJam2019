@@ -25,9 +25,10 @@ public class LevelFlowEditor : Editor
 public enum gameState
 {
     Tutorial,
-    Level1,
-    Level2,
-    Level3,
+    Interwave,
+    Wave1,
+    Wave2,
+    Wave3,
     Boss,
     Defeat,
     Victory
@@ -43,6 +44,7 @@ public class LevelFlow : Singleton<LevelFlow>
         public int WaveSize;
         public int WaveInstantiatedEnemies;
         public float TimerToInstantiate;
+        public float TimeToComplete;
 
         public LevelParameters() { }
 
@@ -61,6 +63,7 @@ public class LevelFlow : Singleton<LevelFlow>
     public LevelParameters Level;
     private float _timer;
     private gameState currentGameState;
+    private gameState lastWave;
 
     //Lists Enemies & Positions
     public List<InstantiateBehaviour> Enemies = new List<InstantiateBehaviour>();
@@ -72,7 +75,7 @@ public class LevelFlow : Singleton<LevelFlow>
         SetPath();
         //Save();
         Read();
-        currentGameState = gameState.Level1;
+        currentGameState = gameState.Tutorial;
     }
 
     private void SetPath()
@@ -125,10 +128,64 @@ public class LevelFlow : Singleton<LevelFlow>
         }
     }
 
+    private void loseGame()
+    {
+        currentGameState = gameState.Defeat;
+        _timer = 10f;
+        fileName = "Level1.json";
+        SetPath();
+        Read();
+
+        foreach (GameObject obj in EnemyPool.Instance.activeEnemies)
+        {
+            obj.GetComponent<Enemy>().killEnemy();
+        }
+    }
+
+    public void startWave()
+    {
+        _timer = 0f;
+        EnemyPool.Instance.cleanUpEnemies();
+
+        if(lastWave == gameState.Wave1)
+        {
+            fileName = "Level2.json";
+            SetPath();
+            Read();
+        }
+        else if (lastWave == gameState.Wave2)
+        {
+            fileName = "Level3.json";
+            SetPath();
+            Read();
+        }
+    }
+
+    private void winWave()
+    {
+        GameEvents.GameState.WaveWon.SafeInvoke();
+        lastWave = currentGameState;
+        _timer = 10f;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        _timer += Time.deltaTime;
-        InstantiateEnemy();
+        if (currentGameState == gameState.Interwave || currentGameState == gameState.Defeat)
+        {
+            _timer -= Time.deltaTime;
+            if (_timer <= 0f) startWave();
+        }
+        else
+        {
+            if (LudicController.Instance.ludicMeter <= 0) loseGame();
+            else if (Level.WaveInstantiatedEnemies == Level.WaveSize && Level.EnemiesOnScreen == 0) winWave();
+            else if (_timer >= (Level.TimeToComplete * 60f)) startWave();
+            else
+            {
+                _timer += Time.deltaTime;
+                InstantiateEnemy();
+            }
+        }
     }
 }
