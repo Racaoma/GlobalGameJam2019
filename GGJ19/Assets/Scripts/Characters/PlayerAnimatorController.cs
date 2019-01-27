@@ -31,10 +31,14 @@ public class PlayerAnimatorController : MonoBehaviour
     private int _onKnockbackAnimationKey;
     private Coroutine _movementAnimationCoroutine;
 
+    public void OnAttack()
+    {
+        OnExecuteAttack.SafeInvoke();
+    }
     private void Awake()
     {
         _movementController = GetComponent<PlayerMovementController>();
-        _animationEvents.OnExecuteAttack += OnExecuteAttack;
+        _animationEvents.OnExecuteAttack += OnAttack;
     }
 
     private void OnDestroy()
