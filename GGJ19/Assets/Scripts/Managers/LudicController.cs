@@ -28,10 +28,12 @@ public class LudicController : Singleton<LudicController>
     public void IncreaseLudicMeter()
     {
         ludicMeter = Mathf.Max(ludicMeter + 1, maxLudicMeter);
+        HUDController.Instance.ChangeLudicMeter();
     }
 
     public void DecreaseLudicMeter()
     {
         ludicMeter = Mathf.Min(ludicMeter - 1, 0);
+        HUDController.Instance.ChangeLudicMeter();
     }
 }
