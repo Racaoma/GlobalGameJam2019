@@ -30,6 +30,10 @@ public class Enemy_Puff : Enemy
         currentState = enemyState.Active;
         if (UnityEngine.Random.value >= 0.5f) movementDirection = Vector3.right;
         else movementDirection = Vector3.left;
+        animatorRef.enabled = true;
+        spriteRendererRef.sortingOrder = 0;
+        boxCollider2DRef.enabled = true;
+        rigidBody2DRef.isKinematic = false;
         animatorRef.Play("Idle");
     }
 

@@ -7,7 +7,9 @@ public class EnemyPool : Singleton<EnemyPool>
     //Variables
     [SerializeField]
     private GameObject puffPrefab;
+    [SerializeField]
     private GameObject pillowPrefab;
+    [SerializeField]
     private GameObject mattressPrefab;
 
     [SerializeField]
@@ -16,12 +18,16 @@ public class EnemyPool : Singleton<EnemyPool>
     private Queue<GameObject> puffObjects;
     private Queue<GameObject> pillowObjects;
     private Queue<GameObject> mattressObjects;
+    public LinkedList<GameObject> activeEnemies;
+    public LinkedList<GameObject> defeatedEnemies;
 
     private void Start()
     {
         puffObjects = new Queue<GameObject>();
         pillowObjects = new Queue<GameObject>();
         mattressObjects = new Queue<GameObject>();
+        activeEnemies = new LinkedList<GameObject>();
+        defeatedEnemies = new LinkedList<GameObject>();
 
         for (int i = 0; i < initialPoolSize; i++)
         {
@@ -39,11 +45,20 @@ public class EnemyPool : Singleton<EnemyPool>
         }
     }
 
-    public void registerNewEnemy(GameObject enemy, enemyType enemyType)
+    public void defeatEnemy(GameObject enemy)
     {
-        if (enemyType == enemyType.Pillow) pillowObjects.Enqueue(enemy);
-        else if (enemyType == enemyType.Puff) pillowObjects.Enqueue(enemy);
-        else if(enemyType == enemyType.Mattress) mattressObjects.Enqueue(enemy);
+        activeEnemies.Remove(enemy);
+        defeatedEnemies.AddLast(enemy);
+    }
+
+    public void cleanUpEnemies()
+    {
+        foreach(GameObject obj in defeatedEnemies)
+        {
+            if (obj.GetComponent<Enemy>() is Enemy_Pillow) pillowObjects.Enqueue(obj);
+            else if (obj.GetComponent<Enemy>() is Enemy_Puff) puffObjects.Enqueue(obj);
+            else if (obj.GetComponent<Enemy>() is Enemy_Mattress) mattressObjects.Enqueue(obj);
+        }
     }
 
     public void spawnEnemy(Vector3 position, enemyType enemyType)
@@ -56,6 +71,7 @@ public class EnemyPool : Singleton<EnemyPool>
 
             obj.transform.position = position;
             obj.SetActive(true);
+            activeEnemies.AddLast(obj);
         }
         else if (enemyType == enemyType.Puff)
         {
@@ -65,6 +81,7 @@ public class EnemyPool : Singleton<EnemyPool>
 
             obj.transform.position = position;
             obj.SetActive(true);
+            activeEnemies.AddLast(obj);
         }
         else if (enemyType == enemyType.Mattress)
         {
@@ -74,6 +91,7 @@ public class EnemyPool : Singleton<EnemyPool>
 
             obj.transform.position = position;
             obj.SetActive(true);
+            activeEnemies.AddLast(obj);
         }
     }
 }
