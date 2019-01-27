@@ -14,6 +14,7 @@ public class HitArea : MonoBehaviour
     [SerializeField]
     private LayerMask _collisionLayerMask;
 
+    [SerializeField]
     protected Collider2D _collider;
     private List<Collider2D> visitedColliders = new List<Collider2D>();
     public bool hitEnemies = false;
@@ -51,7 +52,15 @@ public class HitArea : MonoBehaviour
 
     public virtual void OnHitTarget(GameObject target)
     {
-        
+       
+    }
+
+    public void OnColliderEnter2D(Collision2D col)
+    {
+        if (_collisionLayerMask.value == (_collisionLayerMask.value | (1 << col.gameObject.layer)))
+        {
+            OnHitTarget(col.gameObject);
+        }
     }
 
     public void CheckCollisions()

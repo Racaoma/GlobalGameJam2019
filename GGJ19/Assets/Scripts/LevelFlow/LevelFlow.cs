@@ -71,8 +71,8 @@ public class LevelFlow : Singleton<LevelFlow>
     // Start is called before the first frame update
     private void Start()
     {
-        currentGameState = gameState.Tutorial;
-        TutorialFlow.Instance.startTutorial();
+       // currentGameState = gameState.Tutorial;
+       // TutorialFlow.Instance.startTutorial();
     }
 
     private void SetPath()

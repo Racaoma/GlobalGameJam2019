@@ -2202,6 +2202,11 @@ PrefabInstance:
       propertyPath: Positions.Array.data[1]
       value: 
       objectReference: {fileID: 1901372359}
+    - target: {fileID: 128905564703644231, guid: 3291ec6ae5cf5d0479084a5dbab5a7c3,
+        type: 3}
+      propertyPath: currentGameState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 128905565646205556, guid: 3291ec6ae5cf5d0479084a5dbab5a7c3,
         type: 3}
       propertyPath: playerCharacter
