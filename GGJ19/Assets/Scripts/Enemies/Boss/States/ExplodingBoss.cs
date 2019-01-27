@@ -19,6 +19,7 @@ public class ExplodingBoss : BossState
         boss.rightFistCollider.enabled = false;
 
         boss.IdleState(Random.Range(4, 9));
+        boss.SetAudio(boss.sound_explode);
     }
 
     public override void FixedTick()

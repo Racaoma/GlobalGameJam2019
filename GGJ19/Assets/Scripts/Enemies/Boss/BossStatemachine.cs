@@ -13,9 +13,14 @@ public class BossStatemachine : MonoBehaviour
     public Enemy_Boss enemyBoss;
 
     public ParticleSystem DeathFX;
+
+    public AudioClip sound_attacking;
+    public AudioClip sound_defending;
+    public AudioClip sound_hittingFloor;
+    public AudioClip sound_explode;
+    public AudioClip sound_defeated;
+
     
-
-
     public IdleBoss idle;
     public AttackingBoss attacking;
     public DefendingBoss defending;
@@ -23,11 +28,13 @@ public class BossStatemachine : MonoBehaviour
     public ExplodingBoss explode;
     public DefeatedBoss defeated;
 
-    private BossState currentState;
-
+    private BossState _currentState;
+    private AudioSource _source;
 
     private void Start()
     {
+        _source = GetComponent<AudioSource>();
+
         idle = new IdleBoss(this);
         attacking = new AttackingBoss(this);
         defending = new DefendingBoss(this);
@@ -43,12 +50,12 @@ public class BossStatemachine : MonoBehaviour
 
     private void Update()
     {
-        currentState.Tick();
+        _currentState.Tick();
     }
 
     private void FixedUpdate()
     {
-        currentState.FixedTick();
+        _currentState.FixedTick();
     }
 
     
@@ -81,25 +88,32 @@ public class BossStatemachine : MonoBehaviour
 
     public void KillBoss()
     {
-        SetState(idle);
+        StopAllCoroutines();
 
         enemyBoss.gameObject.SetActive(false);
         DeathFX.Play();
     }
 
 
+    public void SetAudio(AudioClip audio)
+    {
+        _source.Stop();
+        _source.clip = audio;
+        _source.Play();
+    }
+
     public void SetState(BossState state)
     {
-        if (currentState != null)
+        if (_currentState != null)
         {
-            currentState.OnStateExit();
+            _currentState.OnStateExit();
         }
 
-        currentState = state;
+        _currentState = state;
 
-        if (currentState != null)
+        if (_currentState != null)
         {
-            currentState.OnStateEnter();
+            _currentState.OnStateEnter();
         }
     }
 

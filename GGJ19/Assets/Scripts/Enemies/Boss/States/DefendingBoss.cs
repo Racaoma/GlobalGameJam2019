@@ -16,6 +16,7 @@ public class DefendingBoss : BossState
         boss.animator.SetBool("covering", true);
 
         boss.IdleState(Random.Range(2, 6));
+        boss.SetAudio(boss.sound_defeated);
     }
 
     public override void FixedTick()
