@@ -18,8 +18,8 @@ public class GunShotSpawner : MonoBehaviour
 
     public void Shot(Vector2 direction)
     {
-        var bullet = Instantiate(bulletPrefab);
-        bullet.transform.position = transform.position;
+        var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        //bullet.transform.position = transform.position;
         var rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * speed;
         bullet.transform.right = direction;
