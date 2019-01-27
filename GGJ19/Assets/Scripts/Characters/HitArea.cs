@@ -5,14 +5,20 @@ using UnityEngine;
 public class HitArea : MonoBehaviour
 {
     public int damage = 1;
+
     [SerializeField]
     private Collider2D _ignoreCollider;
     [SerializeField]
     private bool _oneFrameOnly;
+
+    [SerializeField]
+    private LayerMask _collisionLayerMask;
+
     protected Collider2D _collider;
     private List<Collider2D> visitedColliders = new List<Collider2D>();
     public bool hitEnemies = false;
-
+    protected Rigidbody2D _rigidBody;
+    
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
@@ -20,6 +26,8 @@ public class HitArea : MonoBehaviour
         {
             Physics2D.IgnoreCollision(_collider, _ignoreCollider);
         }
+
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     public void LateUpdate()
@@ -78,7 +86,7 @@ public class HitArea : MonoBehaviour
                 }
             }
 
-            if(result.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
+            if (_collisionLayerMask.value == (_collisionLayerMask.value | (1 << result.gameObject.layer)))
             {
                 OnHitTarget(result.gameObject);
             }
