@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 81176059576833348}
   - component: {fileID: 5609171411044177890}
-  m_Layer: 8
+  - component: {fileID: 3797768200835162719}
+  m_Layer: 10
   m_Name: RoundTable
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1435982428221432921}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4676, y: 1.4676, z: 1.4676}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 284334578697933009}
   m_Father: {fileID: 0}
@@ -50,6 +51,25 @@ EdgeCollider2D:
   m_Points:
   - {x: -2.0140753, y: 1.853732}
   - {x: 1.9791931, y: 1.8462831}
+--- !u!251 &3797768200835162719
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435982428221432921}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &9050956344792409045
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +80,8 @@ GameObject:
   m_Component:
   - component: {fileID: 284334578697933009}
   - component: {fileID: 6826752106228308759}
-  m_Layer: 8
+  - component: {fileID: 2638533748597932280}
+  m_Layer: 10
   m_Name: table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,8 +136,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -651003343
-  m_SortingLayer: 1
+  m_SortingLayerID: -2006896967
+  m_SortingLayer: 2
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 0c936f867ca13c047a27e0feec572728, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -129,3 +150,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2638533748597932280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050956344792409045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d6b9867da8573429719e0f40b35945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

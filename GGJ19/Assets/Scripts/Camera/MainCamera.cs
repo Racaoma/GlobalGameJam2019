@@ -24,6 +24,7 @@ public class MainCamera : MonoBehaviour
 
         offsetX = (_camera.aspect * _camera.orthographicSize);
         offsetY = _camera.orthographicSize;
+        target = FindObjectOfType<PlayerStateController>().transform;
     }
     
     void Update()
