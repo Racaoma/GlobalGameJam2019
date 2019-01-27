@@ -149,11 +149,14 @@ public class LevelFlow : Singleton<LevelFlow>
         currentGameState = gameState.Interwave;
         setNextGameState(gameState.Wave1);
         _timer = 4f;
+        LudicController.Instance.setMaxLudic();
 
         while(EnemyPool.Instance.activeEnemies.Count > 0)
         {
             EnemyPool.Instance.activeEnemies.First.Value.GetComponent<Enemy>().killEnemy();
         }
+
+        GameEvents.GameState.WaveLose.SafeInvoke();
     }
 
     public void startWave()
@@ -186,7 +189,7 @@ public class LevelFlow : Singleton<LevelFlow>
         }
         else if(currentGameState == gameState.Wave1 || currentGameState == gameState.Wave2 || currentGameState == gameState.Wave3)
         {
-            if (LudicController.Instance.ludicMeter <= 0) loseGame();
+            if (LudicController.Instance.getLudicMeter() <= 0) loseGame();
             else if (Level.WaveInstantiatedEnemies == Level.WaveSize && Level.EnemiesOnScreen == 0) winWave();
             else if (_timer >= (Level.TimeToComplete * 60f)) startWave();
             else

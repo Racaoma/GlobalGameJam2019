@@ -104,6 +104,7 @@ public abstract class Enemy : MonoBehaviour
         currentState = enemyState.KnockedDown;
         this.enabled = false;
         EnemyPool.Instance.defeatEnemy(this.gameObject);
+        LudicController.Instance.IncreaseLudicMeter();
     }
 
     private void SpawnFX(GameObject effect)

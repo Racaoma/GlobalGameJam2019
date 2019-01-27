@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class LudicController : Singleton<LudicController>
 {
-    public float ludicMeter;
+    [SerializeField]
+    private float ludicMeter;
     private float currentLudicMeter;
     public float maxLudicMeter;
     public float changeSpeed;
@@ -25,6 +26,16 @@ public class LudicController : Singleton<LudicController>
         ludicMeter = maxLudicMeter;
     }
 
+    public float getLudicMeter()
+    {
+        return ludicMeter;
+    }
+
+    public void setMaxLudic()
+    {
+        ludicMeter = maxLudicMeter;
+    }
+
     public float getRatio(float current, float max)
     {
         return current / max;
@@ -38,13 +49,13 @@ public class LudicController : Singleton<LudicController>
 
     public void IncreaseLudicMeter()
     {
-        ludicMeter = Mathf.Max(ludicMeter + 1, maxLudicMeter);
+        ludicMeter = Mathf.Min(ludicMeter + 1f, maxLudicMeter);
         HUDController.Instance.ChangeLudicMeter();
     }
 
     public void DecreaseLudicMeter()
     {
-        ludicMeter = Mathf.Min(ludicMeter - 1, 0);
+        ludicMeter = Mathf.Max(ludicMeter - 1f, 0);
         HUDController.Instance.ChangeLudicMeter();
     }
 }

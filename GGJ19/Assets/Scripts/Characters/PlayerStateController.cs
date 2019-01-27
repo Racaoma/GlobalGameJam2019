@@ -44,7 +44,7 @@ public class PlayerStateController : MonoBehaviour
         StunKnockbackDirection = (transform.position-hitterPosition).normalized;
         if (StateMachine.CurrentState == FreeMovementState)
         {
-            LudicController.Instance.ludicMeter--;
+            LudicController.Instance.DecreaseLudicMeter();
             StateMachine.SetState(StunState);
             return true;
         }
