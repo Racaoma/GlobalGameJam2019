@@ -90,9 +90,6 @@ public abstract class Enemy : MonoBehaviour
         currentState = enemyState.KnockedDown;
         this.enabled = false;
         EnemyPool.Instance.defeatEnemy(this.gameObject);
-        var collider = GetComponent<Collider2D>();
-        collider.enabled = false;
-        GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
     private void SpawnFX(GameObject effect)
@@ -111,5 +108,8 @@ public abstract class Enemy : MonoBehaviour
         rigidBody2DRef.isKinematic = true;
         spriteRendererRef.sortingOrder = -1;
         spriteRendererRef.sprite = mundaneFormSprite;
+        var collider = GetComponent<Collider2D>();
+        collider.enabled = false;
+        GetComponent<Rigidbody2D>().isKinematic = true;
     }
 }

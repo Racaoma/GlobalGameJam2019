@@ -71,7 +71,7 @@ public class HitArea : MonoBehaviour
             if(hitEnemies)
             {
                 var enemy = result.GetComponent<Enemy>();
-                if (enemy != null)
+                if (enemy != null && enemy.currentState != enemyState.KnockedDown)
                 {
                     enemy.takeDamage(damage);
                     OnHitTarget(result.gameObject);
