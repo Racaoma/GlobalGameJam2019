@@ -42,7 +42,7 @@ public class Enemy_Mattress : Enemy
             collision = Physics2D.OverlapCircle(this.transform.position, detectionRange, playerLayerMask);
             if(collision != null)
             {
-                if(collision.transform.position.x < this.transform.position.x) this.transform.GetChild(0).localScale = new Vector3(-1f, 1f, 1f);
+                if(collision.transform.position.x > this.transform.position.x) this.transform.GetChild(0).localScale = new Vector3(-1f, 1f, 1f);
                 else this.transform.GetChild(0).localScale = new Vector3(1f, 1f, 1f);
 
                 animatorRef.SetTrigger("attack");

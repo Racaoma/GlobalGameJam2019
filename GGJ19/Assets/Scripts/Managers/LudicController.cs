@@ -16,7 +16,7 @@ public class LudicController : Singleton<LudicController>
         if (Mathf.Abs(ludicMeter_continous - (float)ludicMeter) > 0.05f)
         {
             ludicMeter_continous = Mathf.Lerp(ludicMeter_continous, ludicMeter, changeSpeed * Time.deltaTime);
-            UpdateLudicMeter(ludicMeter_continous/(float)maxLudicMeter);
+            if(UpdateLudicMeter != null) UpdateLudicMeter(ludicMeter_continous/(float)maxLudicMeter);
         }
     }
 
