@@ -14,7 +14,6 @@ public class DefeatedBoss : BossState
         boss.rightFistCollider.enabled = false;
         boss.headCollider.enabled = false;
 
-        boss.KillBoss();
         boss.SetAudio(boss.sound_defeated);
     }
 

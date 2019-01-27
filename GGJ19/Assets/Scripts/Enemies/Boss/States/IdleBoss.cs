@@ -15,6 +15,7 @@ public class IdleBoss : BossState
         boss.leftFistCollider.enabled = false;
         boss.rightFistCollider.enabled = false;
 
+        boss.SetAudio(null);
         boss.RandomState(Random.Range(4, 9));
     }
     
