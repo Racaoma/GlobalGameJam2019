@@ -10,6 +10,7 @@ public class BossThornLauncher : MonoBehaviour
 
     public List<Transform> thornAnchors;
     private List<Thorn> instantiatedThorns = new List<Thorn>();
+    public Vector3 rotto; 
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class BossThornLauncher : MonoBehaviour
             instantiatedThorns[i].gameObject.SetActive(true);
             instantiatedThorns[i].Reset();
             instantiatedThorns[i].transform.position = thornAnchors[i].position;
-            instantiatedThorns[i].transform.rotation = Quaternion.LookRotation(thornAnchors[i].position - headCenter.position,Vector3.forward);
+            instantiatedThorns[i].transform.rotation = Quaternion.LookRotation(thornAnchors[i].position - headCenter.position,rotto);
         }
     }
 
