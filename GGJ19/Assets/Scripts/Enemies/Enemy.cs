@@ -53,8 +53,12 @@ public abstract class Enemy : MonoBehaviour
         groundLayerMask = LayerMask.GetMask("Ground");
         animatorRef = this.transform.GetComponentInChildren<Animator>();
         spriteRendererRef = this.transform.GetComponentInChildren<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         OnEnemyDie.AddListener(LevelFlow.Instance.EnemyDeath);
-    } 
+    }
 
     public void takeDamage(int damageTaken)
     {
