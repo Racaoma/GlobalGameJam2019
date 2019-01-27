@@ -28,6 +28,7 @@ public class PlayerAnimatorController : MonoBehaviour
     private int _isJumpingAnimationKey;
     private int _isFallingAnimationKey;
     private int _attackAnimationKey;
+    private int _onKnockbackAnimationKey;
     private Coroutine _movementAnimationCoroutine;
 
     private void Awake()
@@ -47,6 +48,7 @@ public class PlayerAnimatorController : MonoBehaviour
         _isJumpingAnimationKey = Animator.StringToHash("isJumping");
         _isFallingAnimationKey = Animator.StringToHash("isFalling");
         _attackAnimationKey = Animator.StringToHash("attack");
+        _onKnockbackAnimationKey = Animator.StringToHash("onKnockback");
     }
 
     void LateUpdate()
@@ -110,5 +112,15 @@ public class PlayerAnimatorController : MonoBehaviour
     public void StopAttackAnimation()
     {
         
+    }
+
+    public void StartKnockbackAnimation()
+    {
+        _animator.SetBool(_onKnockbackAnimationKey, true);
+    }
+
+    public void StopKnockbackAnimation()
+    {
+        _animator.SetBool(_onKnockbackAnimationKey, false);
     }
 }

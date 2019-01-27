@@ -35,11 +35,25 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        var player = collision.GetComponent<PlayerStateController>();
+        if(player != null)
+        {
+            if(player.TakeHit(transform.position))
+            {
+                disableBullet();
+            }
+        }
+
+        if (collision.gameObject.layer == groundLayer)
+        {
+            disableBullet();
+        }
+
         if (collision.gameObject.layer == playerLayer)
         {
-            LudicController.Instance.ludicMeter--;
+            
             //Player stun
-            disableBullet();
+            
         }
         else if(collision.gameObject.layer == groundLayer)
         {
