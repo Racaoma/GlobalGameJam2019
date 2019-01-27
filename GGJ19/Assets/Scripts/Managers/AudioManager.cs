@@ -13,6 +13,9 @@ public class AudioManager : SingletonAwakePersistent<AudioManager>
     public AudioClip BGM_InGame;
     public AudioClip BGM_IntroBoss;
     public AudioClip BGM_Boss;
+    public AudioClip BGM_Defeat;
+    public AudioClip BGM_Victory;
+    public AudioClip BGM_Tutorial;
 
     [Header("SFX Audios")]
     public AudioClip SFX_SwordAttack;
@@ -28,12 +31,43 @@ public class AudioManager : SingletonAwakePersistent<AudioManager>
     public AudioClip SFX_ButtonSelect;
 
     //Control Variables
+    private AudioClip nextIntroBGM;
     private AudioClip nextBGM;
     public float audioFadeOutFactor = 0.6f;
 
     //Events
-    public void playBGM_Main() { playIntroBGM(BGM_IntroInGame); }
-    public void playBGM_Boss() { playIntroBGM(BGM_IntroBoss); }
+    public void playBGM_Main()
+    {
+        Debug.Log("Play playBGM_Main");
+        StartCoroutine(stopMusicWithFade());
+        nextBGM = BGM_InGame;
+    }
+    public void playBGM_Boss()
+    {
+        Debug.Log("Play playBGM_Boss");
+        StartCoroutine(stopMusicWithFade());
+        nextIntroBGM = BGM_IntroBoss;
+        nextBGM = BGM_Boss;
+    }
+    public void playBGM_Tutorial()
+    {
+        Debug.Log("Play playBGM_Tutorial");
+        StartCoroutine(stopMusicWithFade());
+        nextBGM = BGM_Tutorial;
+    }
+    public void playBGM_Victory()
+    {
+        Debug.Log("Play playBGM_Victory");
+        StartCoroutine(stopMusicWithFade());
+        nextBGM = BGM_Victory;
+    }
+    public void playBGM_Defeat()
+    {
+        Debug.Log("Play playBGM_Defeat");
+        StartCoroutine(stopMusicWithFade());
+        nextBGM = BGM_Defeat;
+    }
+
     public void playSFX_WaveWon() { playSFX(SFX_VictoryFanfare); }
     public void playSFX_SwordAttack() { playSFX(SFX_SwordAttack); }
     public void playSFX_NerfShoot() { playSFX(SFX_NerfShoot); }
@@ -41,7 +75,6 @@ public class AudioManager : SingletonAwakePersistent<AudioManager>
     public void playSFX_Jump() { playSFX(SFX_ChildJump); }
     public void playSFX_SwordHit() { playSFX(SFX_SwordHit); }
     public void playSFX_NerfHit() { playSFX(SFX_NerfHit); }
-    public void playSFX_LazerShoot() { playSFX(SFX_LazerShoot); }
     public void playSFXButtonSelect() { AudioSource.PlayClipAtPoint(SFX_ButtonSelect, Camera.main.transform.position); }
 
     //Start
@@ -54,13 +87,14 @@ public class AudioManager : SingletonAwakePersistent<AudioManager>
         GameEvents.GameState.StartGame += playBGM_Main;
         GameEvents.GameState.StartBoss += playBGM_Boss;
         GameEvents.GameState.WaveWon += playSFX_WaveWon;
+        GameEvents.GameState.Victory += playBGM_Victory;
+        GameEvents.GameState.Tutorial += playBGM_Tutorial;
         GameEvents.PlayerAction.SwordAttack += playSFX_SwordAttack;
         GameEvents.PlayerAction.NerfShoot += playSFX_NerfShoot;
         GameEvents.PlayerAction.TookDamage += playSFX_TookDamage;
         GameEvents.PlayerAction.Jump += playSFX_Jump;
         GameEvents.EnemyAction.SwordHit += playSFX_SwordHit;
         GameEvents.EnemyAction.NerfHit += playSFX_NerfHit;
-        GameEvents.EnemyAction.LazerShoot += playSFX_LazerShoot;
     }
 
     private void OnDestroy()
@@ -68,31 +102,32 @@ public class AudioManager : SingletonAwakePersistent<AudioManager>
         GameEvents.GameState.StartGame -= playBGM_Main;
         GameEvents.GameState.StartBoss -= playBGM_Boss;
         GameEvents.GameState.WaveWon -= playSFX_WaveWon;
+        GameEvents.GameState.Victory -= playBGM_Victory;
+        GameEvents.GameState.Tutorial -= playBGM_Tutorial;
         GameEvents.PlayerAction.SwordAttack -= playSFX_SwordAttack;
         GameEvents.PlayerAction.NerfShoot -= playSFX_NerfShoot;
         GameEvents.PlayerAction.TookDamage -= playSFX_TookDamage;
         GameEvents.PlayerAction.Jump -= playSFX_Jump;
         GameEvents.EnemyAction.SwordHit -= playSFX_SwordHit;
         GameEvents.EnemyAction.NerfHit -= playSFX_NerfHit;
-        GameEvents.EnemyAction.LazerShoot -= playSFX_LazerShoot;
     }
 
     private void playIntroBGM(AudioClip bgm)
     {
-        if(bgmAudioSource.isPlaying) StartCoroutine(changeMusicWithFade(bgm));
-        else if (bgm != null)
-        {
-            bgmAudioSource.clip = bgm;
-            bgmAudioSource.loop = false;
-            bgmAudioSource.Play();
-        }
+        bgmAudioSource.volume = 1f;
+        bgmAudioSource.clip = bgm;
+        bgmAudioSource.loop = false;
+        bgmAudioSource.Play();
+        nextIntroBGM = null;
     }
 
-    private void playBGM()
+    private void playBGM(AudioClip bgm)
     {
+        bgmAudioSource.volume = 1f;
         bgmAudioSource.clip = nextBGM;
         bgmAudioSource.loop = true;
         bgmAudioSource.Play();
+        nextIntroBGM = null;
         nextBGM = null;
     }
 
@@ -105,7 +140,7 @@ public class AudioManager : SingletonAwakePersistent<AudioManager>
     }
 
     //Change Music with Fade
-    private IEnumerator changeMusicWithFade(AudioClip musicClip)
+    private IEnumerator stopMusicWithFade()
     {
         while (bgmAudioSource.volume > 0f)
         {
@@ -113,16 +148,19 @@ public class AudioManager : SingletonAwakePersistent<AudioManager>
             yield return 0;
         }
 
-        //Change Music
+        bgmAudioSource.volume = 0f;
         bgmAudioSource.Stop();
-        playIntroBGM(musicClip);
     }
 
     private void Update()
     {
-        if(nextBGM != null)
+        if(nextIntroBGM != null || nextBGM != null)
         {
-            if (!bgmAudioSource.isPlaying) playBGM();
+            if(!bgmAudioSource.isPlaying)
+            {
+                if (nextIntroBGM != null) playIntroBGM(nextIntroBGM);
+                else if (nextBGM != null) playBGM(nextBGM);
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ public static class GameEvents
         public static Action WaveWon;
         public static Action WaveLose;
         public static Action StartLevel;
+        public static Action Victory;
+        public static Action Tutorial;
     }
 
     public static class PlayerAction
