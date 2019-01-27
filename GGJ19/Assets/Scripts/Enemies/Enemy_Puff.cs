@@ -41,8 +41,11 @@ public class Enemy_Puff : Enemy
     {
         if (collision.gameObject.layer == playerLayer)
         {
-            LudicController.Instance.ludicMeter--;
-            //Player stun
+            var player = collision.gameObject.GetComponent<PlayerStateController>();
+            if (player != null)
+            {
+                player.TakeHit(transform.position);
+            }
         }
         else if (collision.gameObject.layer == groundLayer)
         {

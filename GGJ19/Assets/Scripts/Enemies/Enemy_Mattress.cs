@@ -29,8 +29,11 @@ public class Enemy_Mattress : Enemy
     {
         if (collision.gameObject.layer == playerLayer)
         {
-            LudicController.Instance.ludicMeter--;
-            //Player stun
+            var player = collision.gameObject.GetComponent<PlayerStateController>();
+            if(player != null)
+            {
+                player.TakeHit(transform.position);
+            }
         }
     }
 

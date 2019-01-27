@@ -38,8 +38,11 @@ public class Enemy_Pillow : Enemy
     {
         if(collision.gameObject.layer == playerLayer)
         {
-            LudicController.Instance.ludicMeter--;
-            //Player stun
+            var player = collision.gameObject.GetComponent<PlayerStateController>();
+            if (player != null)
+            {
+                player.TakeHit(transform.position);
+            }
         }
         else if (collision.gameObject.layer == groundLayer)
         {
