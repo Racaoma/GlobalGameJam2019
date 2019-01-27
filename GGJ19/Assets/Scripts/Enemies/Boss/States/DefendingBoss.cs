@@ -15,8 +15,8 @@ public class DefendingBoss : BossState
         boss.headCollider.enabled = false;
         boss.animator.SetBool("covering", true);
 
+        boss.SetAudio(boss.sound_defending);
         boss.IdleState(Random.Range(2, 6));
-        boss.SetAudio(boss.sound_defeated);
     }
 
     public override void FixedTick()

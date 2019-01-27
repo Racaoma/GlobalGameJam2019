@@ -103,7 +103,7 @@ MonoBehaviour:
   DeathFX: {fileID: 2100640802102685534}
   sound_attacking: {fileID: 8300000, guid: 53183b263eeef6743987f4fffa64db6c, type: 3}
   sound_defending: {fileID: 8300000, guid: 53183b263eeef6743987f4fffa64db6c, type: 3}
-  sound_hittingFloor: {fileID: 8300000, guid: 53183b263eeef6743987f4fffa64db6c, type: 3}
+  sound_hittingFloor: {fileID: 8300000, guid: d23058147f390f344b27d2836f828859, type: 3}
   sound_explode: {fileID: 8300000, guid: 53183b263eeef6743987f4fffa64db6c, type: 3}
   sound_defeated: {fileID: 8300000, guid: 950346ecc2f6dac438a4df440635ea70, type: 3}
 --- !u!82 &1642417049748017205
@@ -116,7 +116,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 53183b263eeef6743987f4fffa64db6c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -387,7 +387,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8956401391822045605}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
