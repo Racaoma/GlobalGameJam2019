@@ -13,6 +13,7 @@ public class BossStatemachine : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Boss Idle");
         SetState(new IdleBoss(this));
     }
 
@@ -41,5 +42,16 @@ public class BossStatemachine : MonoBehaviour
         {
             currentState.OnStateEnter();
         }
+    }
+
+    public void SetState(BossState state, float delay)
+    {
+        StartCoroutine(WaitToChange(state, delay));
+    }
+
+    IEnumerator WaitToChange(BossState state, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SetState(state);
     }
 }
