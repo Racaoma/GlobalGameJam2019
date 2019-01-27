@@ -177,8 +177,22 @@ public class LevelFlow : Singleton<LevelFlow>
         {
             LudicController.Instance.setMaxLudic();
             GameEvents.GameState.StartGame.SafeInvoke();
+            Fortress.Instance.ActivateFortress(0);
+        }
+        else if (currentGameState == gameState.Wave2)
+        {
+            Fortress.Instance.ActivateFortress(1);
+        }
+        else if (currentGameState == gameState.Wave3)
+        {
+            Fortress.Instance.ActivateFortress(2);
+        }
+        else
+        {
+            Fortress.Instance.ActivateFortress(10);
         }
         GameEvents.GameState.StartLevel.SafeInvoke();
+
     }
 
     private void winWave()
