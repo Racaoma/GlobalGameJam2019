@@ -98,6 +98,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (_canJump)
             {
+                GameEvents.PlayerAction.Jump.SafeInvoke();
                 StartJump();
             }
         }
