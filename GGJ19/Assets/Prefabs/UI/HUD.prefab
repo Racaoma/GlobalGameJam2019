@@ -346,6 +346,10 @@ MonoBehaviour:
   bulletsParent: {fileID: 0}
   ColorBulletOff: {r: 0, g: 0, b: 0, a: 0.5176471}
   ColorBulletOn: {r: 1, g: 1, b: 1, a: 1}
+  HouseColor: {fileID: 1923307543812131294}
+  Tower: {fileID: 1923307543727340073}
+  Tail: {fileID: 1923307542955350906}
+  Spaceship: {fileID: 1923307543692082626}
 --- !u!1 &1923307543631867827
 GameObject:
   m_ObjectHideFlags: 0
