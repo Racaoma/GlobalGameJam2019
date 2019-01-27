@@ -37,12 +37,12 @@ public class HUDController : Singleton<HUDController>
             for (int i = PlayerAttackController.Instance.Bullets; i < (PlayerAttackController.Instance.StartingBullets); i++)
             {
                 Bullets[i].GetComponent<Image>().color = ColorBulletOff;
-                Debug.Log("[i] " + i);
+            //    Debug.Log("[i] " + i);
             }
         }
         for (int i = 0; i < (PlayerAttackController.Instance.Bullets); i++) {
-            Debug.Log("Bullets " + (PlayerAttackController.Instance.Bullets));
-            Debug.Log("[i] " + i);
+          //  Debug.Log("Bullets " + (PlayerAttackController.Instance.Bullets));
+          //  Debug.Log("[i] " + i);
             if (i < PlayerAttackController.Instance.Bullets)
             {
                 Bullets[i].GetComponent<Image>().color = ColorBulletOn;

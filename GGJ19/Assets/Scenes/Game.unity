@@ -2244,6 +2244,31 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorBulletOn.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorBulletOn.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorBulletOn.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorBulletOn.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923307543534926496, guid: 10a117737bcdb7f4cb6e0f5af118c1ab,
+        type: 3}
+      propertyPath: ColorBulletOff.a
+      value: 0.42745098
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10a117737bcdb7f4cb6e0f5af118c1ab, type: 3}
 --- !u!1001 &6181991799176239390

@@ -342,7 +342,10 @@ MonoBehaviour:
     type: 3}
   BulletsPos: {fileID: 1923307543206877445}
   bulletsSpacing: 45
-  bulletsParent: {fileID: 1923307543631867827}
+  bulletsParent: {fileID: 156832128533714432, guid: fe835eef59f7e8f428caa7e360a4b83d,
+    type: 3}
+  ColorBulletOff: {r: 0, g: 0, b: 0, a: 0.5176471}
+  ColorBulletOn: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1923307543631867827
 GameObject:
   m_ObjectHideFlags: 0
