@@ -107,7 +107,6 @@ public class PlayerAttackController : MonoBehaviour
 
     private void StartSwordAttack()
     {
-        Debug.Log("StartSwordAttack");
         GameEvents.PlayerAction.SwordAttack.SafeInvoke();
         StartAttack(_swordAttackConfig);
     }
@@ -128,7 +127,6 @@ public class PlayerAttackController : MonoBehaviour
 
     private void StartAttack(AttackConfig attackConfig)
     {
-        Debug.Log("StartAttack");
         if (_attackCoroutine != null)
         {
             StopCoroutine(_attackCoroutine);
@@ -138,7 +136,6 @@ public class PlayerAttackController : MonoBehaviour
 
     public IEnumerator AttackCR(AttackConfig attack)
     {
-        Debug.Log("AttackCR");
         _animationController.StartAttackAnimation();
         _animationController.ChangeWeapon(attack.AnimatorWeapon);
         
@@ -149,7 +146,6 @@ public class PlayerAttackController : MonoBehaviour
 
     public void OnExecuteAttack()
     {
-        Debug.Log("OnExecuteAttack");
         if (_currentAttack == _swordAttackConfig)
         {
             OnExecuteSwordAttack();
@@ -168,7 +164,6 @@ public class PlayerAttackController : MonoBehaviour
 
     private IEnumerator ExecuteSwordAttackCR()
     {
-        Debug.Log("ExecuteSwordAttackCR");
         _attackCollider.gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
         _attackCollider.gameObject.SetActive(false);
