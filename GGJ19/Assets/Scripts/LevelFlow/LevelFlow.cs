@@ -184,7 +184,7 @@ public class LevelFlow : Singleton<LevelFlow>
             _timer -= Time.deltaTime;
             if (_timer <= 0f) startWave();
         }
-        else
+        else if(currentGameState == gameState.Wave1 || currentGameState == gameState.Wave2 || currentGameState == gameState.Wave3)
         {
             if (LudicController.Instance.ludicMeter <= 0) loseGame();
             //else if (Level.WaveInstantiatedEnemies == Level.WaveSize && Level.EnemiesOnScreen == 0) winWave();

@@ -21,14 +21,17 @@ public class EnemyPool : Singleton<EnemyPool>
     public LinkedList<GameObject> activeEnemies;
     public LinkedList<GameObject> defeatedEnemies;
 
-    private void Start()
+    private void Awake()
     {
         puffObjects = new Queue<GameObject>();
         pillowObjects = new Queue<GameObject>();
         mattressObjects = new Queue<GameObject>();
         activeEnemies = new LinkedList<GameObject>();
         defeatedEnemies = new LinkedList<GameObject>();
+    }
 
+    private void Start()
+    {
         for (int i = 0; i < initialPoolSize; i++)
         {
             GameObject obj = Instantiate(puffPrefab);
